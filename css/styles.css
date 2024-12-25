@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to bottom, #f0f5ff, #ffffff);
+    padding: 6rem 0;
+}
+
+.feature-item {
+    padding: 2rem;
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-item p {
+    color: #6c757d;
+}
+
+/* Pricing Section */
+.pricing-card {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.price {
+    margin-bottom: 2rem;
+}
+
+.price .amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.price .period {
+    color: #6c757d;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.feature-list li {
+    margin-bottom: 0.75rem;
+    color: #495057;
+}
+
+.feature-list i {
+    color: #28a745;
+    margin-right: 0.5rem;
+}
+
+/* Upload Section */
+.upload-area {
+    max-width: 600px;
+    height: 300px;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+.upload-content {
+    text-align: center;
+}
+
+.upload-content i {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.upload-content label {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 4rem 0;
+    }
+    
+    .feature-item {
+        padding: 1rem;
+    }
+}

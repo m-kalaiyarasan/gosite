@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Project</title>
+</head>
+<body>
+    <h1>Host Your Project</h1>
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <label for="domain">Enter Subdomain Name:</label>
+        <input type="text" id="domain" name="domain" required placeholder="e.g., userdomain" />
+        <br><br>
+
+        <label for="file">Upload Your Project: (.zip)</label>
+        <input type="file" id="file" name="file" accept=".zip" />
+        <br><br>
+
+        <!-- <label for="folder">Or Upload a Folder:</label>
+        <input type="file" id="folder" name="folder[]" webkitdirectory directory multiple />
+        <br><br> -->
+
+        <button type="submit">Host Project</button>
+    </form>
+</body>
+</html>
