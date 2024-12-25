@@ -9,7 +9,8 @@
 <?php
 
 // Define the parent directory for user projects
-$baseDir = "/home/kalai/htdocs/kalai/";
+$baseDir = __DIR__."/../site/";
+printf($baseDir);
 
 // Function to check if file is uploaded
 function isFileUploaded($file) {
@@ -130,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("No folder uploaded or folder upload error.<br>");
     }
 
-    $uploadDir = "/home/kalai/htdocs/kalai/";
+    $uploadDir =  __DIR__."/../site/";
     $uploadFile = $uploadDir . basename($_FILES['file']['name']);
     $newDirName = $projectDir;
 
