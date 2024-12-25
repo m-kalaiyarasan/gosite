@@ -1,14 +1,25 @@
 /* General Styles */
 body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: rgb(19,183,231);
+    background: linear-gradient(180deg, rgba(19,183,231,1) 14%, rgba(60, 183, 216, 0.763) 98%);
 }
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(to bottom, #f0f5ff, #ffffff);
-    padding: 6rem 0;
+    /* background: linear-gradient(to bottom, #f0f5ff, #ffffff);
+    padding: 6rem 0; */
+    background: rgb(16,110,190);
+background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 39%, rgba(16,124,198,1) 45%, rgba(17,140,207,1) 57%, rgba(19,183,231,1) 81%);
 }
+.nav-color{
+    background-color: #106cbb;
 
+}
+.logo-colour{
+    color: #0fffbe;
+
+}
 .feature-item {
     padding: 2rem;
     text-align: center;
@@ -16,7 +27,7 @@ body {
 
 .feature-item i {
     font-size: 2.5rem;
-    color: #0d6efd;
+    color: #0fffbe;
     margin-bottom: 1rem;
 }
 
@@ -70,7 +81,7 @@ body {
 }
 
 .feature-list i {
-    color: #28a745;
+    color: #0fffbe;
     margin-right: 0.5rem;
 }
 
@@ -88,8 +99,8 @@ body {
 
 .upload-area:hover,
 .upload-area.dragover {
-    border-color: #0d6efd;
-    background-color: #f8f9fa;
+    background: rgba(16, 109, 190, 0.493);
+    background: linear-gradient(180deg, rgba(16, 109, 190, 0.541rgba(16, 116, 193, 0.47),193,1) 39%, rgba(16, 125, 198, 0.481) 45%, rgba(17, 141, 207, 0.525) 57%, rgba(19, 182, 231, 0.519) 81%);
 }
 
 .upload-content {
@@ -101,11 +112,37 @@ body {
     color: #6c757d;
     margin-bottom: 1rem;
 }
+.t-white{
+    color: #ffffff;
+}
+.t-black{
+    color: #000000;
+}
+.t-btn{
+    color: #0fffbe;
+}
+.bg-price{
+    background-color: #0fffbe;
+    border-color: #1088cc;
+}
 
 .upload-content label {
     cursor: pointer;
     text-decoration: underline;
 }
+.feature-list li{
+    color:whitesmoke;   
+}
+.btn{
+    background-color: #0fffbe;
+    border-color: #0fffbe;
+    color: black;
+}
+.btn-price{
+        background: rgb(16, 109, 190);
+        background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 39%, rgba(16,124,198,1) 45%, rgba(17,140,207,1) 57%, rgba(19,183,231,1) 81%);
+        color: whitesmoke;
+    }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {

@@ -5,7 +5,9 @@ include 'libs/load.php';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  
     <? load('head') ?>
 
 </head>
@@ -13,6 +15,7 @@ include 'libs/load.php';
     <!-- Navbar -->
 
     <? load('navbar') ?>
+    <!-- <button id="dark-mode-toggle">Toggle Dark Mode</button> -->
 
 
     <!-- banner Section -->

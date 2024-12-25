@@ -1,0 +1,46 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;  
+  }
+
+body{
+    background: rgb(16,110,190);
+    background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 39%, rgba(16,124,198,1) 45%, rgba(17,140,207,1) 57%, rgba(19,183,231,1) 81%);
+        background-repeat: no-repeat;
+        background-size:cover;
+  }
+
+
+.form-signin {
+width: 100%;
+max-width: 330px;
+padding: 15px;
+margin: auto;
+}
+
+.form-signin .checkbox {
+font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+z-index: 2;
+}
+
+.form-signin input[type="name"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 1;
+  border-bottom-left-radius: 1;
+  border-color: #ffffff;
+  background-color: #0fffbf3f;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 1;
+  border-bottom-left-radius: 1;
+  border-color: #ffffff;
+  background-color: #0fffbf3f
+}
