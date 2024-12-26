@@ -26,8 +26,4 @@ function get_config($key, $default=null)
    else{
     return $default;
    }  
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 9950612fd860370fdf654e0285ac8b30e66e7baf
+
