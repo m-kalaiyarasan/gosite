@@ -12,7 +12,7 @@ function load($name){
 Session::start();
 
 global $__site_config;
-$__site_config_path = __DIR__.'/../../project/photogramconfig.json';
+$__site_config_path = __DIR__.'/../../project/gosite.json';
 $__site_config = file_get_contents($__site_config_path);
 
 
