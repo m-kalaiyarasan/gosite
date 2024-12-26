@@ -2,13 +2,13 @@
 
 include 'libs/load.php';
 $visitorId = $_POST['fingerprint'] ;
-print("JS finger print : ".$visitorId);
+// print("JS finger print : ".$visitorId);
 
 $user = $_POST['user'];
 $pass =$_POST['pass'];
 $result = null;
-print($user);
-print($pass);
+// print($user);
+// print($pass);
 
 // $user = "kalaiyarasan";
 // $pass = "kalai";
@@ -69,16 +69,29 @@ else
     }
     else{
         echo "login failed";
+        header("Location: login.php?faild");
+   exit;
+        ?>
+        
+        <div class="alert alert-danger">
+  <strong>failed!</strong>Invalid username or password. 
+</div>
+        <?
+        
     }
 }
 
-echo <<<EOL
-<br><br><a href="logintest.php?logout">Logout</a>
-EOL;
+
 
 ?>
 
 <?php
+if(Session::get('is_login')){
+  echo <<<EOL
+<br><br><a href="logintest.php?logout">Logout</a>
+EOL;
    header("Location: index.php");
    exit;
+
+}
 ?>

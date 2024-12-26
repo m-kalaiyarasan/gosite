@@ -7,6 +7,20 @@ include 'libs/load.php';?>
  <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+    
+<!-- login fail message -->
+<?
+if (isset($_GET['faild'])) {
+
+    ?>
+    <div class="alert alert-danger" role="alert">
+        Login Faild, Please try again
+    </div>
+    <?
+
+}
+?>
+
 <?load('navbar');?>
 
 <div class="pt-5">

@@ -1,0 +1,11 @@
+{
+    "server" : "mysql-kalai-blogingapp.h.aivencloud.com",
+    "port":"18299",
+    "username": "avnadmin",
+    "password" : "AVNS_mnJiF0eiNhJ1JwyR0il",
+    "dbname" : "defaultdb",
+    "ssl":"/home/kalaiyarasan.offl.2004/htdocs/gosite/htdocs/libs/includes/ca.pem",
+    "base_path" : "/"
+
+
+}
