@@ -26,4 +26,4 @@ function get_config($key, $default=null)
    else{
     return $default;
    }  
-
+}
