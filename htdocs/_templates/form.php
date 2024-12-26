@@ -1,4 +1,9 @@
-<section id="upload" class="upload-section py-5">
+<?php
+
+if(Session::get('is_login')){
+
+    ?>
+    <section id="upload" class="upload-section py-5">
         <div class="container">
             <h2 class="text-center mb-4">Launch Your Websites <i class="fa fa-rocket" style="font-size:48px;color:rgb(255, 62, 62)"></i>
             </h2>
@@ -19,3 +24,4 @@
             </div>
         </div>
     </section>
+<?}?>

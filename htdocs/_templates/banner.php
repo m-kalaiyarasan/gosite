@@ -2,7 +2,18 @@
         <div class="container">
             <h1 class="display-4 t-btn fw-bold">Deploy Your Website in Minutes</h1>
             <p class="lead mb-5 t-black">Simple, fast, and secure web hosting. Upload your project, and we'll handle the rest.<br>Get SSL, custom domain, and 24/7 support included.</p>
-            <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a>
+            <!-- <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a> -->
+             <?
+             if(Session::get('is_login')){
+                ?>
+                <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a>
+                <?}
+                else{
+                    ?>
+                    <a href="signup.php" class="btn btn-primary btn-lg">Launch Now</a>
+                    <?
+                }
+             ?>
             
             <div class="row mt-5 pt-5 g-4 ">
                 <div class="col-md-4">

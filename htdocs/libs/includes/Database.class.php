@@ -11,9 +11,9 @@ class Database{
         if(Database::$conn == null)
         {
             $servername = "mysql.selfmade.ninja:3306";
-            $username = "kalaiyarasan";
-            $password = "MKYsna#2004@";
-            $dbname = "";
+            $username = "gosite";
+            $password = "MKYgosite#2004@";
+            $dbname = "gosite_db";
 
             // get_config is a function that basically write in the load.php file,
             // Used to get the login details of the database from the json file

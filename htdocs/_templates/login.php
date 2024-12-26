@@ -26,6 +26,9 @@
     </div>
     <button class="w-100 btn btn-lg btn-primary hvr-wobble-skew" type="submit">Logn in</button>
   </form>
+  <div class="mt-5 ">
+    <h6>Don't have an account ?   <a class="btn btn-primary ms-2" href="signup.php">Signup</a></h6>
+</div>
 
 </main> 
 <script>
