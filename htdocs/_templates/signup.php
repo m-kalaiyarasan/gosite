@@ -5,7 +5,7 @@
   <!-- <center><img class="mb-4" src="_templates/dys.png" alt="" width="80" height="70"> -->
   <!-- <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1> -->
   <center>
-  <h1 class="h3 mb-3 t-white">Sign Up</h1>
+  <h1 class="h3 mb-3 t-black">Sign Up</h1>
 
 </center>
 

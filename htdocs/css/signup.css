@@ -10,8 +10,8 @@
   background-image: url('login.jpg');
 } */
 body{
-  background: rgb(16,110,190);
-  background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 39%, rgba(16,124,198,1) 45%, rgba(17,140,207,1) 57%, rgba(19,183,231,1) 81%);
+  background: rgb(195, 197, 201);
+  background: linear-gradient(180deg, rgba(243,247,255,1) 0%, rgba(255,255,255,1) 100%);
       background-repeat: no-repeat;
       background-size:cover;
 }
@@ -35,7 +35,7 @@ margin-bottom: -1px;
 border-bottom-right-radius: 1;
 border-bottom-left-radius: 1;
 border-color: #ffffff;
-background-color: #0fffbf3f;
+background-color: rgb(195, 197, 201);
 }
 .form-signup input[name="phone"] {
 margin-bottom: -1px;
@@ -44,7 +44,7 @@ border-bottom-left-radius: 1;
 border-top-left-radius: 1 ;
 border-color: #ffffff;
 border-top-right-radius: 1; 
-background-color: #0fffbf3f;
+background-color: rgb(195, 197, 201);
 }
 
 .form-signup input[type="email"] {
@@ -55,7 +55,7 @@ border-top-left-radius: 1 ;
 border-top-right-radius: 1;
 border-color: #ffffff;
 /* opacity: 0.1; */
-background-color: #0fffbf3f;
+background-color: rgb(195, 197, 201);
 }
 
 .form-signup input[type="password"] {
@@ -63,13 +63,13 @@ margin-bottom: 10px;
 border-color: #ffffff;
 border-top-left-radius: 1;
 border-top-right-radius: 1;
-background-color: #0fffbf3f;
+background-color: rgb(195, 197, 201);
 } 
 /* .form-signup{
   background-image: url('login.jpg');
 } */
 #bttn{
-  background-color:#0fffbe;
-  color:black ;
+  background-color:#0d6efd;
+  color:white ;
   
 }

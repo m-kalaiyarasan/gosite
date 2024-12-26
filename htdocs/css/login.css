@@ -7,8 +7,9 @@
   }
 
 body{
-    background: rgb(16,110,190);
-    background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 39%, rgba(16,124,198,1) 45%, rgba(17,140,207,1) 57%, rgba(19,183,231,1) 81%);
+  color: black;
+  background: rgb(243,247,255);
+background: linear-gradient(180deg, rgba(243,247,255,1) 0%, rgba(255,255,255,1) 100%);
         background-repeat: no-repeat;
         background-size:cover;
   }
@@ -34,7 +35,7 @@ z-index: 2;
   border-bottom-right-radius: 1;
   border-bottom-left-radius: 1;
   border-color: #ffffff;
-  background-color: #0fffbf3f;
+  background-color: rgb(195, 197, 201);
 }
 
 .form-signin input[type="password"] {
@@ -42,5 +43,5 @@ z-index: 2;
   border-bottom-right-radius: 1;
   border-bottom-left-radius: 1;
   border-color: #ffffff;
-  background-color: #0fffbf3f
+  background-color: rgb(195, 197, 201)
 }

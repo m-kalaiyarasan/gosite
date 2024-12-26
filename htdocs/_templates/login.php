@@ -5,7 +5,7 @@
     <!-- <center> <img class="mb-4" src="_templates/dys.png" alt="" width="80" height="70"></center> -->
    
     <center>
-    <h1 class="h3 mb-3 t-white">Login in</h1>
+    <h1 class="h3 mb-3 color-1">Login in</h1>
     </center>
 
     <div class="form-floating">
