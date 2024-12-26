@@ -1,0 +1,141 @@
+
+<?php
+ // This is basically a usersession available  in database table called 'session' to authenticate and authorize the user
+ // also used to set to and get from the db table 
+
+// This file is basically used to validate the user session
+
+
+class UserSession
+{
+    public $conn;
+    public $id;
+    public $uid;
+    public $data;
+    public $token;
+
+    // chech the username and password is valid, if it is valid, make an entry for the user in database, like ip, useragent, login time.
+    // and also generate a token and put in into the database and give one copy to the user for verification, and finally return that token
+    // also we implement a fingerprint js
+    public static function authenticate($user, $pass)
+    {
+        $username = User::login($user,$pass);
+        // print($username);
+        $user = new User($username);
+        if($username){
+            $conn = Database::getConnection();
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $agent = $_SERVER['HTTP_USER_AGENT'];
+            $fingerprint = $_POST['fingerprint'];                          // mark
+            $token = md5(rand(0,9999).$ip.$agent.time());
+            $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`,`fingerprint`) 
+            VALUES ('$user->id', '$token', now(), '$ip', '$agent', '1','$fingerprint')";
+            if($conn->query($sql))
+            {
+                Session::set('session_token',$token);
+                Session::set('fingerprint',$fingerprint);
+                return $token;
+            }
+            else{ return false; }
+        }else{ return false; }
+    }
+
+    public static function authorize($token)
+    {
+         try{
+        $session = new UserSession($token);
+         if($session->isValid() and $session->isActive())
+         {
+            if($_SESSION['fingerprint'] == $session->getFingerprint())
+            {
+                return true;
+            }
+            else
+            {
+                $session->deactivate();
+                throw new ExceException("Fingerprint did not match");
+            }
+         }else {
+
+            throw new Exception("agent or an ip doesnot match");
+         }
+         }
+         catch(Exception $e){
+            return false;
+
+         }
+    }
+
+    public function __construct($token){
+        $this->conn = Database::getConnection();
+        $this->token = $token;
+        $this->token=null;
+        $sql= "SELECT * FROM `session` WHERE `token`= '$token' LIMIT 1";     // mark
+        $result = $this->conn->query($sql);
+        // print_r($result);
+        if($result->num_rows){  
+            $row=$result->fetch_assoc();
+            $this->data=$row;
+            $this->uid=$row['uid'];
+            $this->id = $row['id'];
+            // print($this->uid);
+        }
+        else{
+            throw new Exception("session does't exist");
+        }
+    }
+
+    public function getUser()
+    {
+        return new User($this->uid);
+    }
+
+    public function getIP(){
+        $this->conn = Database::getConnection();
+        $sql = "SELECT * FROM `session` WHERE `uid`='$this->uid' LIMIT 1";   // mark
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc()['ip'];
+    }
+
+    public function getUserAgent(){
+        $this->conn = Database::getConnection();
+        $sql = "SELECT * FROM `session` WHERE `uid`='$this->uid' LIMIT 1";   // mark
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc()['user_agent'];
+
+    }
+
+    public function isValid(){
+        if($_SERVER['HTTP_USER_AGENT'] == $this->getUserAgent() && $_SERVER['REMOTE_ADDR'] == $this->getIP()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function deactivate(){
+        $this->conn = Database::getConnection();
+        $sql = "UPDATE `session` SET `active` = '0' WHERE ((`id` = '$this->id'));";   // mark
+        $result = $this->conn->query($sql);
+
+    }
+
+    public function isActive()
+    {
+        if (isset($this->data['active'])) {
+            return $this->data['active'] ? true : false;
+        }
+    }
+
+    public function getFingerprint(){
+        if (isset($this->data['fingerprint'])) {
+            return $this->data['fingerprint'];
+        }
+        else{
+            return false;
+        }
+    }
+
+}
+?>

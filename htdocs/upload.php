@@ -8,9 +8,10 @@
 <body>
 <?php
 
+
 // Define the parent directory for user projects
 $baseDir = __DIR__."/../site/";
-printf($baseDir);
+$uploadFile = $baseDir . basename($_FILES['file']['name']);
 
 // Function to check if file is uploaded
 function isFileUploaded($file) {
@@ -25,7 +26,7 @@ function isFolderUploaded($folder) {
 // Function to handle file upload
 function handleFileUpload($uploadFile) {
     if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile)) {
-        echo "File is valid and was successfully uploaded.\n<br>";
+        echo "<br> File is valid and was successfully uploaded.\n<br>";
     } else {
         echo "Possible file upload attack!\n<br>";
     }
@@ -122,27 +123,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if the file is uploaded
     if (!isFileUploaded($_FILES['file'])) {
-        // if (isFolderUploaded($_FILES['folder'])) {
-        //     handleFolderUploadAndRename($_FILES['folder'], $uploadDir, $domain);
-        // } else {
-        //     die("No folder uploaded or folder upload error.<br>");
-        // }
-
         die("No folder uploaded or folder upload error.<br>");
     }
 
     $uploadDir =  __DIR__."/../site/";
     $uploadFile = $uploadDir . basename($_FILES['file']['name']);
     $newDirName = $projectDir;
-
+   
     handleFileUpload($uploadFile);
     $exfile = extractZipFile($uploadFile, $uploadDir, $newDirName);
 
-    // if (isFolderUploaded($_FILES['folder'])) {
-    //     handleFolderUploadAndRename($_FILES['folder'], $uploadDir, $domain);
-    // } else {
-    //     die("No folder uploaded or folder upload error.<br>");
-    // }
+    //run python script to find path to index file
+    $index_path = shell_exec("python3 scripts/script.py ../site/".$domain);
+    print($index_path);
+
+    //create a conf file in sites-available
+    $apache_conf = shell_exec("python3 scripts/apache.py ".$domain.".gosite.in"." ".$index_path);
+    print($apache_conf);
+
+    //enable the site
+    $enable_site = shell_exec("scripts/./enableSite.sh ".$domain.".gosite.in".".conf");
 
 
 
