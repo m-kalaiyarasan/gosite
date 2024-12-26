@@ -10,6 +10,10 @@ function load($name){
     include "_templates/$name.php";
 }
 Session::start();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9950612fd860370fdf654e0285ac8b30e66e7baf
 global $__site_config;
 $__site_config_path = __DIR__.'/../../project/gosite.json';
 $__site_config = file_get_contents($__site_config_path);
@@ -25,4 +29,8 @@ function get_config($key, $default=null)
    else{
     return $default;
    }  
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9950612fd860370fdf654e0285ac8b30e66e7baf
