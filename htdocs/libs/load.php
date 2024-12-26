@@ -10,3 +10,19 @@ function load($name){
     include "_templates/$name.php";
 }
 Session::start();
+global $__site_config;
+$__site_config_path = __DIR__.'/../../project/gosite.json';
+$__site_config = file_get_contents($__site_config_path);
+
+
+function get_config($key, $default=null)
+{
+   global $__site_config;
+   $array = json_decode($__site_config, true);
+   if (isset($array[$key])){
+        return $array[$key];
+   }
+   else{
+    return $default;
+   }  
+}
