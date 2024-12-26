@@ -1,7 +1,7 @@
 <header class="hero-section text-center py-5">
         <div class="container">
             <h1 class="display-4 t-btn fw-bold">Deploy Your Website in Minutes</h1>
-            <p class="lead mb-5 t-white">Simple, fast, and secure web hosting. Upload your project, and we'll handle the rest.<br>Get SSL, custom domain, and 24/7 support included.</p>
+            <p class="lead mb-5 t-black">Simple, fast, and secure web hosting. Upload your project, and we'll handle the rest.<br>Get SSL, custom domain, and 24/7 support included.</p>
             <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a>
             
             <div class="row mt-5 pt-5 g-4 ">

@@ -27,7 +27,7 @@ fi
 echo "Restarting Apache..."
 sudo service apache2 reload
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to restart Apache."
+    echo "Error: Failed to reload Apache."
     exit 1
 fi
 
