@@ -42,12 +42,12 @@ class Conf
 
     //write a method to a2disconf the site
     public static function disableSite($name) {
-        $output = shell_exec('sudo a2dissite '.$name.'.gosite.conf || a2dissite '.$name.'.conf');
+        $output = shell_exec('sudo a2dissite '.$name.'.gosite.conf || a2dissite '.$name.'.gosite.conf');
         echo "Site disabled successfully.\n<br>";
     }
     //write a method to a2enconf the site
     public static function enableSite($name) {
-        $output = shell_exec('sudo a2ensite '.$name.'.gosite.conf || a2ensite '.$name.'.conf');
+        $output = shell_exec('sudo a2ensite '.$name.'.gosite.conf || a2ensite '.$name.'.gosite.conf');
         echo "Site enabled successfully.\n<br>";
     }
 
