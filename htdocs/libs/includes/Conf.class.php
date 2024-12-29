@@ -8,10 +8,10 @@ class Conf
     public static function changeapacheConfig($name,$newDirName) {   
         global $workdone;
 
-        $apacheConfigFile = '/etc/apache2/sites-available/gosite.template.conf';
+        $apacheConfigFile = '/etc/apache2/sites-available/000-default.conf';
         $apacheConfig = file_get_contents($apacheConfigFile);
         $newApacheConfig = str_replace('DocumentRoot /var/www/html', "DocumentRoot $newDirName", $apacheConfig);
-        $newApacheConfig = str_replace('ServerName gosite.in', "ServerName $name.gosite.in", $newApacheConfig);
+        $newApacheConfig = str_replace('#ServerName www.example.com', "ServerName $name.gosite.in", $newApacheConfig);
         
         $newfile = '/etc/apache2/sites-available/'.$name.'.gosite.conf';
         if (file_put_contents($newfile, $newApacheConfig)) {
