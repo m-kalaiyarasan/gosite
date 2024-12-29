@@ -36,7 +36,7 @@ class Conf
 
     //write a class to reload apache
     public static function reloadApache() {
-        $output = shell_exec('service apache2 reload');
+        $output = shell_exec('sudo service apache2 reload || service apache2 reload');
         echo "Apache reloaded successfully.\n<br>";
     }
 

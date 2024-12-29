@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+Conf::reloadApache();
 
 
 // header("Location: dashboard.php?manage");
