@@ -6,7 +6,11 @@
              <?
              if(Session::get('is_login')){
                 ?>
+
+               <a href="dashboard.php?manage" class="btn btn-primary btn-lg">Dashboard</a>
+
                 <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a>
+                
                 <?}
                 else{
                     ?>

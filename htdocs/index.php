@@ -14,27 +14,33 @@ include 'libs/load.php';
 <body>
     <!-- Navbar -->
 
-    <? load('navbar') ?>
+    <? load('navbar'); 
+    // print( $_SERVER['HTTP_USER_AGENT']);
+    ?>
     <!-- <button id="dark-mode-toggle">Toggle Dark Mode</button> -->
 
 
     <!-- banner Section -->
  
-    <? load('banner') ?>
+    <? load('banner'); ?>
 
 
     <!-- Pricing Section -->
 
-    <? load('pricing') ?>
+    <? load('pricing'); ?>
 
 
     <!-- Upload Section -->
     
-    <? load('form') ?>
+    <?
+    if(Session::get('is_login')){
+    load('form') ;
+    }
+    ?>
 
 
 
-    <? load('footer') ?>
+    <? load('footer'); ?>
 
 
 </body>

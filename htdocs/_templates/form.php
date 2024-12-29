@@ -1,17 +1,13 @@
-<?php
 
-if(Session::get('is_login')){
-
-    ?>
-    <section id="upload" class="upload-section py-5">
+<section id="upload" class="upload-section py-5">
         <div class="container">
             <h2 class="text-center mb-4">Launch Your Websites <i class="fa fa-rocket" style="font-size:48px;color:rgb(255, 62, 62)"></i>
             </h2>
             <div class="upload-area mx-auto">
                 <div class="upload-content">
                     <i class="bi bi-cloud-upload"></i>
-                    <form action="upload.php" method="POST" enctype="multipart/form-data">
-        <h6>Enter Subdomain Name</h6>
+                    <form action="uploadtest.php" method="POST" enctype="multipart/form-data">
+        <h6>Enter Domain Name</h6>
         <input class="form-control" type="text" id="domain" name="domain" required placeholder="" />
         <br><br>
 
@@ -24,4 +20,3 @@ if(Session::get('is_login')){
             </div>
         </div>
     </section>
-<?}?>

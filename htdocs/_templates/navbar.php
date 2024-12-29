@@ -15,18 +15,22 @@
                     <li class="t nav-item">
                         <a class="color-1 nav-link" href="https://test.kalaiyarasan.me/gosite/htdocs/index.php#pricing">Pricing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary ms-2" href="https://test.kalaiyarasan.me/gosite/htdocs/index.php#upload">Get Started</a>
-
+                    
                         <!-- <a class="btn btn-primary ms-2" href="signup.php">Sign up</a> -->
                          <?
                          if(Session::get('is_login')){
                                 ?>
+                                 <li class="nav-item">
+                                <!-- <a class="btn btn-primary ms-2" href="dashboard.php?manage">Dashboard</a> -->
+
                                 <a class="btn btn-primary ms-2" href="logintest.php?logout">Logout</a>
                                 <?
                             }
                             else{
                                 ?>
+                                <li class="nav-item">
+                                <a class="btn btn-primary ms-2" href="https://test.kalaiyarasan.me/gosite/htdocs/index.php#upload">Get Started</a>
+
                                 <a class="btn btn-primary ms-2" href="login.php">Login</a>
                                 <?
                          }

@@ -1,9 +1,6 @@
 
 <?php
- // This is basically a usersession available  in database table called 'session' to authenticate and authorize the user
- // also used to set to and get from the db table 
 
-// This file is basically used to validate the user session
 
 
 class UserSession
@@ -14,19 +11,17 @@ class UserSession
     public $data;
     public $token;
 
-    // chech the username and password is valid, if it is valid, make an entry for the user in database, like ip, useragent, login time.
-    // and also generate a token and put in into the database and give one copy to the user for verification, and finally return that token
-    // also we implement a fingerprint js
+
     public static function authenticate($user, $pass)
     {
         $username = User::login($user,$pass);
-        // print($username);
+         print($username);
         $user = new User($username);
         if($username){
             $conn = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $agent = $_SERVER['HTTP_USER_AGENT'];
-            $fingerprint = $_POST['fingerprint'];                          // mark
+            $fingerprint = $_POST['fingerprint'];                         
             $token = md5(rand(0,9999).$ip.$agent.time());
             $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`,`fingerprint`) 
             VALUES ('$user->id', '$token', now(), '$ip', '$agent', '1','$fingerprint')";
@@ -48,7 +43,10 @@ class UserSession
          {
             if($_SESSION['fingerprint'] == $session->getFingerprint())
             {
+                // Session::$user = $session->getUser();
+                // return $session;    
                 return true;
+
             }
             else
             {

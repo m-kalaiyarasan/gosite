@@ -18,7 +18,9 @@ $result = null;
 
 if (isset($_GET['logout'])) {
   Session::destroy();
-  exit("Session destroyed, <a href='login.php'>Login Again</a>");
+  header("Location: index.php");
+  exit;
+  // exit("Session destroyed, <a href='login.php'>Login Again</a>");
 
 }
 
@@ -27,17 +29,18 @@ print_r($_SESSION);
 if(Session::get('is_login'))
 {
   printf("Already login. ");
-    // $userdata = Session::get('session_user');
-    // $userobj = new User($user);
+    $userdata = Session::get('session_user');
+    $userobj = new User($user); 
+    Session::set('userobj',serialize($userobj));
 
     ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">  <? print("hello welcome");//print("Welcome Back, ".$userobj->getFirstname()); ?></h1>
+          <h1 class="display-4">  <? ;print("Welcome Back, ".$userobj->getFirstname()); ?></h1>
           <h1> <? 
-          // $token = UserSession::authenticate($user,$pass);
-          // $userSessionObj = new UserSession($token);
-          // print($userSessionObj->getFingerprint());
+          $token = UserSession::authenticate($user,$pass);
+          $userSessionObj = new UserSession($token);
+          print($userSessionObj->getFingerprint());
         
           ?>  </h1>
         </div>
@@ -90,6 +93,7 @@ if(Session::get('is_login')){
   echo <<<EOL
 <br><br><a href="logintest.php?logout">Logout</a>
 EOL;
+
    header("Location: index.php");
    exit;
 

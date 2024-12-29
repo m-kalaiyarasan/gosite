@@ -1,0 +1,50 @@
+        // foreach ($sites as $index => $site) {
+        //   echo "<tr>";
+        //   echo "<th scope='row'>" . ($index + 1) . "</th>";
+        //   echo "<td>" . htmlspecialchars($site['name']) . "</td>";
+        //   echo "<td><a href='" . htmlspecialchars($site['url']) . "'>" . htmlspecialchars($site['url']) . "</a></td>";
+        //   echo "<td>" . htmlspecialchars($site['status']) . "</td>";
+        //   $manage=$site['name'];
+        //     // echo "<td><a href='edit_site.php?name=" . urlencode($site['name']) . "' class='btn btn-primary btn-sm'>Manage</a></td>";
+        //     echo "<td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#siteModal" . $index . "'>Manage</button></td>";
+
+        //     // Modal
+        //     echo "<div class='modal fade' id='siteModal" . $index . "' tabindex='-1' aria-labelledby='siteModalLabel" . $index . "' aria-hidden='true'>";
+        //     echo "<div class='modal-dialog'>";
+        //     echo "<div class='modal-content'>";
+        //     echo "<div class='modal-header'>";
+        //     echo "<h5 class='modal-title' id='siteModalLabel" . $index . "'>Site Details</h5>";
+        //     echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+        //     echo "</div>";
+        //     echo "<div class='modal-body'>";
+        //     echo "<p><strong>Site Name:</strong> " . htmlspecialchars($site['name']) . "</p>";
+        //     echo "<p><strong>URL:</strong> <a href='" . htmlspecialchars($site['url']) . "'>" . htmlspecialchars($site['url']) . "</a></p>";
+        //     echo "<p><strong>Status:</strong> " . htmlspecialchars($site['status']) . "</p>";
+        //     echo "<form action='edit_site.php' method='post'>";
+        //     echo "<input type='hidden' name='index' value='" . $index . "'>";
+        //     echo "<div class='mb-3'>";
+        //     echo "<label for='siteName" . $index . "' class='form-label'>Site Name</label>";
+        //     echo "<input type='text' class='form-control' id='siteName" . $index . "' name='name' value='" . htmlspecialchars($site['name']) . "'>";
+        //     echo "</div>";
+        //     echo "<div class='mb-3'>";
+        //     echo "<label for='siteUrl" . $index . "' class='form-label'>URL</label>";
+        //     echo "<input type='text' class='form-control' id='siteUrl" . $index . "' name='url' value='" . htmlspecialchars($site['url']) . "'>";
+        //     echo "</div>";
+        //     echo "<div class='mb-3'>";
+        //     echo "<label for='siteStatus" . $index . "' class='form-label'>Status</label>";
+        //     echo "<select class='form-select' id='siteStatus" . $index . "' name='status'>";
+        //     echo "<option value='Active'" . ($site['status'] == 'Active' ? ' selected' : '') . ">Active</option>";
+        //     echo "<option value='Inactive'" . ($site['status'] == 'Inactive' ? ' selected' : '') . ">Inactive</option>";
+        //     echo "</select>";
+        //     echo "</div>";
+        //     echo "<button type='submit' class='btn btn-primary'>Save changes</button>";
+        //     echo "</form>";
+        //     echo "</div>";
+        //     echo "<div class='modal-footer'>";
+        //     echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+        //     echo "</div>";
+        //     echo "</div>";
+        //     echo "</div>";
+        //     echo "</div>";     echo "<div class='modal fade' id='siteModal" . $index . "' tabindex='-1' aria-labelledby='siteModalLabel" . $index . "' aria-hidden='true'>";
+ 
+        // }
