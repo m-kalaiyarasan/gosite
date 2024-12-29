@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $apache_conf = shell_exec("python3 scripts/apache.py ".$domain.".gosite.in"." ".$index_path);
 
     //enable the site
-    $enable_site = shell_exec("scripts/./enableSite.sh ".$domain.".gosite.in".".conf");
+    $enable_site = shell_exec("scripts/./enableSite.sh ".$domain.".gosite".".conf");
 // -----------------------------------------------------------------------------------------------
 
         print($workdone);
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-// header("Location: dashboard.php?manage");
+header("Location: dashboard.php?manage");
 $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
 exit;
 

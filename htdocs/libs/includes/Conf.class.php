@@ -11,6 +11,7 @@ class Conf
         $apacheConfigFile = '/etc/apache2/sites-available/gosite.template.conf';
         $apacheConfig = file_get_contents($apacheConfigFile);
         $newApacheConfig = str_replace('DocumentRoot /var/www/html', "DocumentRoot $newDirName", $apacheConfig);
+        $newApacheConfig = str_replace('ServerName gosite.in', "ServerName $name.gosite.in", $newApacheConfig);
         
         $newfile = '/etc/apache2/sites-available/'.$name.'.gosite.conf';
         if (file_put_contents($newfile, $newApacheConfig)) {
