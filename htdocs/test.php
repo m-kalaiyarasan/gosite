@@ -4,8 +4,6 @@
 
 
 include 'libs/load.php';
-$name = 'test';
-$baseDir = __DIR__."/../site/";
-$changeDir = $baseDir . $name;
+$name = 'dddd';
 
-Conf::changeapacheConfig($name,$changeDir);
+Conf::disableSite($name);

@@ -55,6 +55,7 @@ foreach ($details as $index => $site) {
                 <div class="modal-body">
                     <form action="editsite.php" method="post" onsubmit="return confirmDelete();">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($site['id']); ?>">
+                  
                         <div class="mb-3">
                             <label for="siteName<?php echo $index; ?>" class="form-label">Site Name</label>
                             <input type="text" class="form-control" id="siteName<?php echo $index; ?>" name="name" value="<?php echo htmlspecialchars($site['domain']); ?>">

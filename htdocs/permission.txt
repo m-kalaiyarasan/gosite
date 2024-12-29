@@ -4,6 +4,8 @@ sudo visudo
 # add this like in visudo
 www-data ALL=(ALL) NOPASSWD: /usr/sbin/a2ensite, /usr/sbin/service apache2 reload
 
+www-data ALL=(ALL) NOPASSWD: /usr/sbin/a2ensite, /usr/sbin/a2dissite, /usr/sbin/service apache2 reload
+
 ---------------------------------------------------------------------------------------------------------
 
 chmod +x /for/all/the/scripts

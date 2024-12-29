@@ -38,6 +38,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete'){
     $purchase = new Purchase(Session::get('session_user'));
     $result = $purchase->deletedetails($id);
     if($result){
+        Conf::disableSite($name);
+        Conf::deleteapacheConfig($name);
+        Conf::reloadApache();
+        conf::deleteFolder($name);
         header('Location: dashboard.php?manage');
         exit;
     }
