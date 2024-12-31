@@ -14,8 +14,9 @@
         <h6>Upload Your Project: (.zip)</h6>
         <input type="file" class="form-control form-control-lg" id="file" name="file" accept=".zip" />
         <br><br>
-        <button type="submit" class="btn btn-primary">Deploy Now</button>
-                    </form>
+        <!-- <button type="submit" class="btn btn-primary">Deploy Now</button> -->
+        <button type="button" class="btn btn-primary" onclick="window.location.href='dashboard.php?host';">Deploy Now</button>
+        </form>
                </div>
             </div>
         </div>

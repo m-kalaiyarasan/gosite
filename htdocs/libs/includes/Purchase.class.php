@@ -46,10 +46,10 @@ class Purchase{
     }
 
 
-    public static function setdetails($domain, $plan, $path){
+    public static function setdetails($domain, $plan_id,$plan_name, $path){
         $conn = Database::getConnection();
         $username = Session::get('session_user');
-        $sql = "INSERT INTO `purchase` (`username`, `domain`, `plan`, `path`,`status`) VALUES ('$username', '$domain', '$plan', '$path', 1)";
+        $sql = "INSERT INTO `purchase` (`username`, `domain` ,`plan_id`, `plan_name`, `path`,`status`) VALUES ('$username', '$domain','$plan_id', '$plan_name', '$path', 1)";
         $result = $conn->query($sql);
         if($result){
             return true;

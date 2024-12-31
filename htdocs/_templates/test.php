@@ -58,11 +58,8 @@ foreach ($details as $index => $site) {
    if($status === "Not In Use"){ 
     ?>
 
-    <form action="index.php" method="post">
 
-    <input type="hidden" name="plan_id" id="<? print(htmlspecialchars($site['plan_id'])); ?>">
   <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">Use Now</button></td>
-   </form>
 
    <div class="modal fade" id="siteModal<?php echo $index; ?>" tabindex="-1" aria-labelledby="siteModalLabel<?php echo $index; ?>" aria-hidden="true">
         <div class="modal-dialog">
@@ -79,12 +76,15 @@ foreach ($details as $index => $site) {
                     <!-- <i class="bi bi-cloud-upload"></i> -->
                     <form action="uploadtest.php" method="POST" enctype="multipart/form-data"><br>
         <h5>Enter Domain Name</h5>
+        <? print(htmlspecialchars($site['plan_id'])); ?>
         <input class="form-control" type="text" id="domain" name="domain" required placeholder="" />
         <br>
 
         <h5>Upload Your Project: (.zip)</h5 >
         <input type="file" class="form-control form-control-lg" id="file" name="file" accept=".zip" />
         <br>
+        <input type="hidden" name="plan_id" value="<? ECHO htmlspecialchars($site['plan_id']); ?>">
+        <input type="hidden" name="plan_name" value="<? ECHO htmlspecialchars($site['plan_name']); ?>">  
         <button type="submit" class="btn btn-primary">Deploy Now</button>
                     </form>
                     <br>

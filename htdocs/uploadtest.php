@@ -1,5 +1,9 @@
 <?php
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 include 'libs/load.php';
 
 $baseDir = __DIR__."/../site/";
@@ -52,13 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    Conf::reloadApache();
 
 // -----------------------------------------------------------------------------------------------
-
+$plan_id = $_POST['plan_id'];
+$plan_name = $_POST['plan_name'];
         print($workdone);
         if ($workdone >= 3) {
 
             echo "Work done successfully!\n<br>";
             Database::getConnection();  
-            if(Purchase::setdetails($domain, "basic",$index_path )){
+            if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path )){
                 echo "Domain details set successfully!\n<br>";
             } else {
                 echo "Failed to set domain details!\n<br>";
