@@ -8,6 +8,7 @@ include_once 'includes/UserDetails.class.php';
 include_once 'includes/Purchase.class.php';
 include_once 'includes/Upload.class.php';
 include_once 'includes/Conf.class.php';
+include_once 'includes/Subscription.class.php';
 
 function load($name){
     include "_templates/$name.php";

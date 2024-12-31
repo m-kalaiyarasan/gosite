@@ -67,6 +67,12 @@
           Databases
         </a>
       </li>
+    <li>
+        <a href="dashboard.php?host" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Host now
+        </a>
+      </li>
         <!-- 
       <li>
         <a href="#" class="nav-link link-dark">

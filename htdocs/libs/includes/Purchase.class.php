@@ -29,6 +29,23 @@ class Purchase{
 
     }
 
+    public function isPlanIdExists($plan_id) {
+        $conn = Database::getConnection();
+
+        // SQL query to check if the plan_id exists
+        $sql = "SELECT 1 FROM purchase WHERE plan_id = ? LIMIT 1";
+
+        // Use prepared statement
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $plan_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Return true if a row is found, else false
+        return $result->num_rows > 0;
+    }
+
+
     public static function setdetails($domain, $plan, $path){
         $conn = Database::getConnection();
         $username = Session::get('session_user');
@@ -60,6 +77,19 @@ class Purchase{
         $result = $conn->query($sql);
         if($result){
             return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getDomain($domain){
+        $conn = Database::getConnection();
+        $username = Session::get('session_user');
+        $sql = "SELECT $domain FROM `purchase` WHERE `username` = '$username' ";
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            return $row['domain'];
         }else{
             return false;
         }

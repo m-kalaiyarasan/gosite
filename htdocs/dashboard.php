@@ -20,6 +20,9 @@ if (isset($_GET['manage'])) {
 if(isset($_GET['database'])) {
     load('soon');
 }
+if(isset($_GET['host'])) {
+    load('test');
+}
 
 
 
