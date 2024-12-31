@@ -1,0 +1,20 @@
+[33m1f5b22e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: update in reload apache2
+[33mdb25b09[m HEAD@{1}: commit: small conf update
+[33me76484a[m HEAD@{2}: commit: change enable.sh to php function to manage
+[33m76eaa8a[m HEAD@{3}: commit: update to default apache conf
+[33mdf6c893[m HEAD@{4}: commit: demo
+[33mf6a8b95[m HEAD@{5}: commit: add all remove funcions for domain deletion
+[33m045f7e8[m HEAD@{6}: commit: changes
+[33m45bf41a[m HEAD@{7}: commit: update the dashboard, and automate a lot of things
+[33m44a398b[m HEAD@{8}: reset: moving to HEAD~1
+[33mf87e27e[m HEAD@{9}: commit: add a dashboard retrive query and working on dashboard
+[33m44a398b[m HEAD@{10}: commit: ignore
+[33me17743c[m HEAD@{11}: commit: login error messages
+[33m66c8fa2[m HEAD@{12}: commit: login error messages
+[33m58dc548[m HEAD@{13}: commit: login error messages
+[33ma81bd22[m HEAD@{14}: pull: Fast-forward
+[33m9950612[m HEAD@{15}: pull --no-rebase origin main: Merge made by the 'ort' strategy.
+[33m322eabf[m HEAD@{16}: commit: ca
+[33m6fe21b6[m HEAD@{17}: commit: Rebuild Git index and commit changes
+[33m6afde31[m HEAD@{18}: reset: moving to HEAD
+[33m6afde31[m HEAD@{19}: clone: from github.com:m-kalaiyarasan/gosite.git
