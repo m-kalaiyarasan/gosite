@@ -13,7 +13,7 @@
                         <a class="color-1 nav-link" href="index.php">Home</a>
                     </li>
                     <li class="t nav-item">
-                        <a class="color-1 nav-link" href="https://test.kalaiyarasan.me/gosite/htdocs/index.php#pricing">Pricing</a>
+                        <a class="color-1 nav-link" href="index.php#pricing">Pricing</a>
                     </li>
                     
                         <!-- <a class="btn btn-primary ms-2" href="signup.php">Sign up</a> -->

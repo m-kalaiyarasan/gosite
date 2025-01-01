@@ -1,5 +1,6 @@
 <?php
 
+include '../libs/load.php';
 
 $plan = $_POST['plan'];
 $price = $_POST['price'];
@@ -80,7 +81,10 @@ require 'razorpay.class.php';
 $key_id = 'rzp_test_mWWPK4Xg13CyPi';
 $key_secret = 'C1RusLdHei7cDZkQdMXHV8Cq';
 // Set your callback URL
-$callback_url = "https://dys.selfmade.one/gosite/htdocs/razorpay/paymentverify.php";
+
+$callback_url  = get_config('callback_url');
+
+// $callback_url = "https://dys.selfmade.one/gosite/htdocs/razorpay/paymentverify.php";
 
 // Include Razorpay Checkout.js library
 echo '<script src="https://checkout.razorpay.com/v1/checkout.js"></script>';
@@ -104,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Add a script to handle the payment
 echo '<script src="https://checkout.razorpay.com/v1/checkout.js"></script>';
     echo '
-        <button onclick="startPayment()">Pay with Razorpay</button>
         <script>
             function startPayment() {
                 var options = {
