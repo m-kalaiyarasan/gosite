@@ -85,7 +85,19 @@ class Purchase{
     public function getDomain($domain){
         $conn = Database::getConnection();
         $username = Session::get('session_user');
-        $sql = "SELECT $domain FROM `purchase` WHERE `username` = '$username' ";
+        $sql = "SELECT '$domain' FROM `purchase` WHERE `username` = '$username' ";
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            return $row['domain'];
+        }else{
+            return false;
+        }
+    }
+    public function getDomainById($plan_id){
+        $conn = Database::getConnection();
+        $username = Session::get('session_user');
+        $sql = "SELECT * FROM `purchase` WHERE `plan_id` = '$plan_id' ";
         $result = $conn->query($sql);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();

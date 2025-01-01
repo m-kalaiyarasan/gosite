@@ -1,12 +1,47 @@
+<?php
+
+
+try{
+          
+  $username = Session::get('session_user');
+  $subscription = new Subscription();
+  $details = $subscription->getUniquePlans($username);
+  // $getdetail = $subscription->getdetails();
+
+   echo "<pre>";
+  // print_r($details);
+  echo "</pre>";
+
+  $purchase = new Purchase($username);
+  $domian = $purchase->getDomain('domain');
+  print($domain);
+
+}
+catch(Exception $e){
+
+  // echo $e->getMessage();
+  // echo "<center><h3>You Don't have Plan,</h3></center><br>";
+}
+  
+
+
+
+
+?>
 
 
 <div class="container mt-5">
+  <?if ($details !== false && !empty($details)) {?>
     <table class="table table-striped">
       <thead>
+      <tr>
+          <th colspan="6" ><h4 class="text-center"> Your Plan </h4></th>
+        </tr>
         <tr>
           <th scope="col">S.NO</th>
           <!-- <th scope="col">Domain ID</th> -->
           <th scope="col">Plan</th>
+          <th scope="col">Domain</th>
           <!-- <th scope="col">URL</th> -->
           <th scope="col">Status</th>
           <th scope="col">Actions</th>
@@ -16,27 +51,12 @@
       <tbody>
         <?php
 
-        
-        $username = Session::get('session_user');
-        $subscription = new Subscription();
-        $details = $subscription->getUniquePlans($username);
-        // $getdetail = $subscription->getdetails();
-
-         echo "<pre>";
-        // print_r($details);
-        echo "</pre>";
-
-        $purchase = new Purchase($username);
-        $domian = $purchase->getDomain('domain');
-        print($domain);
-        // $planId = 'plan_PdgDRV9wFR8Jn4'; // Example plan ID
   
     
 
 
 
 
-        if ($details !== false) {
             // Iterate over the details array
 foreach ($details as $index => $site) {
 
@@ -44,23 +64,32 @@ foreach ($details as $index => $site) {
   
   if ($purchase->isPlanIdExists($planId)) {
     $status = "In use";
+    $domain = $purchase->getDomainById($planId).".gosite.in";
+    // print($domain);
   } else {
     $status = "Not In Use";
+    $domain = "None";
   }
 
 
     echo "<tr>";
     echo "<th scope='row'>" . ($index + 1) . "</th>";
     // echo "<td>" . htmlspecialchars($site['id']) . "</td>";
-    echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
+    echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>"; 
+    echo "<td>" . $domain . "</td>";
    // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
    if($status === "Not In Use"){ 
     ?>
 
+  <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">Host Now</button></td>
+  <? }else{
+    ?>
+      <td><button type='button' class='btn btn-primary btn-sm' disabled  >In Use</button></td>
 
-  <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">Use Now</button></td>
-
+    <?
+  }
+    ?>
    <div class="modal fade" id="siteModal<?php echo $index; ?>" tabindex="-1" aria-labelledby="siteModalLabel<?php echo $index; ?>" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -101,13 +130,18 @@ foreach ($details as $index => $site) {
         </div>
     </div>
   
-  <? }
-    ?>
+
     <?php
 }
 
 } else {
-    echo 'No purchase details found for the specified username.';
+    echo "<center><h3>You Don't have Plan,</h3>
+    
+    <a href='index.php#pricing' class='btn btn-primary'>Get a Plan</a>
+    </center><br>";
+
+  //create a button and redirect to the plans page
+   
 }
 
         ?>

@@ -9,7 +9,7 @@
 
                <a href="dashboard.php?manage" class="btn btn-primary btn-lg">Dashboard</a>
 
-                <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a>
+                <a href="dashboard.php?host" class="btn btn-primary btn-lg">Launch Now</a>
                 
                 <?}
                 else{

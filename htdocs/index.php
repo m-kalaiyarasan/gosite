@@ -34,7 +34,7 @@ include 'libs/load.php';
     
     <?
     if(Session::get('is_login')){
-    load('form') ;
+    // load('form') ;
     }
     ?>
 
