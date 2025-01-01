@@ -84,7 +84,7 @@ $plan_name = $_POST['plan_name'];
 Conf::reloadApache();
 
 
-// header("Location: dashboard.php?manage");
+header("Location: dashboard.php?manage");
 $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
 exit;
 

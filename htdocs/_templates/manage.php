@@ -87,7 +87,7 @@ foreach ($details as $index => $site) {
                         <!-- <button type="submit" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">delete</button> -->
 
-                        <button type="submit" name="action" value="save" class="btn btn-primary">Save changes</button>
+                        <!-- <button type="submit" name="action" value="save" class="btn btn-primary">Save changes</button> -->
                         <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

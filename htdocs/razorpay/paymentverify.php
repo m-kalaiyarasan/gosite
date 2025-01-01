@@ -74,6 +74,9 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 
+// Redirect to dashboard
 
 
+header("Location: ../dashboard.php?host");
+exit;
 ?>
