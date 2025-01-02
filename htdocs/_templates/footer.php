@@ -24,7 +24,17 @@
     </section>
 
   <!-- Copyright -->
+   <div>
+    <a class="text-dark p-4" href="policy/Refund-Policy.php">Refund Policy</a>  
+    <a class="text-dark p-4" href="policy/Terms-of-Service.php">Terms of Service</a>  
+    <a class="text-dark p-4" href="policy/privacy-policy.php">Privacy Policy</a>  
+</div>
   <div class="text-center p-3" style="background-color:#106cbb; color: white;">
+  <!-- <div>
+    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Refund Policy</a>  
+    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Terms of Service</a>  
+    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Privacy Policy</a>  
+</div> -->
     © 2025 Copyright
     <a class="text-white" href="https://kalaiyarasan.me/">@Kalaiyarasan</a>
   </div>

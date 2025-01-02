@@ -16,6 +16,10 @@
                         <a class="color-1 nav-link" href="index.php#pricing">Pricing</a>
                     </li>
                     
+                    <li class="t nav-item">
+                        <a class="color-1 nav-link" href="contact.php">Support</a>
+                    </li>
+                    
                         <!-- <a class="btn btn-primary ms-2" href="signup.php">Sign up</a> -->
                          <?
                          if(Session::get('is_login')){
