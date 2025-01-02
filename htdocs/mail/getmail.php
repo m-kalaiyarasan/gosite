@@ -1,4 +1,5 @@
 <?php
+include '../libs/load.php';
 
 $name = $_REQUEST['fullname'];
 $email = $_REQUEST['email'];
@@ -20,7 +21,7 @@ try {
     $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
     $mail->SMTPAuth = true;
     $mail->Username = 'gosite.site@gmail.com'; // Replace with your email address
-    $mail->Password = 'oewo xdfe xefn qxdw'; // Replace with your email password
+    $mail->Password = get_config('mail_key'); // Replace with your email password
     $mail->SMTPSecure = 'tls'; // 'tls' can also be used
     $mail->Port = 587; // SMTP port (e.g., 587 for TLS, 465 for SSL)
 
