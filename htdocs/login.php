@@ -23,15 +23,11 @@ if (isset($_GET['faild'])) {
 
 <?load('navbar');?>
 
-<div class="pt-5">
-<div class="pt-5">
 <?load('login');?>
-</div>
-</div>
 
 <div class="pt-5">
 <div class="pt-5">
-<div class="mt-5">
+<div class="mt-2">
 <?load('footer');?>
 </div>
 </div>

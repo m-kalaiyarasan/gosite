@@ -1,13 +1,19 @@
+
+<?php
+
+include 'libs/load.php';
+
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<? load('head') ?>
 </head>
 <body>
+  <? load('navbar'); ?>
     <!-- Contact 3 - Bootstrap Brain Component -->
+
 <section class="bg-light py-3 py-md-5">
     <div class="container">
       <div class="row gy-3 gy-md-4 gy-lg-0 align-items-md-center">
@@ -85,7 +91,7 @@
         <div class="col-12 col-lg-6">
           <div class="bg-white border rounded shadow-sm overflow-hidden">
   
-            <form action="#!">
+            <form action="mail/getmail.php" method="post">
               <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                 <div class="col-12">
                   <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>

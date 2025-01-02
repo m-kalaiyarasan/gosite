@@ -33,7 +33,7 @@
                             else{
                                 ?>
                                 <li class="nav-item">
-                                <a class="btn btn-primary ms-2" href="https://test.kalaiyarasan.me/gosite/htdocs/index.php#upload">Get Started</a>
+                                <a class="btn btn-primary ms-2" href="signup.php">Get Started</a>
 
                                 <a class="btn btn-primary ms-2" href="login.php">Login</a>
                                 <?

@@ -32,7 +32,24 @@
                             <li><i class="bi bi-check-circle-fill"></i>Custom Domain</li>
                             <li><i class="bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
-                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalStarter" data-plan="starter">Get Started</button>
+                        <?
+                        if(Session::get('is_login')){
+                            ?>
+                            
+                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalStarter" data-plan="starter">Get Started</button>
+                            
+                         <?
+                        }else{
+
+                            ?>
+                            <button type="button" class="btn btn-primary w-100" onclick="window.location.href='login.php';">Get Started</button>    
+   
+                            <?
+   
+                           }
+                           ?>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -56,7 +73,22 @@
                             <li><i class="bi bi-check-circle-fill"></i>Custom Domain</li>
                             <li><i class="bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
+                        <?
+                        if(Session::get('is_login')){
+                            ?>
                         <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalProfessional" data-plan="professional">Get Started</button>
+                        
+                        <?
+                        }else{
+
+                         ?>
+                         <button type="button" class="btn btn-primary w-100" onclick="window.location.href='login.php';">Get Started</button>    
+
+                         <?
+
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -81,7 +113,21 @@
                             <li><i class="bi bi-check-circle-fill"></i>Custom Domain</li>
                             <li><i class="bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
+                        <?
+                        if(Session::get('is_login')){
+                            ?>
                         <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalBusiness" data-plan="business">Get Started</button>
+                        
+                        <?
+                        }else{
+
+                         ?>
+                         <button type="button" class="btn btn-primary w-100" onclick="window.location.href='login.php';">Get Started</button>    
+
+                         <?
+
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

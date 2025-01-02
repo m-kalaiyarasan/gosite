@@ -68,7 +68,10 @@ catch (Exception $e) {
 
 
 </center>
-<h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
+<center>
+    <h1 class="h3 mb-3 color-1">Sign up</h1>
+    </center>
+
   
 
   <div class="form-floating">

@@ -9,7 +9,7 @@ include 'libs/load.php';?>
 <body>
 <?load('navbar');?>
 
-<div class="pt-5">
+<div class="pt-4">
 <?load('signup');?>
 </div>
 
