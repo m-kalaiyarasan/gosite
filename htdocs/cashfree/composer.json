@@ -1,0 +1,10 @@
+{
+    "require": {
+        "cashfree/cashfree-pg-sdk-php": "^4.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

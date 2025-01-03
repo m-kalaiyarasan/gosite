@@ -1,0 +1,13 @@
+curl --request POST \
+  --url https://test.cashfree.com/api/v2/subscriptions/nonSeamless/subscription \
+  --header 'Content-Type: application/json' \
+  --header 'X-Client-Id: TEST10415338d02ddc9044ea7f3e348083351401' \
+  --header 'X-Client-Secret: cfsk_ma_test_c8f46887ca2ac8d1276076fc2ce3d60e_f0d05ada' \
+  --data '{
+    "subscriptionId": "Subscription1",
+    "planId": "plan8052",
+    "customerName": "John",
+    "customerPhone": "7484561258",
+    "customerEmail": "john@gmail.com",
+    "linkExpiry": 5
+  }'
