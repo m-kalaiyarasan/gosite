@@ -119,5 +119,6 @@ document.getElementById('payNowButton').addEventListener('click', function() {
 function closeModal() {
     document.getElementById('paymentModal').style.display = 'none';
     document.getElementById('paymentIframe').src = ""; // Clear the iframe content
+    window.location.href = "../index.php"; 
 }
 </script>

@@ -49,7 +49,7 @@ background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 3
 /* Pricing Section */
 .pricing-card {
     border: none;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.122);
     transition: transform 0.3s ease;
 }
 
@@ -136,8 +136,8 @@ background: linear-gradient(180deg, rgba(16,110,190,1) 30%, rgba(16,115,193,1) 3
     cursor: pointer;
     text-decoration: underline;
 }
-.feature-list li{
-    color:0d6efd;   
+.feature-list i{
+    color:#0dc83c;   
 }
 .btn{
     background-color: 0d6efd;

@@ -15,6 +15,12 @@ include 'libs/load.php';?>
 <main>
 
 <!-- ------------------------------------Dashboard ------------------------------------>
+<?php
+
+if(Session::get('is_login'))
+{
+
+?>
 
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -47,9 +53,10 @@ include 'libs/load.php';?>
 
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-     <i class="bi bi-server logo-colour fs-4 me-2"></i>
-      <span class="fs-4">
-   Gosite
+     <!-- <i class="bi bi-server logo-colour fs-4 me-2"></i> -->
+      <img src="logo.png" alt="" width="50" height="50" alt="">
+      <span class="fs-4 ">
+   <h3 class="mt-3">Gosite</h3>
    
     </a>
     <hr>
@@ -73,7 +80,7 @@ include 'libs/load.php';?>
         </a>
       </li>
       <li>
-        <a href="dashboard.php?doc" class="nav-link <?if (isset($_GET['doc'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
+        <a href="documents.php" class="nav-link <?if (isset($_GET['doc'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Documentation
         </a>
@@ -145,6 +152,8 @@ include 'libs/load.php';?>
 <!-- ------------------------------------Dashboard ------------------------------------>
 
 <?
+}
+
 
 // load('dashboard'); 
 

@@ -68,6 +68,10 @@ else
         Session::set('is_login',true);
         Session::set('session_user',$result);
         //print the above session
+        $token = UserSession::authenticate($user,$pass);
+        $userSessionObj = new UserSession($token);
+
+        print($userSessionObj->getFingerprint());
     
     }
     else{

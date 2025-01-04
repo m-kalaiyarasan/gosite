@@ -1,8 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-color shadow-sm">
         <div class="container">
+            
             <a class="navbar-brand d-flex  align-items-center" href="#">
-                <i class="bi bi-server logo-colour fs-4 me-2"></i>
-                <span class="color-1 fw-bold">GoSite</span>
+
+                            <img class="mb-2 "src="logo.png" alt="" width="50" height="50" alt="">
+                  
+                <span class="color-1 fw-bold" style="font-size: 30px;">GoSite</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>

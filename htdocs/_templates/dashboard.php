@@ -1,3 +1,4 @@
+
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -49,7 +50,7 @@
         </a>
       </li>
       <li>
-        <a href="dashboard.php?manage" class="nav-link link-dark">
+        <a href="documents.php" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Documentation
         </a>
@@ -119,6 +120,7 @@
   </div>
   
   <div class="b-example-divider"></div>
+
 
 
 
