@@ -53,8 +53,11 @@ class Conf
 
     //write a method to delete the folder
     public static function deleteFolder($name) {
+        if($name){
         $output = shell_exec('rm -rf '.__DIR__."/../../../site/".$name);
+        echo $output;
         echo "Folder deleted successfully.\n<br>";
+        }
     }
     
 }

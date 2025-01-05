@@ -51,7 +51,7 @@ foreach ($details as $index => $site) {
     echo "<th scope='row'>" . ($index + 1) . "</th>";
     // echo "<td>" . htmlspecialchars($site['id']) . "</td>";
     echo "<td>" . htmlspecialchars($site['domain']) . "</td>";
-    echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
+    echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'target='_blank'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
     echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
    

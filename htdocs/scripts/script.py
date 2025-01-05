@@ -14,7 +14,7 @@ def find_index_file(search_path):
         for file in files:
             if file in index_files:
                 return os.path.abspath(root)
-    return "No index file found."
+    return 0
 
 def main(search_path):
     """
@@ -28,7 +28,7 @@ def main(search_path):
         return f"Error: {search_path} is not a valid directory."
     
     result = find_index_file(search_path)
-    if result == "No index file found.":
+    if result == 0:
         return result
     else:
         return result

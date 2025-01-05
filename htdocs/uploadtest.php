@@ -7,11 +7,82 @@ echo "</pre>";
 include 'libs/load.php';
 
 $baseDir = __DIR__."/../site/";
-$uploadFile = $baseDir . basename($_FILES['file']['name']);
+$File = $baseDir . basename($_FILES['file']['name']);
 // $newDirName = $baseDir . $domain;
 
 //build a object for Upload class
-$upload = new Upload($baseDir, $uploadFile);
+
+//check the user upload file or use git link, and make the functions accordingly
+if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK)
+{
+    $File = $baseDir . basename($_FILES['file']['name']);
+    print("enter in line 19");
+}
+elseif(isset($_POST['git']) && !empty($_POST['git'])){
+    $File = $_POST['git'];
+    print("enter in line 23");
+
+
+}
+else{
+    die("enter git link or upload files");
+}
+
+$upload = new Upload($baseDir, $File);
+
+
+//this is a main functions that execute after the cloning of repo or unzip of file,
+function scripts($workdone,$domain,$newDirName){
+
+    //   ---------------------------------------------------------------------------------------------- 
+    //run python script to find path to index file
+    $index_path = shell_exec("python3 scripts/script.py ../site/".$domain);
+
+    // execute this if the index file is not in the user's project 
+    if($index_path == 0){
+        if (file_exists($newDirName)) {
+        conf::deleteFolder($domain);
+        die("fail to find index and deleted the file");
+        }
+        else{
+            die("line 38 in uploadtest.php");
+
+        }
+    }
+    
+    //create a conf file in sites-available
+    $name = 'test';
+
+        print("<br>index path print : ".$index_path);
+    Conf::changeapacheConfig($domain,$index_path);
+
+
+    //enable the site
+   Conf::enableSite($domain);
+   Conf::reloadApache();
+
+// -----------------------------------------------------------------------------------------------
+    $plan_id = $_POST['plan_id'];
+    $plan_name = $_POST['plan_name'];
+        print($workdone);
+        if ($workdone >= 3) {
+
+            echo "Work done successfully!\n<br>";
+            Database::getConnection();  
+            if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path )){
+                echo "Domain details set successfully!\n<br>";
+            } else {
+                echo "Failed to set domain details!\n<br>";
+            }
+    
+        } elseif($workdone <= 2) {
+            echo "Work done partially!\n<br>";
+        } else {
+            echo "Work done failed!\n<br>";
+        }
+    }
+
+    
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,56 +106,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($upload->isFileUploaded($_FILES['file'])) {
 
-        $upload->handleFileUpload($uploadFile);
-        $workdone = $upload->extractZipFile($uploadFile, $baseDir, $newDirName);
-
-                           //scripts to handle apache configuration
-//   ---------------------------------------------------------------------------------------------- 
-    //run python script to find path to index file
-    $index_path = shell_exec("python3 scripts/script.py ../site/".$domain);
-    //create a conf file in sites-available
-    $name = 'test';
-
-        print("<br>index path print : ".$index_path);
-    Conf::changeapacheConfig($domain,$index_path);
-
-    // $apache_conf = shell_exec("python3 scripts/apache.py ".$domain.".gosite.in"." ".$index_path);
-
-    //enable the site
-    // $enable_site = shell_exec("scripts/./enableSite.sh ".$domain.".gosite".".conf");
-   Conf::enableSite($domain);
-   Conf::reloadApache();
-
-// -----------------------------------------------------------------------------------------------
-$plan_id = $_POST['plan_id'];
-$plan_name = $_POST['plan_name'];
-        print($workdone);
-        if ($workdone >= 3) {
-
-            echo "Work done successfully!\n<br>";
-            Database::getConnection();  
-            if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path )){
-                echo "Domain details set successfully!\n<br>";
-            } else {
-                echo "Failed to set domain details!\n<br>";
-            }
-    
-        } elseif($workdone <= 2) {
-            echo "Work done partially!\n<br>";
-        } else {
-            echo "Work done failed!\n<br>";
-        }
+        $upload->handleFileUpload($File);
+        $workdone = $upload->extractZipFile($File, $baseDir, $newDirName);
+        scripts($workdone,$domain,$newDirName);
     }
+    elseif(isset($_POST['git'])){
 
+        $gitt = $upload->gitclone($domain);
+        $workdone = 3;
+        scripts($workdone,$domain,$newDirName);
+
+    }
     else {
-        echo "File not uploaded!";
+        $gitt = $upload->gitclone($domain);
+        die("File not uploaded!");
     }
 }
 
 Conf::reloadApache();
 
 
-header("Location: dashboard.php?manage");
-$_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
-exit;
+// header("Location: dashboard.php?manage");
+// $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
+// exit;
 

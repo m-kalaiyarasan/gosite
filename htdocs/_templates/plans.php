@@ -105,12 +105,15 @@ foreach ($details as $index => $site) {
                     <!-- <i class="bi bi-cloud-upload"></i> -->
                     <form action="uploadtest.php" method="POST" enctype="multipart/form-data"><br>
         <h5>Enter Domain Name</h5>
-        <? print(htmlspecialchars($site['plan_id'])); ?>
         <input class="form-control" type="text" id="domain" name="domain" required placeholder="" />
         <br>
 
         <h5>Upload Your Project: (.zip)</h5 >
         <input type="file" class="form-control form-control-lg" id="file" name="file" accept=".zip" />
+        <br>
+        <h6>or</h6>
+        <h5>Enter Git Repo Link</h5 >
+        <input type="text" class="form-control form-control-lg" id="git" name="git" />
         <br>
         <input type="hidden" name="plan_id" value="<? ECHO htmlspecialchars($site['plan_id']); ?>">
         <input type="hidden" name="plan_name" value="<? ECHO htmlspecialchars($site['plan_name']); ?>">  

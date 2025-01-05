@@ -5,17 +5,17 @@ include_once 'Database.class.php';
 class Upload{
 
     public $baseDir;
-    public $uploadFile;
+    public $File;
     public $workdone;
     public $conn;
 
 
-    public function __construct($baseDir, $uploadFile) {
+    public function __construct($baseDir, $File) {
         $this->baseDir = $baseDir;
-        $this->uploadFile = $uploadFile;
+        $this->File = $File;
         // print($this->baseDir);
         // echo "<br>";
-        // print($this->uploadFile);
+        // print($this->File);
         $conn = Database::getConnection();
     }
 
@@ -23,8 +23,8 @@ class Upload{
         return isset($file) && $file['error'] === UPLOAD_ERR_OK;
     }
 
-    public function handleFileUpload($uploadFile) {
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile)) {
+    public function handleFileUpload($File) {
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $File)) {
             echo "<br> File is valid and was successfully uploaded.\n<br>";
 
             //to track the work done
@@ -33,11 +33,11 @@ class Upload{
             echo "Possible file upload attack!\n<br>";
         }
     }
-    public function extractZipFile($uploadFile, $uploadDir, $newDirName) {
+    public function extractZipFile($File, $uploadDir, $newDirName) {
         global $workdone; 
 
         $zip = new ZipArchive;
-        if ($zip->open($uploadFile) === TRUE) {
+        if ($zip->open($File) === TRUE) {
             $zip->extractTo($uploadDir);
             $extractedFiles = [];
 
@@ -56,9 +56,9 @@ class Upload{
             //to track the work done
             $workdone = $workdone + 1;
 
-            $dirToRename = str_replace(".zip", "", $uploadFile);
+            $dirToRename = str_replace(".zip", "", $File);
             $this->renameDirectory($dirToRename, $newDirName);
-            $workdone = $this->deleteZipFile($uploadFile); // Fixed here
+            $workdone = $this->deleteZipFile($File); // Fixed here
             return $workdone;
         } else {
             echo "Failed to open ZIP file.\n<br>";
@@ -79,10 +79,10 @@ class Upload{
         }
     }
 
-    public function deleteZipFile($uploadFile) {
+    public function deleteZipFile($File) {
         global $workdone;
 
-        if (unlink($uploadFile)) {
+        if (unlink($File)) {
             echo "ZIP file deleted successfully.\n<br>";
             $workdone = $workdone + 1;
             return $workdone;
@@ -106,6 +106,35 @@ class Upload{
             echo "Failed to update Apache config.\n<br>";
         }
     }
+
+    public function gitclone($domain)
+    {
+        if (empty($domain) || empty($this->File)) {
+            throw new Exception("Invalid domain name or Git link.");
+        }
+
+        $targetDir =  $this->baseDir. $domain;
+        print("<br>".$targetDir."<br>");
+
+        // Ensure the target directory does not already exist
+        if (file_exists($targetDir)) {
+            throw new Exception("The target directory '$targetDir' already exists.");
+        }
+
+        // Construct the Git clone command
+        $gitCommand = sprintf('git clone %s %s', escapeshellarg($this->File), escapeshellarg($targetDir));
+
+        // Execute the Git clone command
+        exec($gitCommand, $output, $returnVar);
+
+        // Check the return status of the exec command
+        if ($returnVar === 0) {
+            echo "Repository cloned successfully into '$targetDir'.";
+        } else {
+            throw new Exception("Git clone failed: " . implode("\n", $output));
+        }
+    }
+
 
 
 
