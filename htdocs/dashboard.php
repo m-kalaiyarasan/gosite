@@ -174,21 +174,77 @@ if(isset($_GET['host'])) {
     load('plans');
 }
 
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------- Message alerts--------------------------------------------------------------------------
 
 //success message for domain host
 if (isset($_SESSION['message'])) {
   $message = $_SESSION['message'];
   //print the message dont dive an alert
-  echo "<div class='alert alert-success' role='alert'>$message</div>";
-  unset($_SESSION['message']); // Clear the message after displaying it
+  ?>
+   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: green;"><?php echo $message; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  <?
+
 }
 ?>
+ <?php
+    if (isset($_GET['error'])) {
+      load('plans');
+        $error = htmlspecialchars($_GET['error']); // Escape for security
+    ?>
+        <!-- Bootstrap Modal -->
+         hello
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: red;"><?php echo $error; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+<!------------------------------------------------------------ Message alerts-------------------------------------------------------------------------- -->
+<!-- //---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+        // Automatically show the modal if the error parameter is present
+        <?php if (isset($_GET['error']) or isset($_SESSION['message'])) { ?>
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        <?php
+       unset($_SESSION['message']); 
+      } ?>
+    </script> 
 <? load('footer'); ?>
 </body>
 </html>
 
 
-<!-- sed -i "s|DocumentRoot .*|DocumentRoot /var/www/html/htdocs|" /etc/apache2/sites-available/000-default.conf -->

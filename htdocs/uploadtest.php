@@ -13,20 +13,58 @@ $File = $baseDir . basename($_FILES['file']['name']);
 //build a object for Upload class
 
 //check the user upload file or use git link, and make the functions accordingly
+
+try {
 if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK)
 {
     $File = $baseDir . basename($_FILES['file']['name']);
     print("enter in line 19");
 }
 elseif(isset($_POST['git']) && !empty($_POST['git'])){
-    $File = $_POST['git'];
+    
+    if(isValidGitLink($_POST['git'])){
+        $File = $_POST['git'];
+        echo "Valid Git link!";
+    }else{
+        
+        throw new Exception("Invalid Git link!");
+        // $errorMessage = "Invalid Git link!";
+        // header("Location: /dashboard.php?error=$errorMessage");
+        // exit();
+    }
     print("enter in line 23");
 }
 else{
     die("enter git link or upload files");
 }
 
+}
+catch (Exception $e) {
+    echo $e->getMessage();
+    $errorMessage = urlencode($e->getMessage());
+    header("Location: /dashboard.php?error=$errorMessage");
+    exit();
+}
+
 $upload = new Upload($baseDir, $File);
+
+
+function isValidGitLink($gitLink) {
+    // Regex for validating Git URL
+    $regex = '/^(https?:\/\/|git@)[\w.-]+(:[\d]+)?\/[\w.-]+\/[\w.-]+(\.git)?$/';
+
+    // Check if the link matches the regex
+    if (preg_match($regex, $gitLink)) {
+        return true;
+    }
+
+    // If not matched, check for harmful characters
+    if (preg_match('/[;&|]/', $gitLink)) {
+        throw new Exception("Invalid Git URL: Contains potentially harmful characters.");
+    }
+
+    return false;
+}
 
 
 //this is a main functions that execute after the cloning of repo or unzip of file,
@@ -40,10 +78,10 @@ function scripts($workdone,$domain,$newDirName){
     if($index_path == 0){
         if (file_exists($newDirName)) {
         conf::deleteFolder($domain);
-        die("fail to find index and deleted the file");
-        }
-        else{
-            die("line 38 in uploadtest.php");
+
+        $errorMessage = "fail to find index in your project";
+        header("Location: /dashboard.php?error=$errorMessage");
+        exit();
 
         }
     }
@@ -81,44 +119,54 @@ function scripts($workdone,$domain,$newDirName){
     }
 
     
+try{
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
+        if (empty($domain)) {
+            die("Invalid domain name.<br>");
+        }
+        $newDirName = $baseDir . $domain;
+        // print($newDirName);
+
+        // echo " <br  > wwwwwww <br>";
+        // Check if the directory already exists
+        if (file_exists($newDirName)) {
+            throw new Exception("Error: Subdomain already exists");
+            die("Error: Subdomain already exists.<br>");    
+        }
+        else{
+            echo " <br>  valid domain <br>";
+        }
+
+        $newDirName = $baseDir . $domain;
+
+        if ($upload->isFileUploaded($_FILES['file'])) {
+
+            $upload->handleFileUpload($File);
+            $workdone = $upload->extractZipFile($File, $baseDir, $newDirName);
+            scripts($workdone,$domain,$newDirName);
+        }
+        elseif(isset($_POST['git'])){
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
-    if (empty($domain)) {
-        die("Invalid domain name.<br>");
+            $gitt = $upload->gitclone($domain);
+            $workdone = 3;
+            scripts($workdone,$domain,$newDirName);
+
+        }
+        else {
+            $gitt = $upload->gitclone($domain);
+            throw new Exception("File not uploaded!");
+            die("File not uploaded!");
+        }
     }
-    $newDirName = $baseDir . $domain;
-    // print($newDirName);
-
-    // echo " <br  > wwwwwww <br>";
-    // Check if the directory already exists
-    if (file_exists($newDirName)) {
-        die("Error: Subdomain already exists.<br>");    
-    }
-    else{
-        echo " <br>  valid domain <br>";
-    }
-
-    $newDirName = $baseDir . $domain;
-
-    if ($upload->isFileUploaded($_FILES['file'])) {
-
-        $upload->handleFileUpload($File);
-        $workdone = $upload->extractZipFile($File, $baseDir, $newDirName);
-        scripts($workdone,$domain,$newDirName);
-    }
-    elseif(isset($_POST['git'])){
-
-        $gitt = $upload->gitclone($domain);
-        $workdone = 3;
-        scripts($workdone,$domain,$newDirName);
-
-    }
-    else {
-        $gitt = $upload->gitclone($domain);
-        die("File not uploaded!");
-    }
+}
+catch (Exception $e) {
+    echo $e->getMessage();
+    $errorMessage = urlencode($e->getMessage());
+    header("Location: /dashboard.php?error=$errorMessage");
+    exit();
 }
 
 Conf::reloadApache();
