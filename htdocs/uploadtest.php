@@ -21,8 +21,6 @@ if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK)
 elseif(isset($_POST['git']) && !empty($_POST['git'])){
     $File = $_POST['git'];
     print("enter in line 23");
-
-
 }
 else{
     die("enter git link or upload files");
