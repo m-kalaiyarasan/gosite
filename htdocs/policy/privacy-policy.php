@@ -41,8 +41,7 @@
 
     <section>
         <h2>4. Payment</h2>
-        <p>We use Cashfree for processing payments. We/Cashfree do not store your card data on their servers. The data is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) when processing payment. Your purchase transaction data is only used as long as necessary to complete your purchase transaction. After that is complete, your purchase transaction information is not saved.</p>
-        <p>Our payment gateway adheres to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, MasterCard, American Express, and Discover.</p>
+        <p>We use Cashfree for processing payments. </p>
         <p>For more insight, you may also want to read Cashfree’s terms and conditions on <a href="https://Cashfree.com">Cashfree</a>.</p>
     </section>
 
