@@ -35,6 +35,7 @@ elseif(isset($_POST['git']) && !empty($_POST['git'])){
     print("enter in line 23");
 }
 else{
+    throw new Exception("enter git link or upload files");
     die("enter git link or upload files");
 }
 
@@ -108,15 +109,18 @@ function scripts($workdone,$domain,$newDirName){
             if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path )){
                 echo "Domain details set successfully!\n<br>";
             } else {
+                throw new Exception("Failed to set domain details!");
                 echo "Failed to set domain details!\n<br>";
             }
     
         } elseif($workdone <= 2) {
+            throw new Exception("Workdone partially success");
             echo "Work done partially!\n<br>";
         } else {
+            throw new Exception("Workdone faild");
             echo "Work done failed!\n<br>";
         }
-    }
+}
 
     
 try{
@@ -124,6 +128,7 @@ try{
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
         if (empty($domain)) {
+            throw new Exception("Invalid domain name !");
             die("Invalid domain name.<br>");
         }
         $newDirName = $baseDir . $domain;
