@@ -3,7 +3,7 @@
             
             <a class="navbar-brand d-flex  align-items-center" href="#">
 
-                            <img class="mb-2 "src="logo.png" alt="" width="50" height="50" alt="">
+                            <img class="mb-2 "src="img/logo.png" alt="" width="50" height="50" alt="">
                   
                 <span class="color-1 fw-bold" style="font-size: 30px;">GoSite</span>
             </a>

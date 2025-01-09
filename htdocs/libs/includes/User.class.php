@@ -37,8 +37,9 @@ class User
         $pass = password_hash($pass, PASSWORD_BCRYPT, $options);
         $conn = Database::getConnection();
         $sql = "INSERT INTO auth (username, password, email, phone, blocked, active) 
-                VALUES (?,?,?,?, '0', '1');";
+                VALUES (?,?,?,?, '0',0);";
         $stmt = $conn->prepare($sql);
+        $defaultValue = 0;
         $stmt->bind_param("ssss", $user, $pass, $email, $phone);
         $result = false;    
         if ($stmt->execute()) {
@@ -119,6 +120,35 @@ class User
             return null;
         }
     }
+    
+    public static function getdata($var, $value) {
+        print("125 user class");
+        // Define allowed column names to prevent SQL injection
+        $allowedColumns = ['id', 'username', 'email', 'phone']; // Update this list based on your table schema
+        
+        if (!in_array($var, $allowedColumns)) {
+            throw new Exception("Invalid column name.");
+        }
+        
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `auth` WHERE `$var` = ?";
+        $stmt = $conn->prepare($sql);
+        
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+        
+        $stmt->bind_param("s", $value); // Use "s" for string, "i" for integer, etc., based on the data type of `$value`
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        if ($result && $result->num_rows === 1) {
+            return $result->fetch_assoc()[$var];
+        } else {
+            return null;
+        }
+    }
+    
 
     private function _set_data($var, $data)
     {
@@ -151,6 +181,18 @@ class User
         
     }
 
+    public static function active($value){
+        $conn = Database::getConnection();
+        $email = Session::get('email');
+        $sql = "UPDATE `auth` SET `active` = '$value' WHERE `email` = '$email'";
+        $result = $conn->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 
  // public function setBio($bio)

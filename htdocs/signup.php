@@ -14,7 +14,9 @@ include 'libs/load.php';?>
 </div>
 
 
+<!-- <footer class="footer fixed-bottom text-center "> -->
 <?load('footer');?>
+<!-- </footer> -->
 
 </body>
 </html>

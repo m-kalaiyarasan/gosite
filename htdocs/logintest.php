@@ -2,7 +2,7 @@
 
 include 'libs/load.php';
 $visitorId = $_POST['fingerprint'] ;
-// print("JS finger print : ".$visitorId);
+print("JS finger print : ".$visitorId);
 
 $user = $_POST['user'];
 $pass =$_POST['pass'];
@@ -71,7 +71,12 @@ else
         $token = UserSession::authenticate($user,$pass);
         $userSessionObj = new UserSession($token);
 
-        print($userSessionObj->getFingerprint());
+        $userobj = new User($user); 
+        Session::set('userobj',serialize($userobj));
+        print("is activr ? -> , ".$userobj->getActive());
+
+
+        // print($userSessionObj->getFingerprint());
     
     }
     else{

@@ -1,46 +1,21 @@
-<!-- Footer -->
-<footer class=" text-center ">
-  <!-- Grid container -->
-  <div class="container p-4">
+<div class="footer-basic">
+        <footer>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="policy/Refund-Policy.php">Refund Policy</a></li>
+                <li class="list-inline-item"><a href="policy/Terms-of-Service.php">Terms of Service</a></li>
+                <li class="list-inline-item"><a href="policy/privacy-policy.php">Privacy Policy</a></li>
+                <!-- <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li> -->
+            </ul>
+           <a href="https://kalaiyarasan.me"> <p class="copyright">Kalaiyarasan © 2025</p></a>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Section: Social media -->
-    
-    <!-- Section: Social media -->
 
 
 
-    <!-- Section: Text -->
-
-    <!-- Section: Text -->
-
-
-  </div>
-  <!-- Grid container -->
-  <section class="mb-4 p-3">
-      <p>
-      "Your vision, our commitment to hosting excellence.
-      Together, we build the future of the web."
-      </p>
-    </section>
-
-  <!-- Copyright -->
-   <div>
-    <a class="text-dark m-4 p-4" href="policy/Refund-Policy.php" style="text-decoration:none">Refund Policy</a>  
-    <a class="text-dark m-4 p-4" href="policy/Terms-of-Service.php" style="text-decoration:none">Terms of Service</a>  
-    <a class="text-dark m-4 p-4" href="policy/privacy-policy.php" style="text-decoration:none">Privacy Policy</a>  
-</div>
-  <div class="text-center p-3" style="background-color:#106cbb; color: white;">
-  <!-- <div>
-    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Refund Policy</a>  
-    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Terms of Service</a>  
-    <a class="text-dark p-4" href="https://kalaiyarasan.me/">Privacy Policy</a>  
-</div> -->
-    © 2025 Copyright
-    <a class="text-white" href="https://kalaiyarasan.me/"  style="text-decoration:none">@Kalaiyarasan</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
 <!-- Footer -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/script.js"></script>

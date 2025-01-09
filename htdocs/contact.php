@@ -91,7 +91,7 @@ include 'libs/load.php';
         <div class="col-12 col-lg-6">
           <div class="bg-white border rounded shadow-sm overflow-hidden">
   
-            <form action="mail/getmail.php" method="post">
+            <form action="libs/mail/getmail.php" method="post">
               <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                 <div class="col-12">
                   <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>

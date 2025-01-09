@@ -10,7 +10,7 @@ include 'libs/load.php';?>
     
 <!-- login fail message -->
 <?
-if (isset($_GET['faild'])) {
+if (isset($_GET['faild'])) {    
 
     ?>
     <div class="alert alert-danger" role="alert">
@@ -25,13 +25,9 @@ if (isset($_GET['faild'])) {
 
 <?load('login');?>
 
-<div class="pt-5">
-<div class="pt-5">
-<div class="mt-2">
+<footer class="footer fixed-bottom text-center ">
 <?load('footer');?>
-</div>
-</div>
-</div>
+</footer>
 
 </body>
 </html>

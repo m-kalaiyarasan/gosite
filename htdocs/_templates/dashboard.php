@@ -1,3 +1,11 @@
+<main>
+
+<!-- ------------------------------------Dashboard ------------------------------------>
+<?php
+
+
+
+?>
 
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -30,9 +38,10 @@
 
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-     <i class="bi bi-server logo-colour fs-4 me-2"></i>
-      <span class="fs-4">
-   Gosite
+     <!-- <i class="bi bi-server logo-colour fs-4 me-2"></i> -->
+      <img src="img/logo.png" alt="" width="50" height="50" alt="">
+      <span class="fs-4 ">
+   <h3 class="mt-3">Gosite</h3>
    
     </a>
     <hr>
@@ -44,13 +53,19 @@
         </a>
       </li>
       <li>
-        <a href="dashboard.php?manage" class="nav-link link-light active">
+        <a href="dashboard.php?manage" class="nav-link <?if (isset($_GET['manage'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Dashboard
         </a>
       </li>
       <li>
-        <a href="documents.php" class="nav-link link-dark">
+        <a href="dashboard.php?host" class="nav-link <?if (isset($_GET['host'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Your Plan
+        </a>
+      </li>
+      <li>
+        <a href="documents.php" class="nav-link <?if (isset($_GET['doc'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Documentation
         </a>
@@ -69,17 +84,12 @@
         </div>
       </li> -->
     <li>
-        <a href="dashboard.php?database" class="nav-link link-dark">
+        <a href="dashboard.php?database" class="nav-link <?if (isset($_GET['database'])){ echo "link-light active";   }else{ echo "link-dark"; }?>">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Databases
         </a>
       </li>
-    <li>
-        <a href="dashboard.php?host" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Hostings
-        </a>
-      </li>
+   
         <!-- 
       <li>
         <a href="#" class="nav-link link-dark">
@@ -97,7 +107,7 @@
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="profile.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+        <img src="img/profile.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>
       <?
       if(Session::isset('session_user')){
@@ -110,9 +120,9 @@
         </strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><a class="dropdown-item" href="#">Host New Site</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+        <li><a class="dropdown-item" href="dashboard.php?host">Host New Site</a></li>
+        <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="logintest.php?logout">Sign out</a></li>
       </ul>
@@ -124,3 +134,96 @@
 
 
 
+<!-- ------------------------------------Dashboard ------------------------------------>
+
+<?
+
+
+
+// load('dashboard'); 
+
+if (isset($_GET['manage'])) {
+
+echo "<div class='container'>";
+
+  load('manage');
+  // load('test');
+  
+echo "</div>";
+
+}
+if(isset($_GET['database'])) {
+    load('soon');
+}
+if(isset($_GET['host'])) {
+    load('plans');
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------- Message alerts--------------------------------------------------------------------------
+
+//success message for domain host
+if (isset($_SESSION['message'])) {
+  $message = $_SESSION['message'];
+  //print the message dont dive an alert
+  ?>
+   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: green;"><?php echo $message; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  <?
+
+}
+?>
+ <?php
+    if (isset($_GET['error'])) {
+      load('plans');
+        $error = htmlspecialchars($_GET['error']); // Escape for security
+    ?>
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: red;"><?php echo $error; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+<!------------------------------------------------------------ Message alerts-------------------------------------------------------------------------- -->
+<!-- //---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+        // Automatically show the modal if the error parameter is present
+        <?php if (isset($_GET['error']) or isset($_SESSION['message'])) { ?>
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        <?php
+       unset($_SESSION['message']); 
+      } ?>
+    </script> 

@@ -37,16 +37,15 @@ class UserSession
 
     public static function authorize($token)
     {
+        // print("40");
          try{
         $session = new UserSession($token);
          if($session->isValid() and $session->isActive())
          {
+            // print("45");
             if($_SESSION['fingerprint'] == $session->getFingerprint())
-            {
-                // Session::$user = $session->getUser();
-                // return $session;    
+            {   
                 return true;
-
             }
             else
             {
@@ -54,11 +53,12 @@ class UserSession
                 throw new ExceException("Fingerprint did not match");
             }
          }else {
-
+            // print("60");
             throw new Exception("agent or an ip doesnot match");
          }
          }
          catch(Exception $e){
+            print($e);
             return false;
 
          }
@@ -67,7 +67,7 @@ class UserSession
     public function __construct($token){
         $this->conn = Database::getConnection();
         $this->token = $token;
-        $this->token=null;
+        // $this->token=null;
         $sql= "SELECT * FROM `session` WHERE `token`= '$token' LIMIT 1";     // mark
         $result = $this->conn->query($sql);
         // print_r($result);
@@ -90,20 +90,25 @@ class UserSession
 
     public function getIP(){
         $this->conn = Database::getConnection();
-        $sql = "SELECT * FROM `session` WHERE `uid`='$this->uid' LIMIT 1";   // mark
+        $sql = "SELECT * FROM `session` WHERE `token`='$this->token' LIMIT 1";   // mark
         $result = $this->conn->query($sql);
         return $result->fetch_assoc()['ip'];
     }
 
     public function getUserAgent(){
         $this->conn = Database::getConnection();
-        $sql = "SELECT * FROM `session` WHERE `uid`='$this->uid' LIMIT 1";   // mark
+        $sql = "SELECT * FROM `session` WHERE `token`='$this->token' LIMIT 1";   // mark
         $result = $this->conn->query($sql);
         return $result->fetch_assoc()['user_agent'];
 
     }
 
     public function isValid(){
+        // print($this->getUserAgent());
+        // echo "<br>";
+        // print($this->getIP());
+        // echo "<br>";
+
         if($_SERVER['HTTP_USER_AGENT'] == $this->getUserAgent() && $_SERVER['REMOTE_ADDR'] == $this->getIP()){
             return true;
         }

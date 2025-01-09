@@ -1,5 +1,8 @@
 <?php
 
+if(UserSession::authorize($_SESSION['session_token'])){
+
+
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
@@ -181,3 +184,4 @@ header("Location: dashboard.php?manage");
 $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
 exit;
 
+}

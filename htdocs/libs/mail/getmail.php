@@ -1,5 +1,5 @@
 <?php
-include '../libs/load.php';
+include '../load.php';
 
 $name = $_REQUEST['fullname'];
 $email = $_REQUEST['email'];
@@ -87,7 +87,7 @@ try {
     $mail->send();
     echo 'Mail sent successfully.';
 
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
         exit;
     
 } catch (Exception $e) {
