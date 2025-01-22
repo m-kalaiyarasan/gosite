@@ -90,6 +90,7 @@ foreach ($details as $index => $site) {
     <?
   }
     ?>
+    
    <div class="modal fade" id="siteModal<?php echo $index; ?>" tabindex="-1" aria-labelledby="siteModalLabel<?php echo $index; ?>" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -121,7 +122,7 @@ foreach ($details as $index => $site) {
                     </form>
                     <br>
                     <!-- //add like "read here how to upload -> link" for help button -->
-                    <a href="documents.php" class="btn btn-link">Read here how to upload</a>
+                    <a href="documents.php" class="btn btn-link mt-4">Read here how to upload</a>
                </div>
             </div>
         </div>

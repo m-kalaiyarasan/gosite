@@ -19,6 +19,7 @@ $details = $purchase->getdetails();
           <th scope="col">URL</th>
           <th scope="col">Status</th>
           <th scope="col">Plan</th>
+          <th scope="col">Git</th>
           <th scope="col">Actions</th>
 
         </tr>
@@ -54,6 +55,21 @@ foreach ($details as $index => $site) {
     echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'target='_blank'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
     echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
+
+    if(htmlspecialchars($site['git_repo']) != null){
+    ?>
+    <form action="gitpull.php" method="post">
+    <input type="hidden" name="id" value="<?php echo htmlspecialchars($site['id']); ?>">
+    <td><button type="submit" class='btn btn-primary btn-sm'>Pull</button></td>
+    </form> 
+    <?
+    }
+    else{
+      echo "<td>" . "Not a Git repo" . "</td>";
+
+    }
+
+    // echo "<td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#siteModal" . $index . "'>Pull</button></td>";
    
     echo "<td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#siteModal" . $index . "'>Manage</button></td>";
     ?>
@@ -68,9 +84,11 @@ foreach ($details as $index => $site) {
                 <div class="modal-body">
                     <form action="editsite.php" method="post" onsubmit="return confirmDelete();">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($site['id']); ?>">
+                        <input type="hidden" name="oldName" value="<?php echo htmlspecialchars($site['domain']); ?>">
+                        <input type="hidden" name="path" value="<?php echo htmlspecialchars($site['path']); ?>">
                   
                         <div class="mb-3">
-                            <label for="siteName<?php echo $index; ?>" class="form-label">Site Name</label>
+                            <label for="siteName<?php echo $index; ?>" class="form-label">Change Domain Name</label>
                             <input type="text" class="form-control" id="siteName<?php echo $index; ?>" name="name" value="<?php echo htmlspecialchars($site['domain']); ?>">
                         </div>
                         <div class="mb-3">
@@ -87,7 +105,7 @@ foreach ($details as $index => $site) {
                         <!-- <button type="submit" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">delete</button> -->
 
-                        <!-- <button type="submit" name="action" value="save" class="btn btn-primary">Save changes</button> -->
+                        <button type="submit" name="action" value="save" class="btn btn-primary">Save changes</button>
                         <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

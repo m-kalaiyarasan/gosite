@@ -9,6 +9,10 @@ $id = $_POST['id'];
 $name = $_POST['name'];
 $status = $_POST['status'];
 $action = $_POST['action'];
+$oldName = $_POST['oldName'];
+$path = $_POST['path'];
+print($path);
+
 if($status == 'Active'){
     $status = 1;
 }
@@ -22,16 +26,34 @@ $changeDir = $baseDir . $name;
 
 
 if(isset($_POST['action']) && $_POST['action'] == 'save'){
+
+    
+    // $purchase = new Purchase(Session::get('session_user'));
+    // $result = $purchase->updatedetails($id, $name, $status);
+        // Conf::createConf($name);
+        if (file_exists($changeDir)){
+           die("domainname already exist");
+        }
+        print("hello");
+        Conf::disableSite($oldName);
+        Conf::deleteapacheConfig($oldName);
+        Conf::renameFolder($oldName, $name);
+        // Conf::updateApacheConf($oldName, $name);
+        Conf::changeapacheConfig($name,$path);
+        Conf::enableSite($name);
+        Conf::reloadApache();
+
+
+        // header('Location: dashboard.php?manage');
+        // exit;
+   
+    
     $purchase = new Purchase(Session::get('session_user'));
     $result = $purchase->updatedetails($id, $name, $status);
-    if($result){
-        Conf::createConf($name);
-        header('Location: dashboard.php?manage');
-        exit;
-    }
-    else{
+    if(!$result){
         echo "Error";
     }
+
 }
 
 if(isset($_POST['action']) && $_POST['action'] == 'delete'){

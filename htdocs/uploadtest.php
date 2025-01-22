@@ -1,4 +1,5 @@
 <?php
+include 'libs/load.php';
 
 if(UserSession::authorize($_SESSION['session_token'])){
 
@@ -7,7 +8,7 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-include 'libs/load.php';
+
 
 $baseDir = __DIR__."/../site/";
 $File = $baseDir . basename($_FILES['file']['name']);
@@ -16,6 +17,23 @@ $File = $baseDir . basename($_FILES['file']['name']);
 //build a object for Upload class
 
 //check the user upload file or use git link, and make the functions accordingly
+function isValidGitLink($gitLink) {
+    // Regex for validating Git URL
+    $regex = '/^(https?:\/\/|git@)[\w.-]+(:[\d]+)?\/[\w.-]+\/[\w.-]+(\.git)?$/';
+
+    // Check if the link matches the regex
+    if (preg_match($regex, $gitLink)) {
+        return true;
+    }
+
+    // If not matched, check for harmful characters
+    if (preg_match('/[;&|]/', $gitLink)) {
+        throw new Exception("Invalid Git URL: Contains potentially harmful characters.");
+    }
+
+    return false;
+}
+
 
 try {
 if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK)
@@ -53,23 +71,6 @@ catch (Exception $e) {
 $upload = new Upload($baseDir, $File);
 
 
-function isValidGitLink($gitLink) {
-    // Regex for validating Git URL
-    $regex = '/^(https?:\/\/|git@)[\w.-]+(:[\d]+)?\/[\w.-]+\/[\w.-]+(\.git)?$/';
-
-    // Check if the link matches the regex
-    if (preg_match($regex, $gitLink)) {
-        return true;
-    }
-
-    // If not matched, check for harmful characters
-    if (preg_match('/[;&|]/', $gitLink)) {
-        throw new Exception("Invalid Git URL: Contains potentially harmful characters.");
-    }
-
-    return false;
-}
-
 
 //this is a main functions that execute after the cloning of repo or unzip of file,
 function scripts($workdone,$domain,$newDirName){
@@ -104,12 +105,13 @@ function scripts($workdone,$domain,$newDirName){
 // -----------------------------------------------------------------------------------------------
     $plan_id = $_POST['plan_id'];
     $plan_name = $_POST['plan_name'];
-        print($workdone);
+    $File = $_POST['git'];
+    print($workdone);
         if ($workdone >= 3) {
 
             echo "Work done successfully!\n<br>";
             Database::getConnection();  
-            if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path )){
+            if(Purchase::setdetails($domain,$plan_id,$plan_name ,$index_path,$File )){
                 echo "Domain details set successfully!\n<br>";
             } else {
                 throw new Exception("Failed to set domain details!");

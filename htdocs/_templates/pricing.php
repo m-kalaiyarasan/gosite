@@ -146,7 +146,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="paymentFormStarter" action="razorpay/payment.php" method="POST">
+                <form id="paymentFormStarter" action="libs/cashfree/payment.php" method="POST">
                     <p>Please make the payment to start enjoying all the features of the Starter Plan.</p>
                     <!-- <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
@@ -179,7 +179,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="paymentFormProfessional" action="razorpay/payment.php" method="POST">
+                <form id="paymentFormProfessional" action="libs/cashfree/payment.php" method="POST">
                     <p>Please make the payment to start enjoying all the features of the Professional Plan.</p>
                     <!-- <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
@@ -212,7 +212,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="paymentFormBusiness" action="razorpay/payment.php" method="POST">
+                <form id="paymentFormBusiness" action="libs/cashfree/payment.php" method="POST">
                     <p>Please make the payment to start enjoying all the features of the Business Plan.</p>
                     <!-- <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">

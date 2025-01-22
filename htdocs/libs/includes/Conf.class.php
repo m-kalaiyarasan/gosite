@@ -59,5 +59,25 @@ class Conf
         echo "Folder deleted successfully.\n<br>";
         }
     }
-    
+
+    public static function renameFolder($name , $rename) {
+        if($name){
+        $output = shell_exec('mv '.__DIR__."/../../../site/".$name." ".__DIR__."/../../../site/".$rename);
+        echo $output;
+        echo "Folder rename successfully.\n<br>";
+        }
+    }
+
+    public static function updateApacheConf($name , $rename) {
+        if($name){
+        $output = shell_exec("mv /etc/apache2/sites-enabled/".$name.".site.conf /etc/apache2/sites-enabled/".$rename.".site.conf");
+        echo $output;
+        echo "apache2 updated successfully.\n<br>";
+        }
+    }
+
+
+
+
+
 }

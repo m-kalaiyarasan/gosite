@@ -57,7 +57,7 @@ class Cashfree {
             'customerPhone' => $customerPhone,
             'customerEmail' => $customerEmail,
             'linkExpiry' => 5,
-            'returnUrl' => 'https://dys.selfmade.one/gosite/htdocs/cashfree/verify.php', // Replace with actual notification URL
+            'returnUrl' => 'https://gosite.zeal.lol/libs/cashfree/verify.php', // Replace with actual notification URL
         ];
 
         $response = $this->sendRequest($url, 'POST', $data, $headers);
@@ -83,42 +83,4 @@ class Cashfree {
     }
 }
 
-$cashfree = new Cashfree('TEST10415338d02ddc9044ea7f3e348083351401', 'cfsk_ma_test_c8f46887ca2ac8d1276076fc2ce3d60e_f0d05ada');
-$plan = $cashfree->createPlan('Basic Plan', 9900, 'month');
 
-echo "<pre>";
-print_r($plan);
-echo "</pre>";
-
-$planId = $plan['data']['planId'];
-
-$subscription = $cashfree->createSubscription($planId, "kalaiyarasan", "7418073126", "kalaiyarasan.offl@gmail.com") ;
-// $subscription = $cashfree->createSubscription($planId, $customerName, $customerPhone, $customerEmail) ;
-
-echo "<pre>";
-print_r($subscription);
-echo "</pre>";
-
-?>
-<!-- Trigger Button -->
-<button id="payNowButton">Pay Now</button>
-
-<!-- Modal -->
-<div id="paymentModal" style="display:none; position:fixed; top:10%; left:10%; width:80%; height:80%; background:white; z-index:1000; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <iframe id="paymentIframe" src="" style="width:100%; height:100%; border:none;"></iframe>
-    <button onclick="closeModal()" style="position:absolute; top:10px; right:10px;">Close</button>
-</div>
-
-<script>
-document.getElementById('payNowButton').addEventListener('click', function() {
-    const paymentUrl = '<? echo $subscription['data']['authLink']; ?>'; // Replace with the actual link
-    document.getElementById('paymentIframe').src = paymentUrl;
-    document.getElementById('paymentModal').style.display = 'block';
-});
-
-function closeModal() {
-    document.getElementById('paymentModal').style.display = 'none';
-    document.getElementById('paymentIframe').src = ""; // Clear the iframe content
-    window.location.href = "../index.php"; 
-}
-</script>

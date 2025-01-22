@@ -46,10 +46,10 @@ class Purchase{
     }
 
 
-    public static function setdetails($domain, $plan_id,$plan_name, $path){
+    public static function setdetails($domain, $plan_id,$plan_name, $path,$gitlink){
         $conn = Database::getConnection();
         $username = Session::get('session_user');
-        $sql = "INSERT INTO `purchase` (`username`, `domain` ,`plan_id`, `plan_name`, `path`,`status`) VALUES ('$username', '$domain','$plan_id', '$plan_name', '$path', 1)";
+        $sql = "INSERT INTO `purchase` (`username`, `domain` ,`plan_id`, `plan_name`, `path`,`status`,`git_repo`) VALUES ('$username', '$domain','$plan_id', '$plan_name', '$path', 1,'$gitlink')";
         $result = $conn->query($sql);
         if($result){
             return true;
@@ -105,6 +105,22 @@ class Purchase{
         }else{
             return false;
         }
+    }
+
+    public function gitdetails($value){
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `purchase` WHERE `username` = '$this->username' AND `id` = '$value' ";
+        $result = $conn->query($sql);
+        // $details = array();
+        if($result->num_rows > 0){
+        
+                $details = $result->fetch_assoc();
+            
+            return $details;
+        }else{
+            return false;
+        }
+
     }
 
 }
