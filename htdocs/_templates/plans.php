@@ -32,19 +32,19 @@ catch(Exception $e){
 
 <div class="container mt-5">
   <?if ($details !== false && !empty($details)) {?>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered text-center">
       <thead>
       <tr>
           <th colspan="6" ><h4 class="text-center"> Your Plan </h4></th>
         </tr>
-        <tr>
-          <th scope="col">S.NO</th>
+        <tr class="bg-primary text-light">
+          <th class="bg-primary text-light" scope="col">S.NO</th>
           <!-- <th scope="col">Domain ID</th> -->
-          <th scope="col">Plan</th>
-          <th scope="col">Domain</th>
+          <th class="bg-primary text-light" scope="col">Plan</th>
+          <th class="bg-primary text-light" scope="col">Domain</th>
           <!-- <th scope="col">URL</th> -->
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
+          <th class="bg-primary text-light" scope="col">Status</th>
+          <th class="bg-primary text-light" scope="col">Actions</th>
 
         </tr>
       </thead>
@@ -92,16 +92,16 @@ foreach ($details as $index => $site) {
     ?>
     
    <div class="modal fade" id="siteModal<?php echo $index; ?>" tabindex="-1" aria-labelledby="siteModalLabel<?php echo $index; ?>" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog ">
             <div class="modal-content">
                 
             
   <section id="upload" class="upload-section py-5">
         <div class="container">
-            <h2 class="text-center mb-4">Launch Your Websites <i class="fa fa-rocket" style="font-size:48px;color:rgb(255, 62, 62)"></i>
+            <h2 class="text-center mb-2">Launch Your Websites <i class="fa fa-rocket" style="font-size:48px;color:rgb(255, 62, 62)"></i>
             </h2>
             <br>
-            <div class="upload-area mx-auto">
+            <div class="">
                 <div class="upload-content">
                     <!-- <i class="bi bi-cloud-upload"></i> -->
                     <form action="uploadtest.php" method="POST" enctype="multipart/form-data"><br>
@@ -109,10 +109,24 @@ foreach ($details as $index => $site) {
         <input class="form-control" type="text" id="domain" name="domain" required placeholder="" />
         <br>
 
+    <!-- subdomain or custom domain selection -->
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="domainType" id="inlineRadio1" value="subdomain" checked>
+          <label style="text-decoration:none;" class="form-check-label" for="inlineRadio1"><p>Subdomain</p></label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="domainType" id="inlineRadio2" value="custom">
+          <label style="text-decoration:none;" class="form-check-label" for="inlineRadio2">Custom</label>
+          
+        </div>
+        <br>
+        <br>
+        
+
         <h5>Upload Your Project: (.zip)</h5 >
         <input type="file" class="form-control form-control-lg" id="file" name="file" accept=".zip" />
         <br>
-        <h6>or</h6>
+        <h4>(or)</h4>
         <h5>Enter Git Repo Link</h5 >
         <input type="text" class="form-control form-control-lg" id="git" name="git" />
         <br>

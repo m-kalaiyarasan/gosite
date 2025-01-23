@@ -7,20 +7,21 @@ $details = $purchase->getdetails();
 
 <div class="container mt-5">
   <? if ($details !== false){ ?>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered text-center">
       <thead>
         <tr>
-          <th colspan="6" ><h4 class="text-center"> Your Sites </h4></th>
+          <th  colspan="7" ><h4 class="text-center"> Your Sites </h4></th>
+          <!-- <th class="bg-primary text-light" colspan="7" ><h4 class="text-center"> Your Sites </h4></th> -->
         </tr>
-        <tr>
-          <th scope="col">S.NO</th>
-          <!-- <th scope="col">Domain ID</th> -->
-          <th scope="col">Site Name</th>
-          <th scope="col">URL</th>
-          <th scope="col">Status</th>
-          <th scope="col">Plan</th>
-          <th scope="col">Git</th>
-          <th scope="col">Actions</th>
+        <tr >
+          <th class="bg-primary text-light" scope="col">S.NO</th>
+          <!-- <th class="bg-primary text-light" scope="col">Domain ID</th> -->
+          <th class="bg-primary text-light" scope="col">Site Name</th>
+          <th class="bg-primary text-light" scope="col">URL</th>
+          <th class="bg-primary text-light" scope="col">Status</th>
+          <th class="bg-primary text-light" scope="col">Plan</th>
+          <th class="bg-primary text-light" scope="col">Git</th>
+          <th class="bg-primary text-light" scope="col">Actions</th>
 
         </tr>
       </thead>

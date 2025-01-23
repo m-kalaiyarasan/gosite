@@ -8,6 +8,7 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
+$domain= "none";
 
 
 $baseDir = __DIR__."/../site/";
@@ -34,12 +35,47 @@ function isValidGitLink($gitLink) {
     return false;
 }
 
+function isDomainPointedToServer($domain, $serverIp) {
+    // Resolve the domain to its IP address
+    $domainIp = gethostbyname($domain);
+
+ 
+    $serverIp = "106.51.76.75";
+    // Compare the resolved IP with the server's IP
+    print($domainIp."<br>");
+    print($serverIp);
+    return $domainIp === $serverIp;
+}
 
 try {
+
+function isValidDomain($domain) {
+    // Regular expression for a valid domain name
+    $pattern = '/^(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,}$/';
+    return preg_match($pattern, $domain) === 1;
+}
+
+if(($_POST['domainType'] == 'custom')){
+
+    $serverIp = "192.168.1.100";
+    $domain= $_POST['domain'];
+    if (isValidDomain($domain)) {
+
+        if (!isDomainPointedToServer($domain, $serverIp)) {
+            throw new Exception("The domain is not pointed to your server.");
+        }
+
+    } else {
+        throw new Exception("Invalid custom domain");
+    }
+    
+   
+}
+
 if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK)
 {
     $File = $baseDir . basename($_FILES['file']['name']);
-    print("enter in line 19");
+    // print("enter in line 19");
 }
 elseif(isset($_POST['git']) && !empty($_POST['git'])){
     
@@ -48,12 +84,12 @@ elseif(isset($_POST['git']) && !empty($_POST['git'])){
         echo "Valid Git link!";
     }else{
         
-        throw new Exception("Invalid Git link!");
-        // $errorMessage = "Invalid Git link!";
-        // header("Location: /dashboard.php?error=$errorMessage");
-        // exit();
+        
+        $errorMessage = "Invalid Git link!";
+        header("Location: /dashboard.php?error=$errorMessage");
+        exit();
     }
-    print("enter in line 23");
+    // print("enter in line 23");
 }
 else{
     throw new Exception("enter git link or upload files");
@@ -92,9 +128,9 @@ function scripts($workdone,$domain,$newDirName){
     }
     
     //create a conf file in sites-available
-    $name = 'test';
+    // $name = 'test';
 
-        print("<br>index path print : ".$index_path);
+    print("<br>index path print : ".$index_path);
     Conf::changeapacheConfig($domain,$index_path);
 
 
@@ -131,7 +167,10 @@ function scripts($workdone,$domain,$newDirName){
 try{
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
+        if($domain == "none"){
+            $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
+            print("from line 159");
+        }
         if (empty($domain)) {
             throw new Exception("Invalid domain name !");
             die("Invalid domain name.<br>");
@@ -182,8 +221,8 @@ catch (Exception $e) {
 Conf::reloadApache();
 
 
-header("Location: dashboard.php?manage");
-$_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
-exit;
+// header("Location: dashboard.php?manage");
+// $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
+// exit;
 
 }
