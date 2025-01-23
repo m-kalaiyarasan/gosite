@@ -221,8 +221,8 @@ catch (Exception $e) {
 Conf::reloadApache();
 
 
-// header("Location: dashboard.php?manage");
-// $_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
-// exit;
+header("Location: dashboard.php?manage");
+$_SESSION['message'] = "Your site is successfully hosted on ".$domain.".gosite.in";
+exit;
 
 }

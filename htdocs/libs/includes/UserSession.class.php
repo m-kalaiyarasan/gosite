@@ -109,7 +109,7 @@ class UserSession
         // print($this->getIP());
         // echo "<br>";
 
-        if($_SERVER['HTTP_USER_AGENT'] == $this->getUserAgent() && $_SERVER['REMOTE_ADDR'] == $this->getIP()){
+        if($_SERVER['HTTP_USER_AGENT'] == $this->getUserAgent() || $_SERVER['REMOTE_ADDR'] == $this->getIP()){
             return true;
         }
         else{

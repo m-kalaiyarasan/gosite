@@ -71,18 +71,12 @@ else
         $token = UserSession::authenticate($user,$pass);
         $userSessionObj = new UserSession($token);
 
-        $userobj = new User($user); 
-        Session::set('userobj',serialize($userobj));
-        print("is activr ? -> , ".$userobj->getActive());
-
-
-        // print($userSessionObj->getFingerprint());
     
     }
     else{
         echo "login failed";
         header("Location: login.php?faild");
-   exit;
+        exit;
         ?>
         
         <div class="alert alert-danger">
