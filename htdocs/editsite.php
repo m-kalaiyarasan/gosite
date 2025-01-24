@@ -56,9 +56,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
         Conf::changeapacheConfig($name,$newPath);
         Conf::enableSite($name);
         Conf::reloadApache();
-        header('Location: dashboard.php?manage');
-        $_SESSION['message'] = "Domain name updated successfully";
-        exit;
    
     
     $purchase = new Purchase(Session::get('session_user'));
@@ -66,6 +63,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
     if(!$result){
         echo "Error";
     }
+    header('Location: dashboard.php?manage');
+    $_SESSION['message'] = "Domain name updated successfully";
+    exit;
 
 }
 
