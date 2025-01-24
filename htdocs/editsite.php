@@ -43,7 +43,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
     // $result = $purchase->updatedetails($id, $name, $status);
         // Conf::createConf($name);
         if (file_exists($changeDir)){
-           die("domainname already exist");
+            // die("Domain already exists, use another domains");
+            header('Location: dashboard.php?manage');
+            $_SESSION['message'] = "Domain already exists, use another domains";
+            exit;
         }
         print("hello");
         Conf::disableSite($oldName);
@@ -53,10 +56,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
         Conf::changeapacheConfig($name,$newPath);
         Conf::enableSite($name);
         Conf::reloadApache();
-
-
-        // header('Location: dashboard.php?manage');
-        // exit;
+        header('Location: dashboard.php?manage');
+        $_SESSION['message'] = "Domain name updated successfully";
+        exit;
    
     
     $purchase = new Purchase(Session::get('session_user'));
