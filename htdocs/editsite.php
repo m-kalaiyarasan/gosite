@@ -11,7 +11,18 @@ $status = $_POST['status'];
 $action = $_POST['action'];
 $oldName = $_POST['oldName'];
 $path = $_POST['path'];
+
+$pathParts = explode('/', $path);
+
+$pathParts[count($pathParts) - 1] = $name;
+
+$newPath = implode('/', $pathParts);
+
+
+
 print($path);
+
+
 
 if($status == 'Active'){
     $status = 1;
@@ -39,7 +50,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
         Conf::deleteapacheConfig($oldName);
         Conf::renameFolder($oldName, $name);
         // Conf::updateApacheConf($oldName, $name);
-        Conf::changeapacheConfig($name,$path);
+        Conf::changeapacheConfig($name,$newPath);
         Conf::enableSite($name);
         Conf::reloadApache();
 

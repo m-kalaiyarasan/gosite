@@ -19,7 +19,7 @@ chown -R www-data:www-data /home/kalaiyarasan.offl.2004/htdocs/gosite/site/
 
 ---------------------------------------------------------------------------------------------------------
 
-chown www-data:www-data /etc/apache2/sites-availabe
+chown www-data:www-data /etc/apache2/sites-available
 
 ---------------------------------------------------------------------------------------------------------
 
