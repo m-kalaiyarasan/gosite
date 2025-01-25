@@ -64,7 +64,7 @@ foreach ($details as $index => $site) {
   
   if ($purchase->isPlanIdExists($planId)) {
     $status = "In use";
-    $domain = $purchase->getDomainById($planId).".gosite.in";
+    $domain = $purchase->getDomainById($planId);
     // print($domain);
   } else {
     $status = "Not In Use";

@@ -40,7 +40,7 @@ function isDomainPointedToServer($domain, $serverIp) {
     $domainIp = gethostbyname($domain);
 
  
-    $serverIp = "106.51.76.75";
+    // $serverIp = "106.51.76.75";
     // Compare the resolved IP with the server's IP
     print($domainIp."<br>");
     print($serverIp);
@@ -57,7 +57,7 @@ function isValidDomain($domain) {
 
 if(($_POST['domainType'] == 'custom')){
 
-    $serverIp = "192.168.1.100";
+    // $serverIp = "192.168.1.100";
     $domain= $_POST['domain'];
     if (isValidDomain($domain)) {
 
@@ -131,6 +131,8 @@ function scripts($workdone,$domain,$newDirName){
     // $name = 'test';
 
     print("<br>index path print : ".$index_path);
+    
+
     Conf::changeapacheConfig($domain,$index_path);
 
 
@@ -169,6 +171,7 @@ try{
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($domain == "none"){
             $domain = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['domain']);
+            $domain = $domain.".gosite.in";
             print("from line 159");
         }
         if (empty($domain)) {

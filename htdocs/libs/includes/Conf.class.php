@@ -11,10 +11,13 @@ class Conf
         $apacheConfigFile = '/etc/apache2/sites-available/000-default.conf';
         $apacheConfig = file_get_contents($apacheConfigFile);
         $newApacheConfig = str_replace('DocumentRoot /var/www/html', "DocumentRoot $newDirName", $apacheConfig);
+    
+
         
-        $newApacheConfig = str_replace('#ServerName www.example.com', "ServerName $name.gosite.in", $newApacheConfig);
+
+        $newApacheConfig = str_replace('#ServerName www.example.com', "ServerName $name", $newApacheConfig);
         
-        $newfile = '/etc/apache2/sites-available/'.$name.'.gosite.conf';
+        $newfile = '/etc/apache2/sites-available/'.$name.".conf";
         if (file_put_contents($newfile, $newApacheConfig)) {
             echo "Apache config updated successfully.\n<br>";
             return $workdone;
@@ -23,10 +26,11 @@ class Conf
         }
     }
 
+  
     //write a function to delete the apache config file
     public static function deleteapacheConfig($name) {
         global $workdone;
-        $apacheConfigFile = '/etc/apache2/sites-available/'.$name.'.gosite.conf';
+        $apacheConfigFile = '/etc/apache2/sites-available/'.$name;
         if (unlink($apacheConfigFile)) {
             echo "Apache config deleted successfully.\n<br>";
             return $workdone;
@@ -43,12 +47,12 @@ class Conf
 
     //write a method to a2disconf the site
     public static function disableSite($name) {
-        $output = shell_exec('sudo a2dissite '.$name.'.gosite.conf || a2dissite '.$name.'.gosite.conf');
+        $output = shell_exec('sudo a2dissite '.$name.'.conf || a2dissite '.$name.'.conf');
         echo "Site disabled successfully.\n<br>";
     }
     //write a method to a2enconf the site
     public static function enableSite($name) {
-        $output = shell_exec('sudo a2ensite '.$name.'.gosite.conf || a2ensite '.$name.'.gosite.conf');
+        $output = shell_exec('sudo a2ensite '.$name.'.conf || a2ensite '.$name.'.conf');
         echo "Site enabled successfully.\n<br>";
     }
 
@@ -71,7 +75,7 @@ class Conf
 
     public static function updateApacheConf($name , $rename) {
         if($name){
-        $output = shell_exec("mv /etc/apache2/sites-enabled/".$name.".site.conf /etc/apache2/sites-enabled/".$rename.".site.conf");
+        $output = shell_exec("mv /etc/apache2/sites-enabled/".$name.".conf /etc/apache2/sites-enabled/".$rename.".conf");
         echo $output;
         echo "apache2 updated successfully.\n<br>";
         }
