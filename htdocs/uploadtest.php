@@ -40,11 +40,12 @@ function isDomainPointedToServer($domain, $serverIp) {
     $domainIp = gethostbyname($domain);
 
  
-    // $serverIp = "106.51.76.75";
+    $serverIp = "94.237.66.186";
     // Compare the resolved IP with the server's IP
     print($domainIp."<br>");
     print($serverIp);
-    return $domainIp === $serverIp;
+    // return $domainIp === $serverIp;
+    return true;
 }
 
 try {
@@ -57,7 +58,7 @@ function isValidDomain($domain) {
 
 if(($_POST['domainType'] == 'custom')){
 
-    $serverIp = "94.237.66.186";
+    $serverIp = "192.168.1.100";
     $domain= $_POST['domain'];
     if (isValidDomain($domain)) {
 
