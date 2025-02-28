@@ -4,7 +4,7 @@
             <?
              if(!Session::get('is_login')){
             ?>
-            <h1 class="display-6 t-btn fw-bold">Just SignUp and get your free trail</h1>
+            <h1 class="display-6 t-btn fw-bold">Just SignUp and get your free trial</h1>
             <!-- <h1 class="display-6 t-btn fw-bold">Start for free</h1> -->
             <?
             
