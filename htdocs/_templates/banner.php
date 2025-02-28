@@ -1,6 +1,36 @@
 <header class="hero-section text-center py-5">
         <div class="container">
-            <h1 class="display-4 t-btn fw-bold">Deploy Your Website in Minutes</h1>
+            <h1 class="display-4 t-btn fw-bold">Deploy Your Website in Minutes</h1><br>
+            <?
+             if(!Session::get('is_login')){
+            ?>
+            <h1 class="display-6 t-btn fw-bold">Just SignUp and get your free trail</h1>
+            <!-- <h1 class="display-6 t-btn fw-bold">Start for free</h1> -->
+            <?
+            
+             }else{
+              
+                ?>
+               
+                    <?
+                    if(Session::isset('session_user')){
+                        $user = Session::get('session_user');
+                        // $userobj = new User($user);
+                        // print(ucfirst($userobj->getfirstname()));
+                        ?>
+                        <h1 class="display-6 t-btn fw-bold">"Welcome <?print(ucfirst($user));?>"</h1>
+                        <?
+                      }
+                    ?>
+
+                </h1>
+                
+                
+                <?
+                
+             }
+                ?>
+
             <p class="lead mb-5 t-black">Simple, fast, and secure web hosting. Upload your project, and we'll handle the rest.<br>Get SSL, custom domain, and 24/7 support included.</p>
             <!-- <a href="#upload" class="btn btn-primary btn-lg">Launch Now</a> -->
              <?
@@ -14,7 +44,7 @@
                 <?}
                 else{
                     ?>
-                    <a href="signup.php" class="btn btn-primary btn-lg">Launch Now</a>
+                    <a href="signup.php" class="btn btn-primary btn-lg">Start For Free</a>
                     <?
                 }
              ?>

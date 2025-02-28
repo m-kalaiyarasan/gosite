@@ -3,7 +3,7 @@
 include 'libs/load.php';
 $visitorId = $_POST['fingerprint'] ;
 print("JS finger print : ".$visitorId);
-
+ 
 $user = $_POST['user'];
 $pass =$_POST['pass'];
 $result = null;

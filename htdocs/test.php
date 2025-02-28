@@ -1,59 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <?php
-session_start();
 
-print_r($_SESSION);
-// Generate OTP if not already set
-if (!isset($_SESSION['otp'])) {
-    echo "otp is not generated";    
-}
+include 'libs/load.php';
+$savedOtp = $_SESSION['otp'] ?? null;
 
-// Check if the verification page is requested
-if (isset($_GET['verify'])) {
-?>
-    <h1>Guess the Number Game</h1>
-    <p>I am thinking of a number between 1 and 100. Can you guess it?</p>
-    <h2>Verify OTP</h2>
 
-    <label for="otp">Enter OTP:</label>
-    <input type="number" id="otp" name="otp" required>
-    <button onclick="otpverify()">Submit</button>
-    <p class="feedback" id="feedback"></p>
 
-    <script>
-        // Get OTP from PHP session
-        const totp = <?= json_encode($_SESSION['otp']) ?>;
-        let attempts = 0;
+        $razorpay_payment_id = "freeplan1234";
+        $razorpay_subscription_id = "freeplan12345";
+        $razorpay_signature = "freeplan123e4";
+        $plan_id = "freeplan123";
+        $status = "active";
+        $start_at = "2024-12-31 06:12:02";
+        $end_at = "2024-12-31 06:12:02";
+        $charge_at = "2024-12-31 06:12:02";
+        $total_count = "0";
+        $paid_count = "0";
+        $remaining_count = "0";
+        $payment_method = "free";
+        $customer_notify = "1";
+        $plan_name = "freeplan";
+        $username = Session::get('session_user');
 
-        function otpverify() {
-            const otp = parseInt(document.getElementById('otp').value);
-            const feedback = document.getElementById('feedback');
-            attempts++;
 
-            if (otp === totp) {
-                feedback.textContent = `OTP verified Successfully.`;
-                <?
-                unset($_SESSION['otp']);
-                ?>
-                feedback.style.color = "green";
-                // Optionally reload the page or reset OTP after verification
-                setTimeout(() => location.reload(), 5000);
-            } else {
-                feedback.textContent = "Incorrect OTP! Please try again.";
-                feedback.style.color = "red";
-            }
+        // Prepare SQL to insert subscription data
+        $sql = "INSERT INTO subscriptions (
+            `username`,`plan_name`,`razorpay_payment_id`, `razorpay_subscription_id`, `razorpay_signature`, `plan_id`, `status`, 
+            `start_at`, `end_at`, `charge_at`, `total_count`, `paid_count`, `remaining_count`, 
+            `payment_method`, `customer_notify`
+        ) VALUES (
+            '$username','$plan_name','$razorpay_payment_id', '$razorpay_subscription_id', '$razorpay_signature', '$plan_id', '$status',
+            '$start_at', '$end_at', '$charge_at', '$total_count', '$paid_count', '$remaining_count',
+            '$payment_method', '$customer_notify'
+        )";
+
+        $conn = Database::getConnection();
+
+        // // Execute SQL query
+        // if ($conn->query($sql) === TRUE) {
+        //     echo "Subscription details stored successfully!";
+        // } else {
+        //     echo "Error: " . $sql . "<br>" . $conn->error;
+        // }
+
+        // $conn->close();
+
+        $result = $conn->query($sql);
+        if($result){
+            print("hello success");
+            return true;
+        }else{
+            print("fail");
+            return false;
         }
-    </script>
-<?php
-}
-?>
-
-</body>
-</html>

@@ -32,7 +32,7 @@ class User
     public static function signup($user, $pass, $email, $phone) {
 
         $options = [
-            'cost' => 9,
+            'cost' => 9, 
         ];
         $pass = password_hash($pass, PASSWORD_BCRYPT, $options);
         $conn = Database::getConnection();
@@ -48,7 +48,7 @@ class User
         else {
             $result = false;    
         }
-        $conn->close();
+        // $conn->close();
         return $result;
     }
 //-----------------------------------------------------------------------------------------------------------------
@@ -192,6 +192,10 @@ class User
             return false;
         }
 
+    }
+
+    public static function getFreePlan(){
+        
     }
 
 

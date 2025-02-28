@@ -28,6 +28,9 @@ if ($savedOtp && $inputOtp == $savedOtp) {
   if(!User::signup($username,$password,$email,$phone)){
     throw new Exception("aild to insert");
   }
+  if(!Purchase::freePlanUp($username)){
+    throw new Exception("Free plan not asign, please contact at Gosite");
+  }
   // User::active(1);
   unset($_SESSION['otp']);
   unset($_SESSION['username']);
@@ -35,12 +38,11 @@ if ($savedOtp && $inputOtp == $savedOtp) {
   unset($_SESSION['phone']);
   unset($_SESSION['phone']);
   header("Location: success.php");
-  exit;
+  exit; 
 } else {
     echo "Invalid or expired OTP.";
 }
 
-  
 }
 
 
