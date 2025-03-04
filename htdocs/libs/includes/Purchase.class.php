@@ -29,6 +29,35 @@ class Purchase{
 
     }
 
+    public function getDetailsAdmin(){
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `purchase`";
+        $result = $conn->query($sql);
+        $details = array();
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $details[] = $row;
+            }
+            return $details;
+        }else{
+            return false;
+        }
+    }
+    public function subscriptionsDetailsAdmin(){
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `subscriptions` ORDER BY `username`;";
+        $result = $conn->query($sql);
+        $details = array();
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $details[] = $row;
+            }
+            return $details;
+        }else{
+            return false;
+        }
+    }
+
     public function isPlanIdExists($plan_id) {
         $conn = Database::getConnection();
 
@@ -123,14 +152,15 @@ class Purchase{
 
     }
     public static function freePlanUp($username){
+        $d=strtotime("+1 Months");
         $razorpay_payment_id = "freeplan1234";
         $razorpay_subscription_id = "freeplan12345";
         $razorpay_signature = "freeplan123e4";
-        $plan_id = "freeplan123";
+        $plan_id = "freeplan".rand(10,1000000);
         $status = "active";
-        $start_at = "2024-12-31 06:12:02";
-        $end_at = "2024-12-31 06:12:02";
-        $charge_at = "2024-12-31 06:12:02";
+        $start_at = date("Y-m-d H:i:s");
+        $end_at = date("Y-m-d H:i:s", $d);
+        $charge_at = date("Y-m-d H:i:s");
         $total_count = "0";
         $paid_count = "0";
         $remaining_count = "0";
