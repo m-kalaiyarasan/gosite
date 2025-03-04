@@ -151,6 +151,17 @@ class Purchase{
         }
 
     }
+    public static function daysLeftInSubscription($expiryDate) {
+        $currentDate = new DateTime();
+        $expiry = new DateTime($expiryDate);
+        $interval = $currentDate->diff($expiry);
+    
+        if ($currentDate > $expiry) {
+            return "Subscription expired.";
+        } else {
+            return $interval->days . " days left.";
+        }
+    }
     public static function freePlanUp($username){
         $d=strtotime("+1 Months");
         $razorpay_payment_id = "freeplan1234";

@@ -10,7 +10,7 @@ $details = $purchase->getDetailsAdmin();
     <table class="table table-striped table-bordered text-center">
       <thead>
         <tr>
-          <th  colspan="7" ><h4 class="text-center"> Your Sites </h4></th>
+          <th  colspan="7" ><h4 class="text-center"> Live Sites </h4></th>
           <!-- <th class="bg-primary text-light" colspan="7" ><h4 class="text-center"> Your Sites </h4></th> -->
         </tr>
         <tr >

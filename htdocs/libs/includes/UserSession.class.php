@@ -140,5 +140,15 @@ class UserSession
         }
     }
 
+    public static function isAdmin(){
+        if($_SESSION['session_user'] == "kalaiyarasan")
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
 ?>

@@ -14,7 +14,7 @@ try{
 
   $purchase = new Purchase($username);
   $domian = $purchase->getDomain('domain');
-  print($domain);
+  // print($domain);
 
 }
 catch(Exception $e){

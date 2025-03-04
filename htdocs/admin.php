@@ -2,7 +2,7 @@
 
 include 'libs/load.php';
 
-if($_SESSION['session_user'] == "kalai"){
+if(UserSession::isAdmin()){
 
 ?>
 
@@ -33,6 +33,10 @@ load('admin');
 </html>
 
 <?
+}
+else{
+    header("Location: index.php");
+    exit;
 }
 
 ?>

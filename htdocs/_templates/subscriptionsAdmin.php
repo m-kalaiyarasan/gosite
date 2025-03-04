@@ -12,17 +12,18 @@ $details = $purchase->subscriptionsDetailsAdmin();
     <table class="table table-striped table-bordered text-center">
       <thead>
         <tr>
-          <th  colspan="7" ><h4 class="text-center"> Your Sites </h4></th>
+          <th  colspan="7" ><h4 class="text-center"> Available Sites </h4></th>
           <!-- <th class="bg-primary text-light" colspan="7" ><h4 class="text-center"> Your Sites </h4></th> -->
         </tr>
         <tr >
           <th class="bg-primary text-light" scope="col">S.NO</th>
           <!-- <th class="bg-primary text-light" scope="col">Domain ID</th> -->
           <th class="bg-primary text-light" scope="col">Site Name</th>
-          <th class="bg-primary text-light" scope="col">URL</th>
+          <!-- <th class="bg-primary text-light" scope="col">URL</th> -->
           <th class="bg-primary text-light" scope="col">Status</th>
           <th class="bg-primary text-light" scope="col">Plan</th>
           <th class="bg-primary text-light" scope="col">username</th>
+          <th class="bg-primary text-light" scope="col">Days left</th>
           <th class="bg-primary text-light" scope="col">Details</th>
 
         </tr>
@@ -50,16 +51,28 @@ foreach ($details as $index => $site) {
   // else{
   //   $status = "Inactive";
   // }
-  $status = htmlspecialchars($site['status']);
+  $planId = htmlspecialchars($site['plan_id']);
+  
+  if ($purchase->isPlanIdExists($planId)) {
+    $status = "Live";
+    $domain = $purchase->getDomainById($planId);
+    // print($domain);
+  } else {
+    $status = "- - - - ";
+    $domain = "- - - - ";
+  }
+  // $status = htmlspecialchars($site['status']);
 
     echo "<tr>";
     echo "<th scope='row'>" . ($index + 1) . "</th>";
     // echo "<td>" . htmlspecialchars($site['id']) . "</td>";
-    echo "<td>" . htmlspecialchars($site['domain']) . "</td>";
-    echo "<td><a href='"."http://". htmlspecialchars($site['domain']) . "'target='_blank'>" . htmlspecialchars($site['domain']) . "</a></td>";
+    echo "<td>" . $domain . "</td>";
+    // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) . "'target='_blank'>" . htmlspecialchars($site['domain']) . "</a></td>";
     echo "<td>" . $status . "</td>";
     echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
     echo "<td>" . htmlspecialchars($site['username']) . "</td>";
+
+    echo "<td>" . Purchase::daysLeftInSubscription(htmlspecialchars($site['end_at'])) . "</td>";
 
    
 
@@ -76,32 +89,17 @@ foreach ($details as $index => $site) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="editsite.php" method="post" onsubmit="return confirmDelete();">
-                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($site['id']); ?>">
-                        <input type="hidden" name="oldName" value="<?php echo htmlspecialchars($site['domain']); ?>">
-                        <input type="hidden" name="path" value="<?php echo htmlspecialchars($site['path']); ?>">
-                  
-                        <div class="mb-3">
-                            <label for="siteName<?php echo $index; ?>" class="form-label">Change Domain Name</label>
-                            <input type="text" class="form-control" id="siteName<?php echo $index; ?>" name="name" value="<?php echo htmlspecialchars($site['domain']); ?>">
-                        </div>
-                        <div class="mb-3">
-                            <!-- URL - Change automatically when you change the site name -->
-                        </div>
-                        <div class="mb-3">
-                            <label for="siteStatus<?php echo $index; ?>" class="form-label">Status</label>
-                            <select class="form-select" id="siteStatus<?php echo $index; ?>" name="status">
-                                <!-- <option value="Inactive">select</option> -->
-                                <option value="Active" <?php echo $site['status'] == 'Active' ? 'selected' : ''; ?>>Active</option>
-                                <option value="Deactivate" <?php echo $site['status'] == 'Deactivate' ? 'selected' : ''; ?>>Deactivate</option>
-                            </select>
-                        </div>
-                        <!-- <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">delete</button> -->
-
-                        <button type="submit" name="action" value="save" class="btn btn-primary">Save changes</button>
-                        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
-                    </form>
+              
+                <h5>Username : <?=htmlspecialchars($site['username'])?></h5>
+                <h5>Site Name : <?=$domain?></h5>
+                <h5>Status : <?=$status?></h5>
+                <h5>Plan Name : <?=htmlspecialchars($site['plan_name'])?></h5>
+                <h5>Plan Id : <?=htmlspecialchars($site['plan_id'])?></h5>
+                <h5>Start date : <?=htmlspecialchars($site['start_at'])?></h5>
+                <h5>Expire on : <?=htmlspecialchars($site['end_at'])?></h5>
+                <h5>Next Due : <?=htmlspecialchars($site['charge_at'])?></h5>
+                <h5>Days left : <?=Purchase::daysLeftInSubscription(htmlspecialchars($site['end_at']))?></h5>
+            
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

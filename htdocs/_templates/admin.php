@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="admin.php" class="nav-link">Home</a>
+                    <a href="index.php" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="admin.php?manage" class="nav-link 
@@ -60,11 +60,11 @@
                 <li class="nav-item">
                     <a href="admin.php?subscriptions" class="nav-link 
                         <?php if (isset($_GET['subscriptions'])) { echo 'active'; } ?>">Subscriptions</a>
-                </li>
+                <!-- </li>
                 <li class="nav-item">
                     <a href="admin.php?doc" class="nav-link 
                         <?php if (isset($_GET['doc'])) { echo 'active'; } ?>">Documentation</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="dashboard.php?database" class="nav-link 
                         <?php if (isset($_GET['database'])) { echo 'active'; } ?>">Databases</a>

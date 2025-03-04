@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-color shadow-sm">
         <div class="container">
             
-            <a class="navbar-brand d-flex  align-items-center" href="#">
+            <a class="navbar-brand d-flex  align-items-center" href="admin.php">
 
                             <img class="mb-2 "src="img/logo.png" alt="" width="50" height="50" alt="">
                   
