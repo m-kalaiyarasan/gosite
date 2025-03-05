@@ -29,8 +29,10 @@ include 'libs/load.php';
                   </svg>
                 </div>
                 <div>
-                  <h4 class="mb-3">Address</h4>
-                  <address class="mb-0 text-secondary">Tamilnadu, India (630103)</address>
+                  <h4 class="mb-3">Name & Location</h4>
+                  <address class="mb-0 text-secondary">Manoharan Kalaiyarasan,</address>
+                  <address class="mb-0 text-secondary">Tamilnadu, India.</address>
+
                 </div>
               </div>
               <div class="row mb-5">
