@@ -11,3 +11,47 @@ curl --request POST \
     "customerEmail": "john@gmail.com",
     "linkExpiry": 5
   }'
+
+
+plan result
+
+(
+    [status] => OK
+    [message] => Plan created successfully
+    [data] => Array
+        (
+            [planId] => plan4121
+            [planName] => starter
+            [type] => PERIODIC
+            [currency] => INR
+            [amount] => 99
+            [maxAmount] => 10000
+            [intervals] => 1
+            [intervalType] => month
+            [maxCycles] => 0
+            [description] => 
+            [isActive] => 1
+            [addedOn] => 2025-03-05 22:29:10
+        )
+
+)
+
+
+sub result
+
+Array
+(
+    [signature] => U68N1cPK8L+NEIBsIuI3+tzs7dJ+tdotu/bRGrrzRdk=
+    [cf_message] => Subscription Authorised Successfully
+    [cf_subscriptionPaymentId] => 816553
+    [cf_subReferenceId] => 790440
+    [cf_umn] => q1L9XFT4opM1RzIv3WkWqm0AYPd2yk@upi
+    [cf_status] => ACTIVE
+    [cf_subscriptionId] => sub9786
+    [cf_referenceId] => N/A
+    [cf_checkoutStatus] => SUCCESS
+    [cf_authAmount] => 1.00
+    [cf_mode] => SBC_UPI
+)
+
+https://www.cashfree.com/docs/api-reference/payments/previous/subscriptionsv1/subscription/create-a-subscription-plan

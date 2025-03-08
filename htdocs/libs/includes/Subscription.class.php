@@ -11,13 +11,13 @@ class Subscription {
         // Prepare SQL query
         $sql = "SELECT * 
                 FROM subscriptions 
-                WHERE status = 'active' 
+                WHERE cf_checkoutStatus = 'SUCCESS' 
                   AND username = ? 
                   AND id IN (
                       SELECT MIN(id)
                       FROM subscriptions
-                      GROUP BY plan_id
-                  )";
+                      GROUP BY cf_subscriptionId
+                  )";   
 
         // Use prepared statements to prevent SQL injection
         $stmt = $this->conn->prepare($sql);

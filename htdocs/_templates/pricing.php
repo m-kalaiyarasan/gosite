@@ -239,42 +239,53 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const monthlyRadio = document.getElementById('monthly');
-        const annualRadio = document.getElementById('annual');
-        const prices = document.querySelectorAll('.price .amount');
+    const pricingPeriodRadios = document.querySelectorAll('input[name="pricingPeriod"]');
+    const plans = ['starter', 'professional', 'business'];
 
-        const priceData = {
-            monthly: {
-                starter: '99',
-                professional: '199',
-                business: '499'
-            },
-            annual: {
-                starter: '999',
-                professional: '1999',
-                business: '4999'
-            }
-        };
-
-        function updatePrices(period) {
-            // Update price based on selected period (monthly or annual)
-            prices.forEach(price => {
-                const planType = price.closest('.card').querySelector('h3').textContent.toLowerCase();
-                const amount = document.getElementById(planType + 'Price');
-                const periodLabel = amount.nextElementSibling;
-                amount.textContent = '₹' + priceData[period][planType];
-                periodLabel.textContent = period === 'monthly' ? '/month' : '/year';
-
-                // Update the hidden input fields
-                document.getElementById(planType + 'PriceHidden').value = priceData[period][planType];
-                document.getElementById('pricingPeriod' + planType.charAt(0).toUpperCase() + planType.slice(1)).value = period;
-            });
+    const priceData = {
+        monthly: {
+            starter: '99',
+            professional: '199',
+            business: '499'
+        },
+        annual: {
+            starter: '999',
+            professional: '1999',
+            business: '4999'
         }
+    };
 
-        monthlyRadio.addEventListener('change', () => updatePrices('monthly'));
-        annualRadio.addEventListener('change', () => updatePrices('annual'));
+    function updatePrices(period) {
+        plans.forEach(plan => {
+            const amountElement = document.getElementById(`${plan}Price`);
+            const periodLabel = document.getElementById(`${plan}PricePeriod`);
+            const hiddenPriceInput = document.getElementById(`${plan}PriceHidden`);
+            const hiddenPeriodInput = document.getElementById(`pricingPeriod${capitalize(plan)}`);
 
-        // Initialize with the selected monthly period
-        updatePrices('monthly');
+            const price = priceData[period][plan];
+            amountElement.textContent = `₹${price}`;
+            periodLabel.textContent = period === 'monthly' ? '/month' : '/year';
+
+            hiddenPriceInput.value = price;
+            hiddenPeriodInput.value = period;
+        });
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    pricingPeriodRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                updatePrices(this.id === 'monthly' ? 'monthly' : 'annual');
+            }
+        });
     });
+
+    // Initialize with the selected period
+    const selectedPeriod = document.querySelector('input[name="pricingPeriod"]:checked').id;
+    updatePrices(selectedPeriod === 'monthly' ? 'monthly' : 'annual');
+});
+
 </script>

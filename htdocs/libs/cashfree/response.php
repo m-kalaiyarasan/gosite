@@ -1,129 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
- <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Cashfree Payment Gateway Integration in PHP Step by Step</title>
- <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   </head>
-<body>
- <?php  
-  // Database configuration  
-  require_once "inc/config.php";
+<?php
+  include '../load.php';
 
-  // Include Cashfree Configuration
-  require_once "inc/cashfree-config.php";
 
-   $secretkey = SECRECTKEY;  // Secret key from cashfree-config.php
-   $orderId = $_POST["orderId"];
-   $orderAmount = $_POST["orderAmount"];
-   $referenceId = $_POST["referenceId"];
-   $txStatus = $_POST["txStatus"];
-   $paymentMode = $_POST["paymentMode"];
-   $txMsg = $_POST["txMsg"];
-   $txTime = $_POST["txTime"];
-   $signature = $_POST["signature"];
+// $servername = "your_server_name";
+// $username = "your_username";
+// $password = "your_password";
+// $dbname = "your_database_name";
+echo "<pre>";
+print_r($_POST);
+echo "<pre>";
 
-   $data = $orderId.$orderAmount.$referenceId.$txStatus.$paymentMode.$txMsg.$txTime;
-   $hash_hmac = hash_hmac('sha256', $data, $secretkey, true) ;
-   $computedSignature = base64_encode($hash_hmac);
+$cashfree = new Cashfree(get_config('cf_AppId'), get_config('cf_SecKey'));
+$subscriptionDetails = $cashfree->fetchSubscriptionDetails($cf_subReferenceId);
 
-  /* update payment status, date and txnsId by order Id */
-  $query = "UPDATE payment_transaction SET txns_id ='$referenceId', txns_date ='$txTime', status='$txStatus' WHERE order_id = '$orderId'";
-    $con->query($query);
+// Create connection
+$conn = Database::getConnection();
 
-   if ($signature == $computedSignature) {
-  ?>
- <div class="container"> 
-  <div class="card m-5">
-   <div class="card-heading text-success mt-3">
-    <h3 align="center">Your Payment has been Successful</h3>
-   </div>
-   <div class="card-body mt-2">
-    <div class="container">
-     <table class="table table-hover table-striped">
-      <tbody>
-       <tr>
-        <td>Order ID</td>
-        <td><?php echo $orderId; ?></td>
-       </tr>
-       <tr>
-        <td>Order Amount</td>
-        <td><?php echo $orderAmount; ?></td>
-       </tr>
-       <tr>
-        <td>Reference ID</td>
-        <td><?php echo $referenceId; ?></td>
-       </tr>
-       <tr>
-        <td>Transaction Status</td>
-        <td><?php echo $txStatus; ?></td>
-       </tr>
-       <tr>
-        <td>Payment Mode </td>
-        <td><?php echo $paymentMode; ?></td>
-       </tr>
-       <tr>
-        <td>Message</td>
-        <td><?php echo $txMsg; ?></td>
-       </tr>
-       <tr>
-        <td>Transaction Time</td>
-        <td><?php echo $txTime; ?></td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-    <a href="index.php" class="btn-link">Back to Products</a>
-   </div>
-  </div>
- </div>
- <?php } else { ?>
- <div class="container"> 
-  <div class="card mt-5">
-   <div class="card-heading text-danger mt-3">
-    <h3 align="center">Your PayPal Transaction has been Cancelled</h3>
-   </div>
-  <div class="card-body mt-2">
-   <div class="container">
-    <table class="table table-hover table-striped">
-     <tbody>
-      <tr>
-       <td>Order ID</td>
-       <td><?php echo $orderId; ?></td>
-      </tr>
-      <tr>
-       <td>Order Amount</td>
-       <td><?php echo $orderAmount; ?></td>
-      </tr>
-      <tr>
-       <td>Reference ID</td>
-       <td><?php echo $referenceId; ?></td>
-      </tr>
-      <tr>
-       <td>Transaction Status</td>
-       <td><?php echo $txStatus; ?></td>
-      </tr>
-      <tr>
-       <td>Payment Mode </td>
-       <td><?php echo $paymentMode; ?></td>
-      </tr>
-      <tr>
-       <td>Message</td>
-       <td><?php echo $txMsg; ?></td>
-      </tr>
-      <tr>
-       <td>Transaction Time</td>
-       <td><?php echo $txTime; ?></td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-   <a href="index.php" class="btn-link">Back to Products</a>
-  </div>
- </div>
- <?php } ?>
-</body>
-</html>
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve subscription data from $_POST
+$subscriptionData = [
+    'subscriptionId' => $_POST['cf_subscriptionId'],
+    'subReferenceId' => $_POST['cf_subReferenceId'],
+    'planId' => $_POST['subscription']['planId'],
+    'planName' => $_POST['subscription']['planName'],
+    'maxCycles' => $_POST['subscription']['maxCycles'],
+    'type' => $_POST['subscription']['type'],
+    'intervals' => $_POST['subscription']['intervals'],
+    'intervalType' => $_POST['subscription']['intervalType'],
+    'maxAmount' => $_POST['subscription']['maxAmount'],
+    'recurringAmount' => $_POST['subscription']['recurringAmount'],
+    'currency' => $_POST['subscription']['currency'],
+    'customerName' => $_POST['subscription']['customerName'],
+    'customerEmail' => $_POST['subscription']['customerEmail'],
+    'customerPhone' => $_POST['subscription']['customerPhone'],
+    'mode' => $_POST['cf_mode'],
+    'status' => $_POST['cf_status'],
+    'firstChargeDate' => $_POST['subscription']['firstChargeDate'],
+    'expiryDate' => $_POST['subscription']['expiryDate'],
+    'addedOn' => $_POST['subscription']['addedOn'],
+    'scheduledOn' => $_POST['subscription']['scheduledOn'],
+    'currentCycle' => $_POST['subscription']['currentCycle'],
+    'authLink' => $_POST['subscription']['authLink'],
+    'upiId' => $_POST['subscription']['upiId'],
+    'umn' => $_POST['cf_umn'],
+    'authFlow' => $_POST['subscription']['authFlow'],
+    'tpvEnabled' => isset($_POST['subscription']['tpvEnabled']) ? 1 : 0,
+    'signature' => $_POST['signature']
+];
+echo "<pre>";
+print_r($subscriptionData);
+echo "<pre>";
+
+// Prepare and bind
+$stmt = $conn->prepare("INSERT INTO subscriptions (
+    subscription_id, sub_reference_id, plan_id, plan_name, max_cycles, type, intervals, interval_type, max_amount, recurring_amount, currency, customer_name, customer_email, customer_phone, mode, status, first_charge_date, expiry_date, added_on, scheduled_on, current_cycle, auth_link, upi_id, umn, auth_flow, tpv_enabled, signature
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+$stmt->bind_param(
+    "ssssisisddssssssssssissssss",
+    $subscriptionData['subscriptionId'],
+    $subscriptionData['subReferenceId'],
+    $subscriptionData['planId'],
+    $subscriptionData['planName'],
+    $subscriptionData['maxCycles'],
+    $subscriptionData['type'],
+    $subscriptionData['intervals'],
+    $subscriptionData['intervalType'],
+    $subscriptionData['maxAmount'],
+    $subscriptionData['recurringAmount'],
+    $subscriptionData['currency'],
+    $subscriptionData['customerName'],
+    $subscriptionData['customerEmail'],
+    $subscriptionData['customerPhone'],
+    $subscriptionData['mode'],
+    $subscriptionData['status'],
+    $subscriptionData['firstChargeDate'],
+    $subscriptionData['expiryDate'],
+    $subscriptionData['addedOn'],
+    $subscriptionData['scheduledOn'],
+    $subscriptionData['currentCycle'],
+    $subscriptionData['authLink'],
+    $subscriptionData['upiId'],
+    $subscriptionData['umn'],
+    $subscriptionData['authFlow'],
+    $subscriptionData['tpvEnabled'],
+    $subscriptionData['signature']
+);
+
+// Execute the statement
+if ($stmt->execute()) {
+    echo "New subscription record created successfully.";
+} else {
+    echo "Error: " . $stmt->error;
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+?>

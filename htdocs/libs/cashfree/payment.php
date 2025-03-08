@@ -3,9 +3,19 @@
 include '../load.php';
 include 'cashfree.class.php';
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 $plan = $_POST['plan'];
+
 $price = $_POST['price'];
 $pricingPeriod = $_POST['pricingPeriod'];
+
+$pricingPeriod = substr($pricingPeriod, 0, -2);
+print($pricingPeriod  );
+
+
 ?>
 
 
@@ -75,14 +85,22 @@ $pricingPeriod = $_POST['pricingPeriod'];
  
 <?
 
-$cashfree = new Cashfree('TEST10415338d02ddc9044ea7f3e348083351401', 'cfsk_ma_test_c8f46887ca2ac8d1276076fc2ce3d60e_f0d05ada');
-$plan = $cashfree->createPlan('Basic Plan', 9900, 'month');
+$cashfree = new Cashfree(get_config('cf_AppId'), get_config('cf_SecKey'));
+
+$plan = $cashfree->createPlan($plan, $price, $pricingPeriod);
+$planId = $plan['data']['planId'];
+
+// $plan = $cashfree->getplan($plan,$price,$pricingPeriod);
+// $planId = $plan;
 
 echo "<pre>";
 print_r($plan);
 echo "</pre>";
 
-$planId = $plan['data']['planId'];
+
+
+
+
 
 $subscription = $cashfree->createSubscription($planId, "kalaiyarasan", "7418073126", "kalaiyarasan.offl@gmail.com") ;
 // $subscription = $cashfree->createSubscription($planId, $customerName, $customerPhone, $customerEmail) ;
@@ -146,7 +164,7 @@ document.getElementById('payNowButton').addEventListener('click', function() {
 function closeModal() {
     document.getElementById('paymentModal').style.display = 'none';
     document.getElementById('paymentIframe').src = ""; // Clear the iframe content
-    window.location.href = "../../dashboard.php?host"; 
+    //window.location.href = "../../dashboard.php?host"; 
 }
 </script>
 </body>

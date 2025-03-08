@@ -20,10 +20,7 @@ if(UserSession::isAdmin()){
 
 <? 
 
-
-
-load('admin'); 
-
+load('admin');
 
 ?>
 

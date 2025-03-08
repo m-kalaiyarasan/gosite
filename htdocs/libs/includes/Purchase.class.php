@@ -10,7 +10,6 @@ class Purchase{
     public function __construct($username){
     
         $this->username = $username;
-
     }
 
     public function getdetails(){
@@ -76,6 +75,18 @@ class Purchase{
 
 
     public static function setdetails($domain, $plan_id,$plan_name, $path,$gitlink){
+        $conn = Database::getConnection();
+        $username = Session::get('session_user');
+        $sql = "INSERT INTO `purchase` (`username`, `domain` ,`plan_id`, `plan_name`, `path`,`status`,`git_repo`) VALUES ('$username', '$domain','$plan_id', '$plan_name', '$path', 1,'$gitlink')";
+        $result = $conn->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function setPlanDetails($domain, $plan_id,$plan_name, $path,$gitlink){
         $conn = Database::getConnection();
         $username = Session::get('session_user');
         $sql = "INSERT INTO `purchase` (`username`, `domain` ,`plan_id`, `plan_name`, `path`,`status`,`git_repo`) VALUES ('$username', '$domain','$plan_id', '$plan_name', '$path', 1,'$gitlink')";
@@ -162,6 +173,7 @@ class Purchase{
             return $interval->days . " days left.";
         }
     }
+    
     public static function freePlanUp($username){
         $d=strtotime("+1 Months");
         $razorpay_payment_id = "freeplan1234";

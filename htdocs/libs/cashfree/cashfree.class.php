@@ -13,7 +13,7 @@ class Cashfree {
         $this->secretKey = $secretKey;
     }
 
-    // Create a Plan
+    // Create a Plan    
     public function createPlan($planName, $amount, $period) {
         $url = $this->apiUrl . "/api/v2/subscription-plans";
         $headers = [
@@ -42,6 +42,12 @@ class Cashfree {
 
     // Create Subscription
     public function createSubscription($planId, $customerName, $customerPhone, $customerEmail) {
+        $username = "kalai";
+        $metadata = [
+            'username' => 'kalai',
+            'user_id' => '12345',
+            // Add other metadata as needed
+        ];
         $url = $this->apiUrl . "/api/v2/subscriptions/nonSeamless/subscription";
         $headers = [
             'Content-Type: application/json',
@@ -57,7 +63,10 @@ class Cashfree {
             'customerPhone' => $customerPhone,
             'customerEmail' => $customerEmail,
             'linkExpiry' => 5,
-            'returnUrl' => 'https://gosite.zeal.lol/libs/cashfree/verify.php', // Replace with actual notification URL
+            'returnUrl' => 'https://gosite.zeal.lol/libs/cashfree/response.php', // Replace with actual notification URL
+            'subscription_meta' => [
+            'username' => $username
+        ]
         ];
 
         $response = $this->sendRequest($url, 'POST', $data, $headers);
@@ -80,6 +89,47 @@ class Cashfree {
         $response = curl_exec($curl);
         curl_close($curl);
         return json_decode($response, true);
+    }
+    public function fetchSubscriptionDetails($subReferenceId) {
+        $url = $this->apiUrl . "/api/v2/subscriptions/" . $subReferenceId;
+        $headers = [
+            'Content-Type: application/json',
+            'x-api-version: 1.0',
+            'x-client-id: ' . $this->appId,
+            'x-client-secret: ' . $this->secretKey
+        ];
+    
+        $response = $this->sendRequest($url, 'GET', [], $headers);
+        return $response;
+    }
+    public function getplan($plan,$price,$pricingPeriod){
+        echo "<br>";
+
+        // print($plan);
+        // print($price);
+        // print($plan);
+        echo "<br>";
+        if(strcmp($plan,"stater") && $price == 99){
+            return "planstater990123";
+        }
+        if(strcmp($plan,"stater") && $price == 999 ){
+
+        }
+        if(strcmp($plan,"professional") && $price == 199 ){
+            
+        }
+        if(strcmp($plan,"professional") && $price == 1999 ){
+
+        }
+        if(strcmp($plan,"business") && $price == 499 ){
+            
+        }
+        if(strcmp($plan,"business") && $price == 4999 ){
+
+        }
+        else{
+            print("plan error");
+        }
     }
 }
 
