@@ -1,19 +1,19 @@
 <?php
 
-// include_once '../load.php';
-include_once 'payment.class.php';
+include '../load.php';
+include 'cashfree.class.php';
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 
 $plan = $_POST['plan'];
-$official_name = $_POST['name'];
+
 $price = $_POST['price'];
 $pricingPeriod = $_POST['pricingPeriod'];
 
-// $pricingPeriod = substr($pricingPeriod, 0, -2);
-// print($pricingPeriod  );
+$pricingPeriod = substr($pricingPeriod, 0, -2);
+print($pricingPeriod  );
 
 
 ?>
@@ -48,7 +48,7 @@ $pricingPeriod = $_POST['pricingPeriod'];
                     width="60"
                   />
                   <div>
-                    <h5 class="mb-1"><?=$_SESSION['session_user']?></h5>
+                    <h5 class="mb-1">John Doe</h5>
                     <p class="text-muted mb-0">Premium Account</p>
                   </div>
                 </div>
@@ -85,38 +85,34 @@ $pricingPeriod = $_POST['pricingPeriod'];
  
 <?
 
-$cashfree = new Payment(get_config('cf_AppId'), get_config('cf_SecKey'));
+$cashfree = new Cashfree(get_config('cf_AppId'), get_config('cf_SecKey'));
 
 // $plan = $cashfree->createPlan($plan, $price, $pricingPeriod);
 // $planId = $plan['data']['planId'];
 
+$plan = $cashfree->getplan($plan,$price,$pricingPeriod);
+$planId = $plan;
 
+echo "<pre>";
+print_r($plan);
+echo "</pre>";
+
+print_r($_SESSION);
 $username = Session::get('session_user');
 $userobj = new User($username);
 
-// print($userobj->getemail());
 
 
-$paymentLink = $cashfree->paymentLink($userobj->getemail(),$official_name , $userobj->getphone(),$price, $username, $plan, $pricingPeriod);
+$subscription = $cashfree->createSubscription($planId, $username, "7418073126", "kalaiyarasan.offl@gmail.com") ;
 // $subscription = $cashfree->createSubscription($planId, $customerName, $customerPhone, $customerEmail) ;
-$paymentLink = json_decode($paymentLink);
-echo "<pre>";
 
-// print_r($paymentLink);
+echo "<pre>";
+print_r($subscription);
 echo "</pre>";
 
-echo "<br>";
-
-//insert payment datas into database
-
-// print($paymentLink->cf_link_id);
-
-$paymentDetails = $cashfree->updatePayment($username, $paymentLink->cf_link_id, $paymentLink->customer_details->customer_name, $paymentLink->customer_details->customer_phone, $paymentLink->customer_details->customer_email, $paymentLink->link_amount, $paymentLink->link_id, $paymentLink->link_created_at, $paymentLink->link_currency, $paymentLink->link_notes->plan_name, $paymentLink->link_notes->plan_type, $paymentLink->link_purpose, $paymentLink->link_url);
-
-$_SESSION['link_id'] = $paymentLink->link_id;
 ?>
 <!-- Trigger Button -->
-<!-- <button id="payNowButton">Pay Now</button> -->
+<button id="payNowButton">Pay Now</button>
 
 <!-- Modal -->
 <div id="paymentModal" 
@@ -161,7 +157,7 @@ $_SESSION['link_id'] = $paymentLink->link_id;
 
 <script>
 document.getElementById('payNowButton').addEventListener('click', function() {
-    const paymentUrl = '<? echo $paymentLink->link_url; ?>'; // Replace with the actual link
+    const paymentUrl = '<? echo $subscription['data']['authLink']; ?>'; // Replace with the actual link
     document.getElementById('paymentIframe').src = paymentUrl;
     document.getElementById('paymentModal').style.display = 'block';
 });
@@ -169,7 +165,7 @@ document.getElementById('payNowButton').addEventListener('click', function() {
 function closeModal() {
     document.getElementById('paymentModal').style.display = 'none';
     document.getElementById('paymentIframe').src = ""; // Clear the iframe content
-    window.location.href = "https://gosite.zeal.lol/libs/cashfree/verify.php"; 
+    //window.location.href = "../../dashboard.php?host"; 
 }
 </script>
 </body>

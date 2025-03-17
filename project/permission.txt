@@ -13,7 +13,7 @@ chmod +x /for/all/the/scripts
 ---------------------------------------------------------------------------------------------------------
 
 
-chmod 755 /var/labsstorage/home/kalaiyarasan.offl.2004/htdocs/gisite/htdocs/
+chmod 755 /var/labsstorage/home/kalaiyarasan.offl.2004/htdocs/gosite/htdocs/
 
 chown -R www-data:www-data /home/kalaiyarasan.offl.2004/htdocs/gosite/site/
 

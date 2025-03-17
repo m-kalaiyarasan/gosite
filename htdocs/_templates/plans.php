@@ -1,8 +1,22 @@
 <?php
 
+session_start();
 
+if(isset($_SESSION['link_id'])){
+    $id = $_SESSION['link_id'];
+    $paid = Purchase::isPaid($id);
+    // print($id);
+    if($paid === "pending"){
+      ?>
+      <script>
+      window.location.assign("https://gosite.zeal.lol/libs/cashfree/verify.php")
+      </script>
+    <?
+    }
+
+}
 try{
-          
+
   $username = Session::get('session_user');
   $subscription = new Subscription();
   $details = $subscription->getUniquePlans($username);
@@ -44,6 +58,7 @@ catch(Exception $e){
           <th class="bg-primary text-light" scope="col">Domain</th>
           <!-- <th scope="col">URL</th> -->
           <th class="bg-primary text-light" scope="col">Status</th>
+          <th class="bg-primary text-light" scope="col">Days Left</th>
           <th class="bg-primary text-light" scope="col">Actions</th>
 
         </tr>
@@ -60,7 +75,7 @@ catch(Exception $e){
             // Iterate over the details array
 foreach ($details as $index => $site) {
 
-  $planId = htmlspecialchars($site['plan_id']);
+  $planId = htmlspecialchars($site['link_id']);
   
   if ($purchase->isPlanIdExists($planId)) {
     $status = "In use";
@@ -79,8 +94,10 @@ foreach ($details as $index => $site) {
     echo "<td>" . $domain . "</td>";
    // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
+    echo "<td>" . Purchase::daysLeftInSubscription(htmlspecialchars($site['end_at'])) . "</td>";
    if($status === "Not In Use"){ 
-    ?>
+  
+  ?>
 
   <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">Host Now</button></td>
   <? }else{
@@ -130,7 +147,7 @@ foreach ($details as $index => $site) {
         <h5>Enter Git Repo Link</h5 >
         <input type="text" class="form-control form-control-lg" id="git" name="git" />
         <br>
-        <input type="hidden" name="plan_id" value="<? ECHO htmlspecialchars($site['plan_id']); ?>">
+        <input type="hidden" name="plan_id" value="<? ECHO htmlspecialchars($site['link_id']); ?>">
         <input type="hidden" name="plan_name" value="<? ECHO htmlspecialchars($site['plan_name']); ?>">  
         <button type="submit" class="btn btn-primary">Deploy Now</button>
                     </form>

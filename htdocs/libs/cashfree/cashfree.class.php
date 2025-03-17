@@ -57,7 +57,7 @@ class Cashfree {
         ];
         $subscriptionId = "sub".mt_rand(1000,10000);
         $data = [
-            'subscriptionId' => $subscriptionId,
+            // 'subscriptionId' => $subscriptionId,
             'planId' => $planId,
             'customerName' => $customerName,
             'customerPhone' => $customerPhone,

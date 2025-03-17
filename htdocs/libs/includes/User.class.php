@@ -107,7 +107,7 @@ class User
             $this->conn = Database::getConnection();
         }
         
-        $sql = "SELECT `$var` FROM `users` WHERE `id` = $this->id"; 
+        $sql = "SELECT `$var` FROM `auth` WHERE `username` = '$this->username' "; 
         
         
         $result = $this->conn->query($sql);

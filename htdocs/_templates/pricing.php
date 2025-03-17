@@ -157,7 +157,7 @@
                         </div>
                     </div> -->
                     <div class="email mt-2">
-                        <input type="email" class="form-control email-text" placeholder="Email Address" name="email" id="emailStarter" required>
+                        <input type="text" class="form-control email-text" placeholder="Your Name" name="name" id="emailStarter" required>
                     </div>
                     <input type="hidden" name="plan" value="starter">
                     <input type="hidden" name="price" id="starterPriceHidden" value="99">
@@ -190,7 +190,8 @@
                         </div>
                     </div> -->
                     <div class="email mt-2">
-                        <input type="email" class="form-control email-text" placeholder="Email Address" name="email" id="emailProfessional" required>
+                    <input type="text" class="form-control email-text" placeholder="Your Name" name="name" id="emailProfessional" required>
+
                     </div>
                     <input type="hidden" name="plan" value="professional">
                     <input type="hidden" name="price" id="professionalPriceHidden" value="199">
@@ -223,7 +224,8 @@
                         </div>
                     </div> -->
                     <div class="email mt-2">
-                        <input type="email" class="form-control email-text" placeholder="Email Address" name="email" id="emailBusiness" required>
+                    <input type="text" class="form-control email-text" placeholder="Your Name" name="name" id="emailBusiness" required>
+
                     </div>
                     <input type="hidden" name="plan" value="business">
                     <input type="hidden" name="price" id="businessPriceHidden" value="499">

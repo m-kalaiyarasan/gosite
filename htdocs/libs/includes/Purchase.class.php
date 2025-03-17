@@ -27,6 +27,21 @@ class Purchase{
         }
 
     }
+    public function getPaymentDetails(){
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `payment` ORDER BY STR_TO_DATE(link_created_at, '%Y-%m-%d %H:%i:%s') DESC";
+        $result = $conn->query($sql);
+        $details = array();
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $details[] = $row;
+            }
+            return $details;
+        }else{
+            return false;
+        }
+
+    }
 
     public function getDetailsAdmin(){
         $conn = Database::getConnection();
@@ -44,7 +59,7 @@ class Purchase{
     }
     public function subscriptionsDetailsAdmin(){
         $conn = Database::getConnection();
-        $sql = "SELECT * FROM `subscriptions` ORDER BY `username`;";
+        $sql = "SELECT * FROM `payment` ORDER BY `username`;";
         $result = $conn->query($sql);
         $details = array();
         if($result->num_rows > 0){
@@ -164,6 +179,7 @@ class Purchase{
     }
     public static function daysLeftInSubscription($expiryDate) {
         $currentDate = new DateTime();
+        // print($expiryDate);
         $expiry = new DateTime($expiryDate);
         $interval = $currentDate->diff($expiry);
     
@@ -215,5 +231,41 @@ class Purchase{
             return false;
         }
     }
+    public static function isPaid($id) {
+        try {
+            $conn = Database::getConnection();
+            
+            if ($conn->connect_error) {
+                throw new Exception("Connection failed: " . $conn->connect_error);
+            }
+    
+            // Fetch payment status for the given ID
+            $sql = "SELECT payment_status FROM payment WHERE link_id = ?";
+            $stmt = $conn->prepare($sql);
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $conn->error);
+            }
+            $stmt->bind_param("s", $id);
+            if (!$stmt->execute()) {
+                throw new Exception("Execution failed: " . $stmt->error);
+            }
+    
+            $stmt->bind_result($payment_status);
+            if (!$stmt->fetch()) {
+                throw new Exception("No record found for ID: " . $id);
+            }
+    
+            $stmt->close();
+            
+            // print($payment_status);
+            // Check if payment status is 'paid' or 'pending'
+            return $payment_status;
+    
+        } catch (Exception $e) {
+            error_log("Error in isPaid: " . $e->getMessage()); // Logs the error
+            return false; // Treat as 'pending' if an error occurs
+        }
+    }
+    
 
 }

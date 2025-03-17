@@ -1,5 +1,6 @@
 <?php
   include '../load.php';
+  require_once "cashfree.class.php";
 
 
 // $servername = "your_server_name";
@@ -11,8 +12,11 @@ print_r($_POST);
 echo "<pre>";
 
 $cashfree = new Cashfree(get_config('cf_AppId'), get_config('cf_SecKey'));
-$subscriptionDetails = $cashfree->fetchSubscriptionDetails($cf_subReferenceId);
+$subscriptionDetails = $cashfree->fetchSubscriptionDetails($_POST['cf_subReferenceId']);
 
+echo "<pre>";
+print_r($subscriptionDetails);
+echo "<pre>";
 // Create connection
 $conn = Database::getConnection();
 
@@ -21,34 +25,35 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
 // Retrieve subscription data from $_POST
 $subscriptionData = [
     'subscriptionId' => $_POST['cf_subscriptionId'],
     'subReferenceId' => $_POST['cf_subReferenceId'],
-    'planId' => $_POST['subscription']['planId'],
-    'planName' => $_POST['subscription']['planName'],
-    'maxCycles' => $_POST['subscription']['maxCycles'],
-    'type' => $_POST['subscription']['type'],
-    'intervals' => $_POST['subscription']['intervals'],
-    'intervalType' => $_POST['subscription']['intervalType'],
-    'maxAmount' => $_POST['subscription']['maxAmount'],
-    'recurringAmount' => $_POST['subscription']['recurringAmount'],
-    'currency' => $_POST['subscription']['currency'],
-    'customerName' => $_POST['subscription']['customerName'],
-    'customerEmail' => $_POST['subscription']['customerEmail'],
-    'customerPhone' => $_POST['subscription']['customerPhone'],
+    'planId' => $subscriptionDetails['subscription']['planId'],
+    'planName' => $subscriptionDetails['subscription']['planName'],
+    'maxCycles' => $subscriptionDetails['subscription']['maxCycles'],
+    'type' => $subscriptionDetails['subscription']['type'],
+    'intervals' => $subscriptionDetails['subscription']['intervals'],   
+    'intervalType' => $subscriptionDetails['subscription']['intervalType'],
+    'maxAmount' => $subscriptionDetails['subscription']['maxAmount'],
+    'recurringAmount' => $subscriptionDetails['subscription']['recurringAmount'],
+    'currency' => $subscriptionDetails['subscription']['currency'],
+    'customerName' => $subscriptionDetails['subscription']['customerName'],
+    'customerEmail' => $subscriptionDetails['subscription']['customerEmail'],
+    'customerPhone' => $subscriptionDetails['subscription']['customerPhone'],
     'mode' => $_POST['cf_mode'],
     'status' => $_POST['cf_status'],
-    'firstChargeDate' => $_POST['subscription']['firstChargeDate'],
-    'expiryDate' => $_POST['subscription']['expiryDate'],
-    'addedOn' => $_POST['subscription']['addedOn'],
-    'scheduledOn' => $_POST['subscription']['scheduledOn'],
-    'currentCycle' => $_POST['subscription']['currentCycle'],
-    'authLink' => $_POST['subscription']['authLink'],
-    'upiId' => $_POST['subscription']['upiId'],
+    'firstChargeDate' => $subscriptionDetails['subscription']['firstChargeDate'],
+    'expiryDate' => $subscriptionDetails['subscription']['expiryDate'],
+    'addedOn' => $subscriptionDetails['subscription']['addedOn'],
+    'scheduledOn' => $subscriptionDetails['subscription']['scheduledOn'],
+    'currentCycle' => $subscriptionDetails['subscription']['currentCycle'],
+    'authLink' => $subscriptionDetails['subscription']['authLink'],
+    'upiId' => $subscriptionDetails['subscription']['upiId'],
     'umn' => $_POST['cf_umn'],
-    'authFlow' => $_POST['subscription']['authFlow'],
-    'tpvEnabled' => isset($_POST['subscription']['tpvEnabled']) ? 1 : 0,
+    'authFlow' => $subscriptionDetails['subscription']['authFlow'],
+    'tpvEnabled' => $subscriptionDetails['subscription']['tpvEnabled'],
     'signature' => $_POST['signature']
 ];
 echo "<pre>";
@@ -57,9 +62,10 @@ echo "<pre>";
 
 // Prepare and bind
 $stmt = $conn->prepare("INSERT INTO subscriptions (
-    subscription_id, sub_reference_id, plan_id, plan_name, max_cycles, type, intervals, interval_type, max_amount, recurring_amount, currency, customer_name, customer_email, customer_phone, mode, status, first_charge_date, expiry_date, added_on, scheduled_on, current_cycle, auth_link, upi_id, umn, auth_flow, tpv_enabled, signature
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    subscription_id, sub_reference_id, plan_id, plan_name, max_cycles, type, intervals, interval_type, max_amount, recurring_amount, currency, customer_name, customer_email, customer_phone, mode, status, first_charge_date, expiry_date, added_on, scheduled_on, current_cycle, auth_link, upi_id, umn, auth_flow, tpv_enabled, signature, created_at
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
 
+// Bind Parameters
 $stmt->bind_param(
     "ssssisisddssssssssssissssss",
     $subscriptionData['subscriptionId'],
@@ -101,4 +107,6 @@ if ($stmt->execute()) {
 // Close the statement and connection
 $stmt->close();
 $conn->close();
+// header("Location: /dashboard.php?host");
+// exit();
 ?>

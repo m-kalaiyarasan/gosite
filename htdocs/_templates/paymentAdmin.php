@@ -1,7 +1,7 @@
 <?php
 $username = Session::get('session_user');
 $purchase = new Purchase($username);
-$details = $purchase->subscriptionsDetailsAdmin();
+$details = $purchase->getPaymentDetails();
 ?>
 
 
@@ -12,19 +12,21 @@ $details = $purchase->subscriptionsDetailsAdmin();
     <table class="table table-striped table-bordered text-center">
       <thead>
         <tr>
-          <th  colspan="7" ><h4 class="text-center"> Available Sites </h4></th>
+          <th  colspan="9" ><h4 class="text-center"> Payment Details</h4></th>
           <!-- <th class="bg-primary text-light" colspan="7" ><h4 class="text-center"> Your Sites </h4></th> -->
         </tr>
         <tr >
           <th class="bg-primary text-light" scope="col">S.NO</th>
           <!-- <th class="bg-primary text-light" scope="col">Domain ID</th> -->
-          <th class="bg-primary text-light" scope="col">Site Name</th>
+          <th class="bg-primary text-light" scope="col">Username</th>
           <!-- <th class="bg-primary text-light" scope="col">URL</th> -->
-          <th class="bg-primary text-light" scope="col">Status</th>
+          <th class="bg-primary text-light" scope="col">Email</th>
+          <th class="bg-primary text-light" scope="col">Date</th>
+          <th class="bg-primary text-light" scope="col">Amount</th>
           <th class="bg-primary text-light" scope="col">Plan</th>
-          <th class="bg-primary text-light" scope="col">username</th>
           <th class="bg-primary text-light" scope="col">Days left</th>
-          <th class="bg-primary text-light" scope="col">Details</th>
+          <th class="bg-primary text-light" scope="col">Status</th>
+          <th class="bg-primary text-light" scope="col">Action</th>
 
         </tr>
       </thead>
@@ -66,11 +68,13 @@ foreach ($details as $index => $site) {
     echo "<tr>";
     echo "<th scope='row'>" . ($index + 1) . "</th>";
     // echo "<td>" . htmlspecialchars($site['id']) . "</td>";
-    echo "<td>" . $domain . "</td>";
+    echo "<td>" .  htmlspecialchars($site['username'])  . "</td>";
     // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) . "'target='_blank'>" . htmlspecialchars($site['domain']) . "</a></td>";
-    echo "<td>" . $status . "</td>";
-    echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
-    echo "<td>" . htmlspecialchars($site['username']) . "</td>";
+    echo "<td>" .  htmlspecialchars($site['customer_email'])  . "</td>";
+    echo "<td>" .  htmlspecialchars($site['link_created_at'])  . "</td>";
+    echo "<td>" . htmlspecialchars($site['link_amount']) . "</td>";
+    echo "<td>" . htmlspecialchars($site['plan_type']) . "</td>";
+    echo "<td>" . htmlspecialchars($site['payment_status']) . "</td>";
 
     echo "<td>" . Purchase::daysLeftInSubscription(htmlspecialchars($site['end_at'])) . "</td>";
 

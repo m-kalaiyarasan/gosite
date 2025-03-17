@@ -1,3 +1,13 @@
+
+  curl --request GET \
+  --url https://sandbox.cashfree.com/pg/links/payment_1741680545 \
+  --header 'x-api-version: 2025-01-01' \
+  --header 'x-client-id: TEST10415338d02ddc9044ea7f3e348083351401' \
+  --header 'x-client-secret: cfsk_ma_test_c8f46887ca2ac8d1276076fc2ce3d60e_f0d05ada'
+
+
+
+
 curl --request POST \
   --url https://test.cashfree.com/api/v2/subscriptions/nonSeamless/subscription \
   --header 'Content-Type: application/json' \

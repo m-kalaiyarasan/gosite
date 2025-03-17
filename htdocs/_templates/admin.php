@@ -66,6 +66,10 @@
                         <?php if (isset($_GET['doc'])) { echo 'active'; } ?>">Documentation</a>
                 </li> -->
                 <li class="nav-item">
+                    <a href="admin.php?payment" class="nav-link 
+                        <?php if (isset($_GET['payment'])) { echo 'active'; } ?>">Payment</a>
+                </li>
+                <li class="nav-item">
                     <a href="dashboard.php?database" class="nav-link 
                         <?php if (isset($_GET['database'])) { echo 'active'; } ?>">Databases</a>
                 </li>
@@ -121,6 +125,9 @@ if(isset($_GET['database'])) {
 }
 if(isset($_GET['subscriptions'])) {
     load('subscriptionsAdmin');
+}
+if(isset($_GET['payment'])) {
+    load('paymentAdmin');
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
