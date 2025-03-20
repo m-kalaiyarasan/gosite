@@ -28,9 +28,9 @@ if ($savedOtp && $inputOtp == $savedOtp) {
   if(!User::signup($username,$password,$email,$phone)){
     throw new Exception("aild to insert");
   }
-  if(!Purchase::freePlanUp($username)){
-    throw new Exception("Free plan not asign, please contact at Gosite");
-  }
+  // if(!Purchase::freePlanUp($username)){
+  //   throw new Exception("Free plan not asign, please contact at Gosite");
+  // }
   // User::active(1);
   unset($_SESSION['otp']);
   unset($_SESSION['username']);
