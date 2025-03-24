@@ -51,7 +51,8 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
             // die("Domain already exists, use another domains");
             header('Location: dashboard.php?manage');
             $_SESSION['message'] = "Domain already exists, use another domains";
-            $oldName = $name;
+            exit;
+            // $oldName = $name;
             }
         
         print("hello");
