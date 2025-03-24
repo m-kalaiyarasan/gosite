@@ -46,12 +46,14 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
     // $purchase = new Purchase(Session::get('session_user'));
     // $result = $purchase->updatedetails($id, $name, $status);
         // Conf::createConf($name);
+        if($oldName != $name){
         if (file_exists($changeDir)){
             // die("Domain already exists, use another domains");
             header('Location: dashboard.php?manage');
             $_SESSION['message'] = "Domain already exists, use another domains";
-            exit;
-        }
+            $oldName = $name;
+            }
+        
         print("hello");
         Conf::disableSite($oldName);
         Conf::deleteapacheConfig($oldName);
@@ -60,7 +62,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
         Conf::changeapacheConfig($name,$newPath);
         Conf::enableSite($name);
         Conf::reloadApache();
-   
+        }
     
     $purchase = new Purchase(Session::get('session_user'));
     $result = $purchase->updatedetails($id, $name, $status);
