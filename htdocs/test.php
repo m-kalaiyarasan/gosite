@@ -63,8 +63,5 @@ include 'libs/load.php';
 // // print(date("Y-m-d")." ".date("H:i:s"));
 // echo "<br>";
 
-$d=strtotime("+1 Months");
-$datee = date("Y-m-d H:i:s", $d);
-
-print(Purchase::daysLeftInSubscription($datee));
+Purchase::freePlanUp("kalai");
 ?>

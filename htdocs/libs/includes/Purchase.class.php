@@ -191,7 +191,56 @@ class Purchase{
     }
     
     public static function freePlanUp($username){
-        $d=strtotime("+1 Months");
+        $conn = Database::getConnection();
+
+        $d=strtotime("+15 Days");
+        $cf_link_id = rand(10,1000000);
+        $customer_name = $username;
+        $customer_phone = "1234567887";
+        $customer_email = "free@freeplan.com";
+        $link_amount = "0";
+        $link_id = "free_".rand(10,1000000);
+        $link_created_at = date("Y-m-d H:i:s");
+        $link_currency = "INR";
+        $plan_name = "freeplan";
+        $plan_type = "freeplan";
+        $link_purpose = "for free plan";
+        $link_url = "none";
+        $payment_status = "PAID";
+        $end_at = date("Y-m-d H:i:s", $d);
+
+
+
+
+
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $payment_status = "PAID";
+
+        // SQL query to insert data
+        $sql = "INSERT INTO payment 
+                (username, cf_link_id, customer_name, customer_phone, customer_email, link_amount, link_id, link_created_at, link_currency, plan_name, plan_type, link_purpose, link_url, payment_status, end_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssdsssssssss", $username, $cf_link_id, $customer_name, $customer_phone, $customer_email, $link_amount, $link_id, $link_created_at, $link_currency, $plan_name, $plan_type, $link_purpose, $link_url, $payment_status, $end_at);
+
+        if ($stmt->execute()) {
+            // echo "Payment data inserted successfully!";
+            return true;
+        } else {
+            echo "Error: " . $stmt->error;
+            die("Failed, contact at support@gosite.in");
+        }
+
+        // Close connection
+        $stmt->close();
+        $conn->close();
+    }
+    public static function freePlanUpsub($username){
+        $d=strtotime("+15 Days");
         $razorpay_payment_id = "freeplan1234";
         $razorpay_subscription_id = "freeplan12345";
         $razorpay_signature = "freeplan123e4";

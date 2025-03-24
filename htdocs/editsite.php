@@ -26,9 +26,13 @@ print($path);
 
 if($status == 'Active'){
     $status = 1;
+    Conf::enableSite($name);
+    Conf::reloadApache();
 }
 else{
     $status = 0;
+    Conf::disableSite($name);
+    Conf::reloadApache();
 }
 
 $baseDir = __DIR__."/../site/";
@@ -64,7 +68,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'save'){
         echo "Error";
     }
     header('Location: dashboard.php?manage');
-    $_SESSION['message'] = "Domain name updated successfully";
+    $_SESSION['message'] = "Changes updated updated successfully";
     exit;
 
 }
