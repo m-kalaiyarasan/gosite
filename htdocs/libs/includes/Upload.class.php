@@ -135,7 +135,45 @@ class Upload{
         }
     }
 
+    public static function isValidGitLink($gitLink) {
+        // Regex for validating Git URL
+        $regex = '/^(https?:\/\/|git@)[\w.-]+(:[\d]+)?\/[\w.-]+\/[\w.-]+(\.git)?$/';
+    
+        // Check if the link matches the regex
+        if (preg_match($regex, $gitLink)) {
+            return true;
+        }
+    
+        // If not matched, check for harmful characters
+        if (preg_match('/[;&|]/', $gitLink)) {
+            throw new Exception("Invalid Git URL: Contains potentially harmful characters.");
+        }
+    
+        return false;
+    }
 
+    public function isDomainPointedToServer($domain, $serverIp) {
+        // Resolve the domain to its IP address
+        $domainIp = gethostbyname($domain);
+    
+     
+        $serverIp = "94.237.66.186";
+        // Compare the resolved IP with the server's IP
+        print($domainIp."<br>");
+        print($serverIp);
+        // return $domainIp === $serverIp;
+        return true;
+    }
+
+    public function isValidDomain($domain) {
+        // Regular expression for a valid domain name
+        $pattern = '/^(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,}$/';
+        return preg_match($pattern, $domain) === 1;
+    }
+
+    public function confssl($domain){
+        
+    }
 
 
 }

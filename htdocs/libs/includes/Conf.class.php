@@ -38,6 +38,16 @@ class Conf
             echo "Failed to delete Apache config.\n<br>";
         }
     }
+    public static function deletesslConfig($name) {
+        global $workdone;
+        $apacheConfigFile = '/etc/apache2/sites-available/'.$name;
+        if (unlink($apacheConfigFile)) {
+            echo "Apache config deleted successfully.\n<br>";
+            return $workdone;
+        } else {
+            echo "Failed to delete Apache config.\n<br>";
+        }
+    }
 
     //write a class to reload apache
     public static function reloadApache() {
@@ -78,6 +88,20 @@ class Conf
         $output = shell_exec("mv /etc/apache2/sites-enabled/".$name.".conf /etc/apache2/sites-enabled/".$rename.".conf");
         echo $output;
         echo "apache2 updated successfully.\n<br>";
+        }
+    }
+    public static function confssl($domain) {
+        if($name){
+        $output = shell_exec("certbot --apache --non-interactive --agree-tos --gosite.site@email.com --redirect --keep-until-expiring -d ".$domain);
+        echo $output;
+        echo "ssl updated successfully.\n<br>";
+        }
+    }
+    public static function delconfssl($domain) {
+        if($name){
+        $output = shell_exec("certbot delete --cert-name ".$domain);
+        echo $output;
+        echo "ssl updated successfully.\n<br>";
         }
     }
 
