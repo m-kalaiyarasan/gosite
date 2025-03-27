@@ -206,6 +206,9 @@ try{
             $gitt = $upload->gitclone($domain);
             $workdone = 3;
             scripts($workdone,$domain,$newDirName);
+            if($_POST['domainType'] == 'custom'){
+                Conf::confssl($domain);
+            }
 
         }
         else {
