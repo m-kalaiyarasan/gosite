@@ -55,7 +55,7 @@ foreach ($details as $index => $site) {
     echo "<td>" . htmlspecialchars($site['domain']) . "</td>";
     echo "<td><a href='"."http://". htmlspecialchars($site['domain']) . "'target='_blank'>" . htmlspecialchars($site['domain']) . "</a></td>";
     echo "<td>" . $status . "</td>";
-    echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>";
+    echo "<td>" . htmlspecialchars(ucfirst($site['plan_name'])) . "</td>";
 
     if(htmlspecialchars($site['git_repo']) != null){
     ?>

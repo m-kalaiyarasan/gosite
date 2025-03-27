@@ -16,7 +16,8 @@ $cashfree = new Payment(get_config('cf_AppId'), get_config('cf_SecKey'));
 $verify = $cashfree->verifyPayment($id);
 
 print($verify);
-if($verify == "PAID"){    
+if($verify == "PAID"){  
+    // $update = $cashfree->updateStatus($id,$verify);
    header("Location: ../../dashboard.php?host");
    exit;
 }
@@ -26,11 +27,11 @@ elseif($verify == "ACTIVE"){
 elseif($verify == "pending"){    
     print("Your Payment is still pending");
 }
-else{
-    print("therila da mapla");
-}
+// else{
+//     print("therila da mapla");
+// }
 
-//    header("Location: ../../dashboard.php?host");
-//    exit;
+   header("Location: ../../dashboard.php?host");
+   exit;
 
 ?>

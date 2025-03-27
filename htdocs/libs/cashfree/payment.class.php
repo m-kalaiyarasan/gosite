@@ -2,13 +2,14 @@
 include '../load.php';
 class Payment
 {
-    private $apiUrl = "https://sandbox.cashfree.com/pg/links";
+    private $apiUrl;
     private $appId;
     private $secretKey;
     
     public function __construct($appId, $secretKey) {
         $this->appId = $appId;
         $this->secretKey = $secretKey;
+        $this->apiUrl = get_config('api_link');
     }
     public function paymentLink($email, $name, $phone, $amount, $username, $planname, $plantype)
     {
@@ -23,7 +24,7 @@ class Payment
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_CUSTOMREQUEST => "POST",        
             CURLOPT_POSTFIELDS => json_encode([
                 "customer_details" => [
                     "customer_email" => $email,
@@ -94,7 +95,8 @@ class Payment
         $curl = curl_init();
     
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://sandbox.cashfree.com/pg/links/{$link_id}",
+            // CURLOPT_URL => "https://sandbox.cashfree.com/pg/links/{$link_id}",
+            CURLOPT_URL => get_config('api_link')."/{$link_id}",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

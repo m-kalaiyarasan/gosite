@@ -102,7 +102,7 @@ $paymentLink = $cashfree->paymentLink($userobj->getemail(),$official_name , $use
 $paymentLink = json_decode($paymentLink);
 echo "<pre>";
 
-// print_r($paymentLink);
+print_r($paymentLink);
 echo "</pre>";
 
 echo "<br>";

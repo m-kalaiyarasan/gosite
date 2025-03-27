@@ -90,7 +90,7 @@ foreach ($details as $index => $site) {
     echo "<tr>";
     echo "<th scope='row'>" . ($index + 1) . "</th>";
     // echo "<td>" . htmlspecialchars($site['id']) . "</td>";
-    echo "<td>" . htmlspecialchars($site['plan_name']) . "</td>"; 
+    echo "<td>" . htmlspecialchars(ucfirst($site['plan_name'])) . "</td>"; 
     echo "<td>" . $domain . "</td>";
    // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
@@ -133,17 +133,23 @@ foreach ($details as $index => $site) {
         </div>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="domainType" id="inlineRadio2" value="custom">
-          <label style="text-decoration:none;" class="form-check-label" for="inlineRadio2">Custom</label>
+          <!-- <label style="text-decoration:none;" class="form-check-label" for="inlineRadio2">Custom</label> -->
+         
+        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Note: Custom domains should have an A record pointing to this IP: 94.237.66.186 in the DNS management panel of your Domain Name Provider, if not, the domain cannot be registered here.">
+        <label style="text-decoration:none;" class="form-check-label" for="inlineRadio2">Custom</label>
+            ℹ️
+        </span>
+        <!-- <i class="bi bi-info-circle" style = "width:50px;"></i> -->
           
         </div>
         <br>
         <br>
         
-
-        <h5>Upload Your Project: (.zip)</h5 >
+       
+        <!-- <h5>Upload Your Project: (.zip)</h5 >
         <input type="file" class="form-control form-control-lg" id="file" name="file" accept=".zip" />
         <br>
-        <h4>(or)</h4>
+        <h4>(or)</h4> -->
         <h5>Enter Git Repo Link</h5 >
         <input type="text" class="form-control form-control-lg" id="git" name="git" />
         <br>
@@ -159,7 +165,13 @@ foreach ($details as $index => $site) {
         </div>
     </section>
     
-
+    <script>
+        // Initialize all tooltips
+        document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+    </script>
 
             </div>
         </div>
