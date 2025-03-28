@@ -42,7 +42,7 @@ class Conf
         global $workdone;
         $apacheConfigFile = '/etc/apache2/sites-available/'.$name."-le-ssl.conf";   
         if (unlink($apacheConfigFile)) {
-            echo "Apache config deleted successfully.\n<br>";
+            echo "SSl config deleted successfully.\n<br>";
             return $workdone;
         } else {
             echo "Failed to delete Apache config.\n<br>";
@@ -94,14 +94,14 @@ class Conf
         if($domain){
         $output = shell_exec("certbot --apache --non-interactive --agree-tos --email gosite.site@gmail.com --redirect --keep-until-expiring --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs -d ".$domain);
         echo $output;
-        echo "ssl updated successfully.\n<br>";
+        echo "ssl configured successfully.\n<br>";
         }
     }
     public static function delconfssl($domain) {
         if($domain){
         $output = shell_exec("certbot delete --cert-name ".$domain." --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs --non-interactive --quiet");
         echo $output;
-        echo "ssl updated successfully.\n<br>";
+        echo "ssl deleted successfully.\n<br>";
         }
     }
 
