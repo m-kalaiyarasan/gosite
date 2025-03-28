@@ -40,7 +40,7 @@ class Conf
     }
     public static function deletesslConfig($name) {
         global $workdone;
-        $apacheConfigFile = '/etc/apache2/sites-available/'.$name;
+        $apacheConfigFile = '/etc/apache2/sites-available/'.$name."-le-ssl.conf";   
         if (unlink($apacheConfigFile)) {
             echo "Apache config deleted successfully.\n<br>";
             return $workdone;
@@ -99,7 +99,7 @@ class Conf
     }
     public static function delconfssl($domain) {
         if($domain){
-        $output = shell_exec("certbot delete --cert-name ".$domain."-le-ssl.conf");
+        $output = shell_exec("certbot delete --cert-name ".$domain." --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs --non-interactive --quiet");
         echo $output;
         echo "ssl updated successfully.\n<br>";
         }

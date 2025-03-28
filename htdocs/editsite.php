@@ -82,7 +82,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete'){
     if($result){
         Conf::disableSite($name);
         Conf::deleteapacheConfig($name);
-        // Conf::deletesslConfig($name);
+        Conf::deletesslConfig($name);
         Conf::reloadApache();
         conf::deleteFolder($name);
         conf::delconfssl($name);
