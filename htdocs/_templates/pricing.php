@@ -22,7 +22,7 @@
                         <h3>Starter</h3>
                         <div class="price">
                             <span class="amount" id="starterPrice">&#8377 99</span>
-                            <span class="t-white" id="starterPricePeriod">/month</span>
+                            <span class="t-blasck" id="starterPricePeriod">/month</span>
                         </div>
                         <ul class="feature-list">
                             <p class="">This Plan For</p>
@@ -31,7 +31,7 @@
                             <li><i class=" bi bi-arrow-right-circle"></i>Business websites</li>          
                             <li><i class=" bi bi-arrow-right-circle"></i>Lightweight websites</li><br>
                             <li><i class=" bi bi-check-circle-fill"></i>Free SSL Certificate</li>
-                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain</li>
+                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
                         <?
@@ -63,7 +63,7 @@
                         <h3>Professional</h3>
                         <div class="price">
                             <span class="amount" id="professionalPrice">&#8377 199</span>
-                            <span class="t-white" id="professionalPricePeriod">/month</span>
+                            <span class="t-black" id="professionalPricePeriod">/month</span>
                         </div>
                         <ul class="feature-list">
                             <p class="">This Plan For</p>
@@ -72,7 +72,7 @@
                             <li><i class=" bi bi-arrow-right-circle"></i>Medium-scale projects</li><br>
                             <li><i class=" bi bi-check-circle-fill"></i>Database Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>Free SSL Certificate</li>
-                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain</li>
+                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
                         <?
@@ -102,7 +102,7 @@
                         <h3>Business</h3>
                         <div class="price">
                             <span class="amount" id="businessPrice">&#8377 499</span>
-                            <span class="t-white" id="businessPricePeriod">/month</span>
+                            <span class="t-black" id="businessPricePeriod">/month</span>
                         </div>
                         <ul class="feature-list">
                             <p class="">This Plan For</p>
@@ -112,7 +112,7 @@
                             <li><i class=" bi bi-check-circle-fill"></i>Database Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>Storage Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>Free SSL Certificate</li>
-                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain</li>
+                            <li><i class=" bi bi-check-circle-fill"></i>Custom Domain Support</li>
                             <li><i class=" bi bi-check-circle-fill"></i>24/7 Support</li>
                         </ul>
                         <?

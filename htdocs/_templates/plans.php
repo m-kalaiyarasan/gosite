@@ -9,12 +9,13 @@ if(isset($_SESSION['link_id'])){
     if($paid === "pending"){
       ?>
       <script>
-      window.location.assign("https://gosite.zeal.lol/libs/cashfree/verify.php")
+      window.location.assign("libs/cashfree/verify.php")
       </script>
     <?
     }
 
 }
+unset($_SESSION['link_id']);
 try{
 
   $username = Session::get('session_user');
