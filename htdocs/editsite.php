@@ -81,11 +81,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete'){
     $result = $purchase->deletedetails($id);
     if($result){
         Conf::disableSite($name);
-        Conf::deleteapacheConfig($name);
         Conf::deletesslConfig($name);
         Conf::reloadApache();
         conf::deleteFolder($name);
         conf::delconfssl($name);
+        Conf::deleteapacheConfig($name);
+
         // header('Location: dashboard.php?manage');
         // exit;
     }

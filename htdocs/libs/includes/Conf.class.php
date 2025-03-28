@@ -40,7 +40,7 @@ class Conf
     }
     public static function deletesslConfig($name) {
         global $workdone;
-        $apacheConfigFile = '/etc/apache2/sites-available/'.$name."-le-ssl.conf";   
+        $apacheConfigFile = '/etc/apache2/sites-enabled/'.$name."-le-ssl.conf";   
         if (unlink($apacheConfigFile)) {
             echo "SSl config deleted successfully.\n<br>";
             return $workdone;
