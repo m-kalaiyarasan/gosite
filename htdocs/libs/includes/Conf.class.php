@@ -30,7 +30,7 @@ class Conf
     //write a function to delete the apache config file
     public static function deleteapacheConfig($name) {
         global $workdone;
-        $apacheConfigFile = '/etc/apache2/sites-available/'.$name.".gosite.in.conf";
+        $apacheConfigFile = '/etc/apache2/sites-available/'.$name.".conf";
         if (unlink($apacheConfigFile)) {
             echo "Apache config deleted successfully.\n<br>";
             return $workdone;
@@ -91,14 +91,14 @@ class Conf
         }
     }
     public static function confssl($domain) {
-        if($name){
-        $output = shell_exec("certbot --apache --non-interactive --agree-tos --gosite.site@gmail.com --redirect --keep-until-expiring -d ".$domain);
+        if($domain){
+        $output = shell_exec("certbot --apache --non-interactive --agree-tos --email gosite.site@gmail.com --redirect --keep-until-expiring --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs -d ".$domain);
         echo $output;
         echo "ssl updated successfully.\n<br>";
         }
     }
     public static function delconfssl($domain) {
-        if($name){
+        if($domain){
         $output = shell_exec("certbot delete --cert-name ".$domain."-le-ssl.conf");
         echo $output;
         echo "ssl updated successfully.\n<br>";
