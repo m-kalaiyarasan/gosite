@@ -44,8 +44,8 @@ function isDomainPointedToServer($domain, $serverIp) {
     // Compare the resolved IP with the server's IP
     print($domainIp."<br>");
     print($serverIp);
-    // return $domainIp === $serverIp;
-    return true;
+    return $domainIp === $serverIp;
+    // return true;
 }
 
 try {
