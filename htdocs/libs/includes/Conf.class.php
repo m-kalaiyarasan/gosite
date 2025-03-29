@@ -99,7 +99,7 @@ class Conf
     }
     public static function confssl($domain) {
         if ($domain) {
-            $webroot = "/var/www/html".$domain;
+            $webroot = "/var/www/html/site".$domain;
             $certbotCommand = "certbot certonly --webroot -w $webroot --non-interactive --agree-tos --email gosite.site@gmail.com --keep-until-expiring --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs -d ".$domain;
             
             shell_exec($certbotCommand);
