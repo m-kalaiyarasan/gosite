@@ -15,7 +15,7 @@ class Conf
 
         
 
-        $newApacheConfig = str_replace('ServerName www.example.com', "ServerName $name", $newApacheConfig);
+        $newApacheConfig = str_replace('#ServerName www.example.com', "ServerName $name", $newApacheConfig);
         
         $newfile = '/etc/apache2/sites-available/'.$name.".conf";
         if (file_put_contents($newfile, $newApacheConfig)) {
@@ -40,9 +40,9 @@ class Conf
     }
     public static function deletesslConfig($name) {
         global $workdone;
-        $apacheConfigFile = '/etc/apache2/sites-enabled/'.$name."-le-ssl.conf";   
+        $apacheConfigFile = '/etc/apache2/sites-available/'.$name;
         if (unlink($apacheConfigFile)) {
-            echo "SSl config deleted successfully.\n<br>";
+            echo "Apache config deleted successfully.\n<br>";
             return $workdone;
         } else {
             echo "Failed to delete Apache config.\n<br>";
@@ -90,18 +90,63 @@ class Conf
         echo "apache2 updated successfully.\n<br>";
         }
     }
-    public static function confssl($domain) {
+    public static function confssl2($domain) {
         if($domain){
         $output = shell_exec("certbot --apache --non-interactive --agree-tos --email gosite.site@gmail.com --redirect --keep-until-expiring --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs -d ".$domain);
         echo $output;
-        echo "ssl configured successfully.\n<br>";
+        echo "ssl updated successfully.\n<br>";
         }
     }
+    public static function confssl($domain) {
+        if ($domain) {
+            $webroot = "/var/www/html".$domain;
+            $certbotCommand = "certbot certonly --webroot -w $webroot --non-interactive --agree-tos --email gosite.site@gmail.com --keep-until-expiring --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs -d ".$domain;
+            
+            shell_exec($certbotCommand);
+    
+            // Define the Apache configuration content
+            $apacheConfig = "
+    <VirtualHost *:80>
+        ServerName $domain
+        Redirect permanent / https://$domain/
+    </VirtualHost>
+    
+    <VirtualHost *:443>
+        ServerName $domain
+        DocumentRoot /var/www/html/site/$domain
+    
+        SSLEngine on
+        SSLCertificateFile /var/www/html/ApacheConfig/letsencrypt/certbot-config/live/$domain/fullchain.pem
+        SSLCertificateKeyFile /var/www/html/ApacheConfig/letsencrypt/certbot-config/live/$domain/privkey.pem
+    
+        <Directory /var/www/html>
+            AllowOverride All
+            Require all granted
+        </Directory>
+    
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>";
+    
+            // Save Apache config file
+            $configPath = "/etc/apache2/sites-available/$domain.conf";
+            file_put_contents($configPath, $apacheConfig);
+    
+            // Enable site and reload Apache
+            shell_exec("a2ensite $domain.conf");
+            shell_exec("a2enmod ssl");
+            shell_exec("service apache2 restart");
+    
+            echo "SSL configured successfully for $domain\n<br>";
+        }
+    }
+    
+
     public static function delconfssl($domain) {
         if($domain){
-        $output = shell_exec("certbot delete --cert-name ".$domain." --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs --non-interactive --quiet");
+        $output = shell_exec("certbot delete --cert-name ".$domain."-le-ssl.conf");
         echo $output;
-        echo "ssl deleted successfully.\n<br>";
+        echo "ssl updated successfully.\n<br>";
         }
     }
 
