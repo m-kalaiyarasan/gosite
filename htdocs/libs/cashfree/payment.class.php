@@ -38,7 +38,7 @@ class Payment
                 "link_id" => "payment_" . time(),
                 "link_meta" => [
                     "notify_url" => "https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net",
-                    "return_url" => "https://gosite.zeal.lol/libs/cashfree/verify.php",
+                    "return_url" =>  get_config('return_url'),
                     "upi_intent" => false
                 ],
                 // "link_minimum_partial_amount" => 20,
