@@ -135,7 +135,7 @@ class Conf
             // Enable site and reload Apache
             shell_exec("a2ensite $domain.conf");
             shell_exec("a2enmod ssl");
-            shell_exec("service apache2 restart");
+            shell_exec("service apache2 reload");
     
             echo "SSL configured successfully for $domain\n<br>";
         }
@@ -144,7 +144,7 @@ class Conf
 
     public static function delconfssl($domain) {
         if($domain){
-        $output = shell_exec("certbot delete --cert-name ".$domain."-le-ssl.conf");
+        $output = shell_exec("certbot delete --cert-name $domain --config-dir /var/www/html/ApacheConfig/letsencrypt/certbot-config --work-dir /var/www/html/ApacheConfig/letsencrypt/certbot-work --logs-dir /var/www/html/ApacheConfig/letsencrypt/certbot-logs");
         echo $output;
         echo "ssl updated successfully.\n<br>";
         }
