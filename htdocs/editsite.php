@@ -87,8 +87,8 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete'){
         conf::delconfssl($name);
         Conf::deleteapacheConfig($name);
 
-        // header('Location: dashboard.php?manage');
-        // exit;
+        header('Location: dashboard.php?manage');
+        exit;
     }
     else{
         echo "Error";

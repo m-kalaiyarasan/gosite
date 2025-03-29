@@ -41,12 +41,12 @@ $pricingPeriod = $_POST['pricingPeriod'];
                 class="d-flex align-items-center justify-content-between mb-4 p-3 bg-light rounded"
               >
                 <div class="d-flex align-items-center">
-                  <img
+                  <!-- <img
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=100"
                     alt="Profile"
                     class="rounded-circle me-3"
                     width="60"
-                  />
+                  /> -->
                   <div>
                     <h5 class="mb-1"><?=$_SESSION['session_user']?></h5>
                     <p class="text-muted mb-0">Premium Account</p>
@@ -64,17 +64,17 @@ $pricingPeriod = $_POST['pricingPeriod'];
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                   <span class="fw-bold">Plan Price</span>
-                  <span><?print($price);?></span>
+                  <span>&#8377;<?print($price);?></span>
                 </div>
                 <hr class="my-4" />
                 <div class="d-flex justify-content-between mb-3">
                   <span class="h5 fw-bold">Total Amount</span>
-                  <span class="h5 text-primary fw-bold"><?print($price);?></span>
+                  <span class="h5 text-primary fw-bold">&#8377;<?print($price);?></span>
                 </div>
               </div>
               <button  id="payNowButton" class="btn btn-primary btn-lg w-100 fw-bold" aria-label="Pay now button">Pay Now</button>
               <p class="text-center text-muted mt-4 mb-0 small">
-                Secure Payment Powered by Stripe
+                Secure Payment Powered by Cashfree
               </p>
             </div>
           </div>
@@ -102,7 +102,7 @@ $paymentLink = $cashfree->paymentLink($userobj->getemail(),$official_name , $use
 $paymentLink = json_decode($paymentLink);
 echo "<pre>";
 
-print_r($paymentLink);
+// print_r($paymentLink);
 echo "</pre>";
 
 echo "<br>";
@@ -127,7 +127,7 @@ $_SESSION['link_id'] = $paymentLink->link_id;
             transform:translate(-50%, -50%); 
             width:90%; 
             max-width:600px; 
-            height:80%; 
+            height:100%; 
             background:white; 
             z-index:1000; 
             border-radius:10px; 
@@ -136,7 +136,7 @@ $_SESSION['link_id'] = $paymentLink->link_id;
     
     <!-- Header with Close Button -->
     <div style="position:relative; background:#f5f5f5; padding:10px; border-bottom:1px solid #ddd;">
-        <h2 style="margin:0; font-size:18px; color:#333;">Payment Modal</h2>
+        <h2 style="margin:0; font-size:18px; color:#333;">Pay Now</h2>
         <button onclick="closeModal()" 
                 style="position:absolute; 
                        top:10px; 
@@ -169,10 +169,10 @@ document.getElementById('payNowButton').addEventListener('click', function() {
 function closeModal() {
     document.getElementById('paymentModal').style.display = 'none';
     document.getElementById('paymentIframe').src = ""; // Clear the iframe content
-    window.location.href = "https://gosite.zeal.lol/libs/cashfree/verify.php"; 
+    // window.location.href = "https://gosite.zeal.lol/libs/cashfree/verify.php"; 
 }
 </script>
 </body>
 </html>
 
-<?Print("sucess");?>
+<?//Print("sucess");?>

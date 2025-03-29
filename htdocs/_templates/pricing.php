@@ -78,7 +78,7 @@
                         <?
                         if(Session::get('is_login')){
                             ?>
-                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalProfessional" data-plan="professional" disabled>Get Started</button>
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalProfessional" data-plan="professional" disabled>Comming Soon</button>
                         
                         <?
                         }else{
@@ -118,7 +118,7 @@
                         <?
                         if(Session::get('is_login')){
                             ?>
-                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalBusiness" data-plan="business" disabled>Get Started</button>
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalBusiness" data-plan="business" disabled>Comming Soon</button>
                         
                         <?
                         }else{
