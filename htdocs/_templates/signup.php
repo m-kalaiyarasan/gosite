@@ -243,6 +243,7 @@ catch (Exception $e) {
 </center>
 <center>
     <h1 class="h3 mb-3 color-1">Verify OTP</h1>
+    <p>Check in Spam Folder</p>
     </center>
 
   <div class="form-floating">

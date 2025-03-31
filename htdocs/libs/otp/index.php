@@ -15,6 +15,7 @@
     if(isset($_GET['verify'])){
     ?>
     <h2>Verify OTP</h2>
+    <p>Check in Spam folder</p>
     <form method="POST" action="verify-otp.php">
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" required>
