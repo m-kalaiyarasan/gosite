@@ -15,7 +15,7 @@ class Conf
 
         
 
-        $newApacheConfig = str_replace('#ServerName www.example.com', "ServerName $name", $newApacheConfig);
+        $newApacheConfig = str_replace('ServerName www.example.com', "ServerName $name", $newApacheConfig);
         
         $newfile = '/etc/apache2/sites-available/'.$name.".conf";
         if (file_put_contents($newfile, $newApacheConfig)) {
