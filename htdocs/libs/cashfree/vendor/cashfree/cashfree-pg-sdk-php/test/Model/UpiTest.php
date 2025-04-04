@@ -1,6 +1,6 @@
 <?php
 /**
- * UpiTest
+ * UPITest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace Cashfree\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpiTest Class Doc Comment
+ * UPITest Class Doc Comment
  *
  * @category    Class
- * @description UPI collect payment method object
+ * @description payment method upi.
  * @package     Cashfree
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UpiTest extends TestCase
+class UPITest extends TestCase
 {
 
     /**
@@ -72,18 +72,9 @@ class UpiTest extends TestCase
     }
 
     /**
-     * Test "Upi"
+     * Test "UPI"
      */
-    public function testUpi()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "channel"
-     */
-    public function testPropertyChannel()
+    public function testUPI()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -99,36 +90,9 @@ class UpiTest extends TestCase
     }
 
     /**
-     * Test attribute "upi_redirect_url"
+     * Test attribute "channel"
      */
-    public function testPropertyUpiRedirectUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "upi_expiry_minutes"
-     */
-    public function testPropertyUpiExpiryMinutes()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "authorize_only"
-     */
-    public function testPropertyAuthorizeOnly()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "authorization"
-     */
-    public function testPropertyAuthorization()
+    public function testPropertyChannel()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

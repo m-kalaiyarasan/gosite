@@ -1,6 +1,6 @@
 <?php
 /**
- * CardTest
+ * CARDTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace Cashfree\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CardTest Class Doc Comment
+ * CARDTest Class Doc Comment
  *
  * @category    Class
- * @description Card Payment method
+ * @description payment method card.
  * @package     Cashfree
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CardTest extends TestCase
+class CARDTest extends TestCase
 {
 
     /**
@@ -72,9 +72,9 @@ class CardTest extends TestCase
     }
 
     /**
-     * Test "Card"
+     * Test "CARD"
      */
-    public function testCard()
+    public function testCARD()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -135,81 +135,18 @@ class CardTest extends TestCase
     }
 
     /**
-     * Test attribute "instrument_id"
+     * Test attribute "card_network"
      */
-    public function testPropertyInstrumentId()
+    public function testPropertyCardNetwork()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "cryptogram"
+     * Test attribute "card_type"
      */
-    public function testPropertyCryptogram()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "token_requestor_id"
-     */
-    public function testPropertyTokenRequestorId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "token_reference_id"
-     */
-    public function testPropertyTokenReferenceId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "token_type"
-     */
-    public function testPropertyTokenType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "card_display"
-     */
-    public function testPropertyCardDisplay()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "card_alias"
-     */
-    public function testPropertyCardAlias()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "card_bank_name"
-     */
-    public function testPropertyCardBankName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "emi_tenure"
-     */
-    public function testPropertyEmiTenure()
+    public function testPropertyCardType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
