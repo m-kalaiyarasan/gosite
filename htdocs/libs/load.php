@@ -9,6 +9,7 @@ include_once 'includes/Purchase.class.php';
 include_once 'includes/Upload.class.php';
 include_once 'includes/Conf.class.php';
 include_once 'includes/Subscription.class.php';
+include_once 'includes/Wordpress.class.php';
 // include_once 'cashfree/payment.class.php';
 include_once 'otp/Otp.class.php';
 
