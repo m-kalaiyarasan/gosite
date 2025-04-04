@@ -96,12 +96,24 @@ foreach ($details as $index => $site) {
    // echo "<td><a href='"."http://". htmlspecialchars($site['domain']) .".gosite.in". "'>" . htmlspecialchars($site['domain']) .".gosite.in". "</a></td>";
     echo "<td>" . $status . "</td>";
     echo "<td>" . Purchase::daysLeftInSubscription(htmlspecialchars($site['end_at'])) . "</td>";
+    if(htmlspecialchars($site['plan_name']) == "wordpress"){
+      $wp=true;
+    }
    if($status === "Not In Use"){ 
+    if($wp){
+      ?>
+        <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">install Now</button></td>
+
+      <?
+
+    }else{
   
   ?>
 
   <td><button type='button' class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target="#siteModal<?print($index);?>">Host Now</button></td>
-  <? }else{
+  <?
+  }
+ }else{
     ?>
       <td><button type='button' class='btn btn-primary btn-sm' disabled  >In Use</button></td>
 
@@ -112,9 +124,17 @@ foreach ($details as $index => $site) {
    <div class="modal fade" id="siteModal<?php echo $index; ?>" tabindex="-1" aria-labelledby="siteModalLabel<?php echo $index; ?>" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
-                
-            
-  <section id="upload" class="upload-section py-5">
+      <?
+      if($wp){
+
+        ?>
+        hello
+
+        <?
+
+      }else{
+        ?>
+        <section id="upload" class="upload-section py-5">
         <div class="container">
             <h2 class="text-center mb-2">Launch Your Websites <i class="fa fa-rocket" style="font-size:48px;color:rgb(255, 62, 62)"></i>
             </h2>
@@ -165,6 +185,13 @@ foreach ($details as $index => $site) {
             </div>
         </div>
     </section>
+        
+        <?
+      }
+      ?>
+                
+            
+  
     
     <script>
         // Initialize all tooltips

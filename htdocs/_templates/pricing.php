@@ -60,10 +60,10 @@
             <div class="col-lg-4">
                 <div class="card pricing-card h-100 btn-price">
                     <div class="card-body">
-                        <h3>Professional</h3>
+                        <h3>Wordpress</h3>
                         <div class="price">
-                            <span class="amount" id="professionalPrice">&#8377 199</span>
-                            <span class="t-black" id="professionalPricePeriod">/month</span>
+                            <span class="amount" id="wordpressPrice">&#8377 199</span>
+                            <span class="t-black" id="wordpressPricePeriod">/month</span>
                         </div>
                         <ul class="feature-list">
                             <p class="">This Plan For</p>
@@ -78,7 +78,8 @@
                         <?
                         if(Session::get('is_login')){
                             ?>
-                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalProfessional" data-plan="professional" disabled>Comming Soon</button>
+                        <!-- <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalWordpress" data-plan="wordpress" disabled>Comming Soon</button> -->
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModalWordpress" data-plan="wordpress" >Get Started</button>
                         
                         <?
                         }else{
@@ -172,16 +173,16 @@
 </div>
 
 <!-- Professional Plan Modal -->
-<div class="modal fade" id="paymentModalProfessional" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+<div class="modal fade" id="paymentModalWordpress" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">Confirm your Professional Plan</h5>
+                <h5 class="modal-title" id="paymentModalLabel">Confirm your Wordpress Plan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="paymentFormProfessional" action="libs/cashfree/payment.php" method="POST">
-                    <p>Please make the payment to start enjoying all the features of the Professional Plan.</p>
+                <form id="paymentFormWordpress" action="libs/cashfree/payment.php" method="POST">
+                    <p>Please make the payment to start enjoying all the features of the Wordpress Plan.</p>
                     <!-- <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
                             <sup class="inr font-weight-bold">₹</sup>
@@ -190,12 +191,12 @@
                         </div>
                     </div> -->
                     <div class="email mt-2">
-                    <input type="text" class="form-control email-text" placeholder="Your Name" name="name" id="emailProfessional" required>
+                    <input type="text" class="form-control email-text" placeholder="Your Name" name="name" id="emailWordpress" required>
 
                     </div>
-                    <input type="hidden" name="plan" value="professional">
-                    <input type="hidden" name="price" id="professionalPriceHidden" value="199">
-                    <input type="hidden" name="pricingPeriod" id="pricingPeriodProfessional" value="monthly">
+                    <input type="hidden" name="plan" value="wordpress">
+                    <input type="hidden" name="price" id="wordpressPriceHidden" value="199">
+                    <input type="hidden" name="pricingPeriod" id="pricingPeriodWordpress" value="monthly">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary payment-button">Proceed to Payment</button>
                     </div>
@@ -242,17 +243,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const pricingPeriodRadios = document.querySelectorAll('input[name="pricingPeriod"]');
-    const plans = ['starter', 'professional', 'business'];
+    const plans = ['starter', 'wordpress', 'business'];
 
     const priceData = {
         monthly: {
             starter: '99',
-            professional: '199',
+            wordpress: '199',
             business: '499'
         },
         annual: {
             starter: '999',
-            professional: '1999',
+            wordpress: '1999',
             business: '4999'
         }
     };

@@ -3,7 +3,7 @@
 class Wordpress{
 
     public function setupWordPress($user_id, $port) {
-        $base_dir = __DIR__."../../../../wp/$user_id";
+        $base_dir = __DIR__."/../../../wp/$user_id";
         print($base_dir);
 
         // Ensure directories exist
@@ -58,12 +58,16 @@ EOL;
         file_put_contents("$base_dir/docker-compose.yml", $docker_compose_content);
 
         // Start the Docker containers
-        $output = shell_exec("sudo docker compose -f $base_dir/docker-compose.yml up -d");
+        $output = shell_exec("docker-compose -f $base_dir/docker-compose.yml up -d");
 
         return [
             "status" => "success",
             "message" => "WordPress for $user_id is now running on port $port",
-            "output" => $output
+            "output" => $output,
+            "docker_compose_path" => "$base_dir/docker-compose.yml",
+            "port" => $port,
+            "user_id" => $user_id,
+            "base_dir" => $base_dir,
         ];
     }
 
@@ -82,6 +86,38 @@ EOL;
             fclose($connection);
         }
         return false; // No available ports
+    }
+    public function findLastPort() {
+      $conn = Database::getConnection();
+      $username = Session::get('session_user');
+      $sql = "SELECT * FROM `config` WHERE `id` = '1' ";
+      $result = $conn->query($sql);
+      if($result->num_rows > 0){
+          $row = $result->fetch_assoc();
+          return $row['port_count'];
+      }else{
+          return false;
+      }
+    }
+    public function updatePortCount($port) {
+        $conn = Database::getConnection();
+        $sql = "UPDATE `config` SET `port_count` = '$port' WHERE `id` = '1'";
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function setDetails($user_id,$port,$base_dir,$docker_compose_path) {
+        $conn = Database::getConnection();
+        $sql = "INSERT INTO `config` (`user_id`, `port`, `base_dir`, `docker_compose_path`) VALUES ('$user_id', '$port', '$base_dir', '$docker_compose_path')";
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+
+        
     }
 
 // Get user ID and port from request (POST method recommended)

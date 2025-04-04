@@ -115,10 +115,10 @@ class Cashfree {
         if(strcmp($plan,"stater") && $price == 999 ){
 
         }
-        if(strcmp($plan,"professional") && $price == 199 ){
+        if(strcmp($plan,"wordpress") && $price == 199 ){
             
         }
-        if(strcmp($plan,"professional") && $price == 1999 ){
+        if(strcmp($plan,"wordpress") && $price == 1999 ){
 
         }
         if(strcmp($plan,"business") && $price == 499 ){
