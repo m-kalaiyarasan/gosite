@@ -141,7 +141,7 @@ class UserSession
     }
 
     public static function isAdmin(){
-        if($_SESSION['session_user'] == "kalaiyarasan")
+        if($_SESSION['session_user'] == "kalai")
         {
             return true;
         }
