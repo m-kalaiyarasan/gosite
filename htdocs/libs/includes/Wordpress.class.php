@@ -58,7 +58,7 @@ EOL;
         file_put_contents("$base_dir/docker-compose.yml", $docker_compose_content);
 
         // Start the Docker containers
-        $output = shell_exec("docker-compose -f $base_dir/docker-compose.yml up -d");
+        $output = shell_exec(" sudo docker-compose -f $base_dir/docker-compose.yml up -d");
 
         return [
             "status" => "success",
